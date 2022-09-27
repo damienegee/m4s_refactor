@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container-fluid mb-3 mt-3">
+		<div class="d-flex justify-content-end">
+			{% include('utilities/_academicYearSelect.html.twig') %}
+		</div>
+		{% if webshopRentOrders|length > 0 %}
+			<table class="datatable table" id="webshopordersM4STable" style="width: 100%">
+				<thead class="thead">
+				<tr class="bg-info">
+					<th scope="col">Payment id</th>
+					<th scope="col">Customer id </th>
+					<th scope="col">Forecast id </th>
+					<th scope="col">Status</th>
+					<th scope="col">Type</th>
+					<th scope="col">Shop</th>
+					<th scope="col">Student id</th>
+					<th scope="col">Student name</th>
+					<th scope="col">Student lastname</th>
+					<th scope="col">Email</th>
+					<th scope="col">Phone number</th>
+					<th scope="col">Device Rent</th>
+					<th scope="col">Total Rent</th>
+					<th scope="col">Contract Rent</th>
+					<th scope="col">Iban Rent</th>
+					<th scope="col">Bic Rent</th>
+					<th scope="col">Order guid Rent</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for webshopRentOrder in webshopRentOrders %}
+					<tr>
+							<td>{{webshopRentOrder.payment_id}}</td>
+							<td>{{webshopRentOrder.customer_idRent}}</td>
+							<td>{{webshopRentOrder.forecast_idRent}}</td>
+							<td>{{webshopRentOrder.status}}</td>
+							<td>{{webshopRentOrder.type}}</td>
+							<td>{{webshopRentOrder.shop}}</td>
+							<td>{{webshopRentOrder.student_idRent}}</td>
+							<td>{{webshopRentOrder.student_firstnameRent}}</td>
+							<td>{{webshopRentOrder.student_lastnameRent}}</td>
+							<td>{{webshopRentOrder.emailRent}}</td>
+							<td>{{webshopRentOrder.phoneRent}}</td>
+							<td>{{webshopRentOrder.device_idRent}}</td>
+							<td>{{webshopRentOrder.totalRent}}</td>
+							<td>{{webshopRentOrder.contract}}</td>
+							<td>{{webshopRentOrder.iban}}</td>
+							<td>{{webshopRentOrder.bic}}</td>
+							<td>{{webshopRentOrder.order_guidRent}}</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<div class="container">
+				<div class="jumbotron">
+					<p>{{'loan.index.nodata'|trans}}</p>
+				</div>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid mb-3 mt-3">
+	<div class="d-flex justify-content-end flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        {% include('utilities/_academicYearSelect.html.twig') %}
+    </div>
+    {% if deliveries|length > 0 %}
+	<div class="text-right">
+
+    </div>
+	<table class="table" id="deliveryTable" style="width: 100%">
+		<thead class="thead">
+			<tr class="bg-info">
+				<th scope="col">{{'byod.deliveries.levering_id'|trans}}</th>
+				<th scope="col">{{'byod.deliveries.aantal'|trans}}</th>
+				<th scope="col">{{'byod.deliveries.toestel'|trans}}</th>
+				<th scope="col">{{'byod.deliveries.adres'|trans}}</th>
+				<th scope="col">{{'byod.deliveries.delivered_on'|trans}}</th>
+				<th scope="col">{{'byod.deliveries.acties'|trans}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for del in deliveries %}
+			<tr>
+				<td>
+					{{del.LeveringId}}<br />
+					<small>{{del.forecastid}}</small><br />
+					<small>{{del.referentie}}</small>
+				</td>
+				<td>{{del.amount}}</td>
+				<td>{{del.devicebeschrijving}}<br><span class="smalltext">{{del.SPSKU}}</span></td>
+				<td>{{del.adres|raw}}</td>
+				<td>
+					{% if del.delivered_on %}
+						{{del.delivered_on | date('d-m-y')}}
+					{% else %}
+						{{del.shipping_date | date('d-m-y')}}
+					{% endif %}
+				</td>
+				<td>
+					<a class="btn btn-link" href="{{app_sp2_url}}/exportDeliveryDetails.php?guid={{del.guid}}" target="_blank">
+						<i class="fas fa-file-excel 9x"></i>
+					</a>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+	<div class="container">
+    <div class="jumbotron">
+        <p>{{'loan.index.nodata'|trans}}</p>
+    </div>
+</div>
+	{% endif %}
+</div>
+{% endblock %}

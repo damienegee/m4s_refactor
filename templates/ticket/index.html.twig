@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid mb-3 mt-3">
+	<div class="mb-3 mt-3">
+        <div class="d-flex justify-content-end mb-3 mt-3">
+            <button class="btn btn-warning ml-3 mr-3" data-toggle="modal" data-target="#modalnewticket">{{'fieldservice.index.button'|trans}}</button>
+            <form action="{{path('report.csv')}}" method="POST" class="ml-3 mr-3">
+                <input type="hidden" value="{{data|json_encode()}}" id="csvexport" name="csvexport" />
+                <input type="hidden" value="internaltickets" name="type">
+                <button class="btn btn-info btnexcell" type="submit" data-toggle="tooltip" data-placement="top" title="Export to Excel">
+                    <i class="fas fa-file-excel"></i>
+                </button>
+            </form>
+        </div>
+		<ul class="nav nav-tabs" id="fielServicesTab" role="tablist">
+			<li class="nav-item" role="presentation">
+                <a class="nav-link active" id="openInternalTicketTab" data-toggle="tab" href="#openInternalTicket" role="tab" aria-controls="openInternalTicket" aria-selected="true">{{'fieldservice.index.tabs.open'|trans}}</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="closedInternalTicketTab" data-toggle="tab" href="#closedInternalTicket" role="tab" aria-controls="closedInternalTicket" aria-selected="true">{{'fieldservice.index.tabs.closed'|trans}}</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="inprogressInternalTicketTab" data-toggle="tab" href="#inprogressInternalTicket" role="tab" aria-controls="inprogressInternalTicket" aria-selected="true">{{'fieldservice.index.tabs.inprogress'|trans}}</a>
+            </li>
+		</ul>
+		<div class="tab-content mb-3 mt-3" id="fieldServiceTabContent">
+			<div class="tab-pane fade show active" id="openInternalTicket" role="tabpanel" aria-labelledby="openInternalTicketTab">
+                {% include 'ticket/_openinternaltickets.html.twig' %}
+            </div>
+            <div class="tab-pane fade" id="closedInternalTicket" role="tabpanel" aria-labelledby="closedInternalTicketTab">
+                {% include 'ticket/_closedinternaltickets.html.twig' %}
+            </div>
+            <div class="tab-pane fade" id="inprogressInternalTicket" role="tabpanel" aria-labelledby="inprogressInternalTicketTab">
+                {% include 'ticket/_inprogressinternaltickets.html.twig' %}
+            </div>
+		</div>
+	</div>
+</div>
+{% include 'ticket/_internal_ticket_create_detail.modal.html.twig' %}
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid mb-3 mt-3">
+    <div class="d-flex justify-content-end mb-3 mt-3">
+        {% if locationid is defined %}
+        <a class="btn btn-info" href="{{path('addExtraDeviceForLocation', {locationid: locationid})}}"><i class="fas fa-laptop-medical"></i>&nbsp;{{'inventory.data.adddevice'|trans}}</a>
+        {% endif %}
+        <form action="{{path('report.csv')}}" method="POST" class="ml-3 mr-3">
+            <input type="hidden" value="{{data|json_encode()}}" id="csvexport" name="csvexport" />
+            <input type="hidden" value="inventory" name="type">
+            <button class="btn btn-info btnexcell" type="submit" data-toggle="tooltip" data-placement="top" title="Export BYOD Excel">
+                <i class="fas fa-file-excel"></i>
+            </button>
+        </form>
+    </div>
+    {{ form_start(bulkmoveform) }}
+    <div class="d-flex justify-content-end mb-3 mt-3">
+        {{ form_widget(bulkmoveform.institutions) }}
+        {{ form_widget(bulkmoveform.locations) }}
+        {{ form_widget(bulkmoveform.submit)}}
+    </div>
+    <ul class="nav nav-tabs" id="deviceTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="devicesAssignedTab" data-toggle="tab" href="#devicesAssigned" role="tab" aria-controls="devicesAssigned" aria-selected="true">{{'inventory.data.assigned'|trans}}</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="devicesNotAssignedTab" data-toggle="tab" href="#devicesNotAssigned" role="tab" aria-controls="devicesNotAssigned" aria-selected="true">{{'inventory.data.notassigned'|trans}}</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="nolocationDevicesTab" data-toggle="tab" href="#nolocationDevices" role="tab" aria-controls="nolocationDevices" aria-selected="true">{{'inventory.data.nolocation'|trans}}</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="extraDevicesTab" data-toggle="tab" href="#extraDevices" role="tab" aria-controls="extraDevices" aria-selected="true">{{'inventory.data.notsignpost'|trans}}</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="devicesTabContent">
+        {% include "inventory/_devicesAssigned.html.twig" %}
+        {% include "inventory/_devicesNotAssigned.html.twig" %}
+        {% include "inventory/_nolocationDevices.html.twig" %}
+        {% include "inventory/_extraDevices.html.twig" %}
+    </div>
+    {{ form_end(bulkmoveform) }}
+</div>
+{% endblock %}

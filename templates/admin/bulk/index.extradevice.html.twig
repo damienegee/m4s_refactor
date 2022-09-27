@@ -1,0 +1,32 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid mb-3 mt-m">
+	<div class="container mb-3 mt-3">
+    {% include ('admin/bulk/form.import.html.twig') %}
+</div>
+<div class="container mb-3 mt3">
+    {% if errors|length > 0 %}
+    <div class="row">
+        <div class="col-md-1">
+            <p><strong>#</strong></p>
+        </div>
+        <div class="col-md-11">
+            <p><strong>Message</strong></p>
+        </div>
+    </div>
+    {% for key,value in errors %}
+    <div class="row">
+        <div class="col-md-1">
+            <p>{{key}}</p>
+        </div>
+        <div class="col-md-11">
+            <p>{{value}}</p>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,191 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid mb-3 mt-3">
+    {# <div class="jumbotron"> #}
+        <h3 class="text-center">
+            {% if institution is defined %}
+            {{institution.institutionName|removeSynergy}}
+            {% else %}
+            {{'fieldservice.index.title'|trans}}
+            {% endif %}
+        </h3>
+    {# </div> #}
+    <div class="mb-3 mt-3">
+        <div class="d-flex justify-content-end mb-3 mt-3">
+            <button class="btn btn-warning ml-3 mr-3" data-toggle="modal" data-target="#modalnewincident">{{'fieldservice.index.button'|trans}}</button>
+            <form action="{{path('report.csv')}}" method="POST" class="ml-3 mr-3">
+                <input type="hidden" value="{{data|json_encode()}}" id="csvexport" name="csvexport" />
+                <input type="hidden" value="fieldservices" name="type">
+                <button class="btn btn-info btnexcell" type="submit" data-toggle="tooltip" data-placement="top" title="Export to Excel">
+                    <i class="fas fa-file-excel"></i>
+                </button>
+            </form>
+        </div>
+        <ul class="nav nav-tabs" id="fielServicesTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="openIssuesTab" data-toggle="tab" href="#openIssues" role="tab" aria-controls="openIssues" aria-selected="true">{{'fieldservice.index.tabs.open'|trans}}</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="waitIssuesTab" data-toggle="tab" href="#waitIssues" role="tab" aria-controls="waitIssues" aria-selected="true">{{'fieldservice.index.tabs.wait'|trans}}</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="closedIssuesTab" data-toggle="tab" href="#closedIssues" role="tab" aria-controls="closedIssues" aria-selected="true">{{'fieldservice.index.tabs.closed'|trans}}</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="graphIssuesTab" data-toggle="tab" href="#graphIssues" role="tab" aria-controls="graphIssues" aria-selected="true">{{'fieldservice.index.tabs.graph'|trans}}</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="fieldServiceTabContent">
+            <div class="tab-pane fade show active" id="openIssues" role="tabpanel" aria-labelledby="openIssuesTab">
+                {% if open|length > 0%}
+                <table id="fieldServices" class="fieldservicetable table table-stripes table-responsive-lg" style="width:100%">
+                    <thead class="thead">
+                        <tr class="bg-info">
+                            <th scope="col" class="text-center">#</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.student'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.serial'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.title'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.problem'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.state'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.created'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.updated'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.location'|trans}}</th>
+                            <th scope="col" class="text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in open %}
+                            <tr>
+                                <td class="text-left">FS{{item.id}}</td>
+                                <td class="text-left"><strong>{{item.firstname}}</strong>&nbsp;{{item.lastname}}</td>
+                                <td class="text-left">
+                                    <strong>{{item.label}}</strong><br />
+                                    <a href="{{ path('invetoryDeviceDetailsBySerial', {'serial' : item.serial}) }}">{{item.serial}}</a>
+                                </td>
+                                <td class="text-left">{{item.title}}</td>
+                                <td class="text-left">{{item.category}} - {{item.problem}}</td>
+                                <td class="text-left">{{item.status}}</td>
+                                <td class="text-left">{{item.created|date('d-m-y')}}</td>
+                                <td class="text-left">{{item.modified|date('d-m-y')}}</td>
+                                <td class="text-left">{{item.city}}</td>
+                                <td class="text-left"><button class="btn btn-info" data-toggle="modal" data-target="#modal{{item.id}}">{{'fieldservice.index.table.details'|trans}}</button></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="container">
+                    <div class="jumbotron">
+                        <p>{{'loan.index.nodata'|trans}}</p>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            <div class="tab-pane fade" id="waitIssues" role="tabpanel" aria-labelledby="waitIssuesTab">
+                {% if wait|length > 0%}
+                <table id="waitfieldServices" class="fieldservicetable table table-stripes table-responsive-lg" style="width:100%">
+                    <thead class="thead">
+                        <tr class="bg-info">
+                            <th scope="col" class="text-center">#</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.student'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.serial'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.title'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.problem'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.state'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.created'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.updated'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.location'|trans}}</th>
+                            <th scope="col" class="text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in wait %}
+                            <tr>
+                                <td class="text-left"> 
+                                    <span><a href="{{ app_sp2_url }}/approveFieldServiceCost.php?guid={{item.guid}}&lang={{app.user.locale}}" target="_blank"><i class="fas fa-search"></i></a></span>
+                                    &nbsp;FS{{item.id}}
+                                </td>
+                                <td class="text-left"><strong>{{item.firstname}}</strong>&nbsp;{{item.lastname}}</td>
+                                <td class="text-left">
+                                    <strong>{{item.label}}</strong><br />
+                                    <a href="{{ path('invetoryDeviceDetailsBySerial', {'serial' : item.serial}) }}">{{item.serial}}</a>
+                                </td>
+                                <td class="text-left">{{item.title}}</td>
+                                <td class="text-left">{{item.category}} - {{item.problem}}</td>
+                                <td class="text-left">{{item.status}}</td>
+                                <td class="text-left">{{item.created|date('d-m-y')}}</td>
+                                <td class="text-left">{{item.modified|date('d-m-y')}}</td>
+                                <td class="text-left">{{item.city}}</td>
+                                <td class="text-left"><button class="btn btn-info" data-toggle="modal" data-target="#modal{{item.id}}">{{'fieldservice.index.table.details'|trans}}</button></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="container">
+                    <div class="jumbotron">
+                        <p>{{'loan.index.nodata'|trans}}</p>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            <div class="tab-pane fade" id="closedIssues" role="tabpanel" aria-labelledby="closedIssuesTab">
+                {% if closed|length > 0%}
+                <table id="closedfieldServices" class="fieldservicetable table table-stripes table-responsive-lg" style="width:100%">
+                    <thead class="thead">
+                        <tr class="bg-info">
+                            <th scope="col" class="text-center">#</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.student'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.serial'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.title'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.problem'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.state'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.created'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.updated'|trans}}</th>
+                            <th scope="col" class="text-center">{{'fieldservice.index.table.location'|trans}}</th>
+                            <th scope="col" class="text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in closed %}
+                            <tr>
+                                <td class="text-left">FS{{item.id}}</td>
+                                <td class="text-left"><strong>{{item.firstname}}</strong>&nbsp;{{item.lastname}}</td>
+                                <td class="text-left">
+                                    <strong>{{item.label}}</strong><br />
+                                    <a href="{{ path('invetoryDeviceDetailsBySerial', {'serial' : item.serial}) }}">{{item.serial}}</a>
+                                </td>
+                                <td class="text-left">{{item.title}}</td>
+                                <td class="text-left">{{item.category}} - {{item.problem}}</td>
+                                <td class="text-left">{{item.status}}</td>
+                                <td class="text-left">{{item.created|date('d-m-y')}}</td>
+                                <td class="text-left">{{item.modified|date('d-m-y')}}</td>
+                                <td class="text-left">{{item.city}}</td>
+                                <td class="text-left"><button class="btn btn-info" data-toggle="modal" data-target="#modal{{item.id}}">{{'fieldservice.index.table.details'|trans}}</button></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="container">
+                    <div class="jumbotron">
+                        <p>{{'loan.index.nodata'|trans}}</p>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            <div class="tab-pane fade" id="graphIssues" aria-labelledby="graphIssuesTab">
+                {# {{ render(controller("App\\Controller\\FieldServiceController::fieldServiceGraphAction", {synergy: synergy})) }} #}
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe  class="embed-responsive-item" id="graphIssuesFrame" title="" src="{{app_sp2_url}}/fieldServiceDashboardBySynergy.php?synergyid={{synergy}}" frameborder="0" ></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'field_service/_field_service_create.modal.html.twig' %}
+{% for item in data %}
+{% include 'field_service/field_service_details.modal.html.twig' %}
+{% endfor %}
+{% endblock %}

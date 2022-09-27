@@ -1,0 +1,36 @@
+<div class="modal fade show" id="staticBackdropLive" data-backdrop="false" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLiveLabel" style="display: block; padding-right: 17px;" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-xl" style="overflow-y: initial;">
+    <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
+	  {{form_start(submitButton, {'action': path('releasenotes'), 'attr': {'id': 'showrelease'}})}}
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLiveLabel">Release notes</h5>
+      </div>
+      <div class="modal-body">
+        {% if releasenotes|length > 0%}
+		{% for release in releasenotes %}
+		<div class="card mb-3">
+			<div class="card-header">
+				<div class="container-fluid">
+					<div class="row justify-content-between">
+						<div class="col"><span class="card-title"><strong>{{release.version}}</strong> : {{release.title}}</span></div>
+						<div class="col col-md-3"><span class="badge badge-secondary">{{release.created|date('d-m-Y')}}</span></div>
+					</div>
+				</div>
+			</div>
+			<div class="card-body">
+				{{release.description|raw}}
+			</div>
+		</div>
+		{% endfor %}
+		{% endif %}
+      </div>
+      <div class="modal-footer">
+        {# <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> #}
+        {# <button type="button" class="btn btn-primary">Understood</button> #}
+		{{form_row(submitButton.submit)}}
+      </div>
+	  {{form_end(submitButton)}}
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop fade show"></div>

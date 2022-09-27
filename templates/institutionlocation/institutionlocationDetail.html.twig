@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid mb-3 mt-3">
+    <h3 class="text-center mb-3">
+        {{schoollocation.institutionName}}
+    </h3>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <h3 class="mb-3">
+                <a href="{{path('customerForInstitutionlocation', {locationid: schoollocation.id})}}">{{ 'institutionLocation.details.users'|trans }}</a>
+            </h3>
+        </div>
+        {% if customers|length > 0 %}
+        {% for customer in customers %}
+        <div class="col-xl-3 col-lg-6 col-xs-12 mb-3">
+            <a style="text-decoration: none;" href="{{path('customerdetails', { cid: customer.id })}}">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">
+                            {{customer.firstname}}&nbsp;<strong>{{customer.lastname}}</strong>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <div class="d-flex justify-content-end">
+        <nav aria-label="Page navigation">
+            {{ knp_pagination_render(customers) }}
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <h3 class="mb-3">
+                <a href="{{path('inventoryForInsitutionlocation', {locationid: schoollocation.id})}}">{{ 'institutionLocation.details.devices'|trans }}</a>
+            </h3>
+        </div>
+        {% if devices|length > 0 %}
+           {# {{devices|length}} #}
+        {% for device in devices%}
+        <div class="col-xl-3 col-lg-6 col-xs-12 mb-3">
+            <a style="text-decoration: none;" class="text-link" href="{{path('invetoryDeviceDetails', {id: device.id})}}">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h5 class="card-title">{{device.model}}<br />
+                                <small class="w-25">
+                                    {% if device.customer_id is null %}
+                                    {{ 'inventory.devices.notAssigned'|trans }}
+                                    {% else %}
+                                    {{device.firstname}}&nbsp;{{device.lastname}}
+                                    {% endif %}
+                                </small>
+                            </div>
+                            {% if common_file_exists(asset('/devicemodel/'~device.model)) %}
+                                <img class="img-fluid w-25" src="{{asset('/devicemodel/'~device.model)}}.png" />
+                            {% else %}
+                                <img class="img-fluid w-25" src="{{asset('/devicemodel/'~device.model)}}.jpg" />
+                            {% endif %}
+                        </div>
+                        
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <div class="d-flex justify-content-end">
+        <nav aria-label="Page navigation">
+            {{ knp_pagination_render(devices) }}
+        </nav>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+<div class="modal fade" id="selectCustomerModal" tabindex="-1" aria-labelledby="selectCustomerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="selectCustomerModalLabel">{{'customer.modal.title'|trans}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ form_start(form) }}
+        <div class="form-group row">
+            <div class="col-sm-2 align-self-center">
+                {{ form_label(form.user) }}
+            </div>
+            <div class="col-sm-10">
+                {{ form_widget(form.user, { 'attr': { 'class' : 'selectpicker', 'data-live-search' : true, 'title': 'customer.modal.title'|trans } }) }}
+            </div>
+        </div>
+        <div>
+            <button id="saveCustomer" type="submit" class="btn btn-primary">{{'customer.modal.save'|trans}}</button>
+        </div>
+        {{ form_end(form) }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{'customer.modal.close'|trans}}</button>
+      </div>
+    </div>
+  </div>
+</div>

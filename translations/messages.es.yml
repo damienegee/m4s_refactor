@@ -1,0 +1,456 @@
+base:
+  navigation:
+    inventory: Inventario
+    fieldService: Incidente
+    users: Usuarios
+    shops: Alquiler/compra
+    mySchools: Mis escuelas
+    logout: Cerrar sesión
+  pagination:
+    previous: Anterior
+    next: Siguiente
+  filtration:
+    search: Buscar
+
+agso:
+  index:
+    title: Pedidos
+    table:
+      orderid: ID de pedido
+      device: Dispositivo
+      numberof: Cantidad
+      total: Total
+      date: Fecha
+      orderNumber: Número de pedido
+
+extradevice:
+  form:
+    title: Añadir dispositivo
+    label:
+      m4sCustomer: Usuario
+      productnumber: Código de producto
+      serial: Número de serie
+      manufacturer: Fabricante
+      model: Modelo
+      supplier: Proveedor
+      reset: Resetear
+      save: Guardar
+
+fieldservice:
+  label: Incidente
+  index:
+    title: Todo
+    button: Reportar incidente
+    tabs:
+      open: Abierto
+      wait: Esperando aprobacion
+      closed: Cerrado
+      inprogress: En curso
+      graph: Grafico
+    table:
+      student: Alumno
+      serial: Número de serie
+      title: Título
+      problem: Problema
+      description: Descripción
+      state: Estado
+      created: Creado
+      updated: Alterado
+      location: Rama
+      details: Detalles
+
+forecasts:
+  index:
+    title: Alquiler/compra
+    yearSelect: Seleccionar el año académico
+    totalForecast: Total previsión
+    totalHire: Total alquiler
+    totalShop: Total tienda en línea
+  hires:
+    title: Alquilar
+    table:
+      firstname: Nombre del usuario
+      lastname: Apellido del usuario
+      contractNumber: Número de seguimiento de contrato
+      contractDrawn: Contrato redactado
+      contractReceived: Contrato recibido
+      advanceReceived: Anticipo recibido
+      deviceOrdered: Dispositivo pedido
+  shop:
+    title: Compra
+    table:
+      firstname: Nombre del usuario
+      lastname: Apellido del usuario
+      orderNumber: Número de seguimiento de pedido
+      shopNumber: Número de seguimiento de tienda en línea
+      orderDate: Fecha de pedido
+      deviceOrdered: Dispositivo pedido
+      paidReveived: Pago recibido
+
+institution:
+  events:
+    table:
+      type: Tipo
+      title: Título
+      device: Dispositivo
+      created: Creado el
+      closed: Finalizado el
+      updated: Modificado el
+    nodata: No se encontraron incidentes
+  counter:
+    inventory: Inventario
+    openEvents: Incidentes abiertos
+    closedEvents: Incidentes cerrados
+    clientsWithoutDevices: Usuarios sin dispositivos
+    clients: Usuarios
+  details:
+    addLocation: Añadir un lugar
+
+institutionLocation:
+  index:
+    openEventsTitle: Incidentes abiertos
+    openEventsDescription: No hay incidentes abiertos
+  details:
+    users: Usuarios
+    devices: Dispositivos
+  form:
+    title: Añadir lugar
+    label:
+      institutionNumber: Número de la institución
+      institutionName: Nombre de la institución
+      save: Guardar
+      reset: Resetear
+    address:
+      label:
+        street: Calle
+        number: Número
+        bus: Buzón
+        zipcode: Código postal
+        city: Ciudad
+
+inventory:
+  index:
+    title: Todo
+    nodata: No hay datos
+    table:
+      label: Etiqueta
+      productnumber: Número de producto
+      serial: Número de serie
+      model: Modelo
+      firstname: Nombre
+      lastname: Apellido
+  devices:
+    selectmodal:
+      title: Dispositivo
+      save: Guardar
+      close: Cerrar
+    assigned: Asignado
+    notAssigned: Dispositivos sin usuario
+  details:
+    information:
+      title: Información
+      device:
+        title: Información del dispositivo
+        label: Etiqueta
+        hostname: Nombre del host
+        serial: Número de serie
+        productcode: Código de producto
+        model: Modelo
+        processor: Procesador
+        memory: Memoria
+        storage: Almacenamiento
+        display: Pantalla
+        location: Lugar
+        warranty: Garantía
+        deliverytime: Plazo de entrega externo
+      user: Usuario
+    log: Registro
+    loan:
+      title: Prestado
+      from: De
+      until: Hasta
+      to: A
+    moved:
+      title: Mudar
+      from: De
+      to: A
+      by: Por
+  extradevice:
+    details:
+      information:
+        title: Información
+        device:
+          title: Información del dispositivo
+          serial: Número de serie
+          brand: Marca
+          supplier: Proveedor
+          location: Lugar
+        user: Usuario
+      log: Registro
+      loan:
+        title: Prestado
+        from: De
+        until: Hasta
+        to: A
+      moved:
+        title: Mudar
+        from: De
+        to: A
+        by: Por
+  form:
+    title: Añadir dispositivo
+    label:
+      label: Etiqueta
+      hostname: Nombre del host
+      serial: Número de serie
+      productcode: Código de producto
+      model: Modelo
+      motherboard: Placa base
+      memory: Memoria
+      storage: Almacenamiento
+      display: Pantalla
+      macaddress: Dirección MAC
+      reset: Resetear
+      save: Guardar
+  data:
+    adddevice: Añadir dispositivo
+    supplier: Proveedor
+    others: Otros
+    assigned: Asignado
+    notassigned: Dispositivos sin usuario
+    notsignpost: Dispositivos que no son de BYOD
+    nolocation: Dispositivos sin lugar
+    table:
+      label: Etiqueta
+      productnumber: Número de producto
+      serial: Número de serie
+      model: Modelo
+      user: Usuario
+      type: Función
+      supplier: Proveedor
+      brand: Marca
+
+loan:
+  form:
+    title: Prestar dispositivo
+    startdate: De
+    user: Usuario
+    device: Dispositivo
+    enddate: Hasta
+    images: Añadir imágenes
+    remark: Comentarios
+    signature: Firma
+    save: Guardar
+    reset: Resetear
+  index:
+    nodata: No se encontraron datos
+    table:
+      user: Usuario
+      device: Dispositivo
+      serial: Número de serie
+      from: De
+      to: Hasta
+      signature: Firma
+      isback: ¿Traído de vuelta?
+      yes: Sí
+      no: No
+      bringback: Traer de vuelta
+
+movecustomer:
+  modal:
+    title: Mover usuario
+    form:
+      customer: Usuario
+      customerName: Nombre de usuario
+      fromlocation: Lugar actual
+      tolocation: Lugar
+      when: Cuándo
+      save: Guardar
+      close: Cerrar
+
+movedevice:
+  modal:
+    title: Mudar dispositivo
+    form:
+      device: Dispositivo
+      serial: Número de serie
+      fromlocation: Lugar actual
+      tolocation: Lugar
+      when: Cuándo
+      save: Guardar
+      close: Cerrar
+
+customer:
+  data:
+    add: Añadir usuario
+    table:
+      firstname: Nombre
+      lastname: Apellido
+      email: Correo electrónico
+      type: Puesto
+      location: Lugar
+    nolocation: Usuarios sin lugar
+  details:
+    information:
+      title: Información
+      customer:
+        title: Usuario
+        firstname: Nombre
+        lastname: Apellido
+        email: Correo electrónico
+        location:
+          title: Escuela - Lugar
+          school: Escuela
+          location: Lugar
+        device:
+          title: Dispositivo
+          label: Etiqueta
+          hostname: Nombre del host
+          serial: Número de serie
+          productcode: Código de producto
+    log: Registro
+    moved:
+      title: Mudar
+      from: De
+      to: A
+      by: Por
+  modal:
+    title: Usuario
+    save: Guardar
+    close: Cerrar
+  form:
+    title: Añadir usuario
+    lastname: Apellido
+    firstname: Nombre
+    email: Correo electrónico
+    type: Puesto
+    save: Guardar
+    reset: Resetear
+
+returnedLoan:
+  form:
+    title: Devolver el dispositivo
+    label:
+      returneddate: Fecha
+      images: Imágenes
+      remarks: Comentarios
+      save: Guardar
+      reset: Resetear
+
+byod:
+  deliveries:
+    follownumber: Número de seguimiento
+    serialnumber: Número de serie
+    manufacturer: Fabricante
+    model: Modelo
+    delivered_on: Entregado en
+    levering_id: Entrega ID
+    aantal: Número
+    toestel: Dispositivo
+    adres: Dirección
+    acties: Comprtamiento
+  forecasts:
+    manufacturer: Fabricante
+    model: Modelo
+    processor: Procesador
+    memorydisk: Memoria - Disco
+    amount: Cantidad
+    label: Etiqueta
+    price: Precio
+    warranty: Garantía
+  intakes:
+    details: Detalles
+    status: Estado
+  softwarerequests:
+    available: Disponible
+    treatment: En proceso
+    amount: Número total de paquetes
+    name: Nombre del software
+    status: Estado
+  menu:
+    forecast: Pronóstico
+    intakes: Tomas de imagen
+    deliveries: Entregas
+    hires: Contratos de alquiler
+    powerbi: Informe de recursos de aprendizaje
+    autoappupdater: actualizador de la aplicación
+    freefields: Campos libres tienda BYOD
+    scripts: Scripts
+  freefields:
+    header: Campos libres tienda BYOD
+    update: Guardar
+    add: Agregar
+    freefields: Campos libres
+    title: Título
+    type: Tipo
+    active: Activo
+    required: Requerido
+    process: Procesar
+    edit: Editar
+    delete: Eliminar
+    label: Etiqueta
+    inputtype: Tipo de entrada
+    text: Texto
+    number: Número
+    inputmessage: Elige un tipo de entrada...
+
+pagenotfound: Página no encontrada
+pagenotfounddescription: La página solicitada no pudo ser encontrada.
+gohome: Haga clic aquí para ir a la página de inicio
+accessdenied: Prohibido
+accessdenieddescription: No está autorizado para realizar esto.
+somethingwrong: Algo salió mal. Por favor intente más tarde.
+somethingwrongdescription: Si el problema ocurre varias veces, comuníquese con el servicio de asistencia técnica a través del chat en la parte inferior derecha de la página.
+admin:
+  index:
+    title: Panel de administración
+    list: Lista
+    add: Agregar
+    images: Imagen para modelo
+    importdevices: Importar dispositivos
+    addinstitution: Institución agregar
+    access: Control de acceso
+    importuser: Importar usuarios
+    notbyod: Dispositivos que no son BYOD
+    assigndevice: Asignar dispositivos
+file: Archivos
+freefield:
+  title: Campos libres
+  user: Usuario
+  device: Dispositivo
+  name: Código
+  defaultvalue: Valor por defecto
+bulkadduser:
+  extrainfo: La columna "tipo" solo puede contener uno de los siguientes valores
+  savettype: Guarde su CSV editado como CSV UTF-8
+report:
+  table:
+    relation: Número
+    name: Estudiante/Aprendiz
+    total: Total
+    contact: Contacto
+bulkform:
+  institution: Institución
+  location: Localización
+  move: Actualizar
+  notsignpost: Dispositivos que no son de BYOD
+internalticket:
+  title: Incidencias internas
+  problem: Problema
+  description: Descripción
+  state:
+    state: Estado
+    open: Abierto
+    closed: bloqueado
+    inprogress: en tratamiento
+  device: Dispositivo
+  customer: Usuario
+  school: Colegio
+  location: Ubicación
+reason_no_warranty: Adjunto del cliente
+billing_information: Datos de facturación
+attachment: Adjunto del cliente
+
+school_settings:
+  settings: Configuración
+  use_school_facturation_default: Utilizar la información de facturación de la escuela automáticamente al registrar un defecto

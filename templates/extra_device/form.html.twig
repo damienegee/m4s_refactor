@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container mb-3 mt-3">
+    <div class="row">
+        <div class="col-md-12 ml-md-auto">
+            <div class="card">
+                <h1 class="card-header text-center">
+                    {{'extradevice.form.title'|trans}}
+                </h1>
+                <div class="card-body">
+                    {{ form_start(form) }}
+                        {# <div class="form-group row">
+                            <div class="col-sm-2 align-self-center">
+                                {{ form_label(form.customer_id) }}
+                            </div>
+                            <div class="col-sm-10">
+                                {{ form_widget(form.customer_id, { 'attr': { 'class' : 'selectpicker', 'data-live-search' : true, 'title': 'extradevice.form.label.m4sCustomer'|trans } }) }}
+                            </div>
+                        </div> #}
+                        <div class="form-group row">
+                            <div class="col-sm-2 align-self-center">
+                                {{ form_label(form.supplier)}}
+                            </div>
+                            <div class="col-sm-10">
+                                {{ form_widget(form.supplier, { 'attr': {'class': 'form-control' } }) }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-2 align-self-center">
+                                {{ form_label(form.model)}}
+                            </div>
+                            <div class="col-sm-10">
+                                {{ form_widget(form.model, { 'attr': {'class': 'form-control' } }) }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-2 align-self-center">
+                                {{ form_label(form.productnumber)}}
+                            </div>
+                            <div class="col-sm-10">
+                                {{ form_widget(form.productnumber, { 'attr': {'class': 'form-control' } }) }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-2 align-self-center">
+                                {{ form_label(form.serialNumber)}}
+                            </div>
+                            <div class="col-sm-10">
+                                {{ form_widget(form.serialNumber, { 'attr': {'class': 'form-control' } }) }}
+                            </div>
+                        </div>
+                         <div class="form-group row">
+                            <div class="col-sm-2 align-self-center">
+                                {{ form_label(form.manufacturer)}}
+                            </div>
+                            <div class="col-sm-10">
+                                {{ form_widget(form.manufacturer, { 'attr': {'class': 'form-control' } }) }}
+                            </div>
+                        </div>
+                        
+                        <div class="container-fluid mb-1 mt-1">
+                            <div class="d-flex justify-content-around">
+                            <div>
+                                <button id="saveDevice" type="submit" class="btn btn-primary">{{'extradevice.form.label.save'|trans}}</button>
+                            </div>
+                            <div>
+                                {{ form_row(form.reset, { 'attr' : { 'class' : 'btn btn-info' }}) }}
+                            </div>
+                            </div>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

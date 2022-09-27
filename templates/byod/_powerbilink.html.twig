@@ -1,0 +1,13 @@
+{% if powerbilink|length > 0 %}
+{% if powerbilink[0].PowerBIlink is empty %}
+{# nothing to do  #}
+{% else %}
+<a class="dropdown-item" href="{{powerbilink[0].PowerBIlink}}" target="_blank">{{'byod.menu.powerbi'|trans}}</a>
+{% endif %}
+{% else %}
+<div class="container">
+    <div class="jumbotron">
+        <p>{{'loan.index.nodata'|trans}}</p>
+    </div>
+</div>
+{% endif %}

@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid mb-3 mt-3">
+    <div class="d-flex justify-content-end">
+        {% include('utilities/_academicYearSelect.html.twig') %}
+    </div>
+    {% if forecasts|length > 0 %}
+    <table class="datatable table" id="forecasts" style="width: 100%">
+        <thead class="thead">
+            <tr class="bg-info">
+                <th scope="col">ID</th>
+                <th scope="col">{{'byod.forecasts.manufacturer'|trans}}</th>
+                <th scope="col">{{'byod.forecasts.model'|trans}}</th>
+                <th scope="col">{{'byod.forecasts.processor'|trans}}</th>
+                <th scope="col">{{'byod.forecasts.memorydisk'|trans}}</th>
+                <th scope="col">{{'byod.forecasts.amount'|trans}}</th>
+                <th scope="col">{{'byod.forecasts.label'|trans}}</th>
+                <th scope="col">Type</th>
+                <th scope="col">{{'byod.forecasts.price'|trans}}</th>
+                <th scope="col">{{'byod.forecasts.warranty'|trans}}</th>
+                <th scope="col"></th>
+                <th scope="col">Configuration</th>
+                <th scope="col">Autopilot</th>
+                <th scope="col">Acties</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for forecast in forecasts %}
+            <tr>
+                <td>{{forecast.id}}</td>
+                <td>{{forecast.manufacturer}}</td>
+                <td>{{forecast.model}}</td>
+                <td>{{forecast.motherboard_value}}</td>
+                <td>{{forecast.MEMORY}} - {{forecast.Harddisk}}</td>
+                <td>{{forecast.Aantal}}</td>
+                <td>{{forecast.Label}}</td>
+                <td>{{forecast['device1-finance']}}</td>
+                {% if (forecast.Prijs != null) or (forecast.Prijs != '') %}
+                <td>€ {{forecast.Prijs}}</td>
+                {% elseif (forecast.Huurprijs != null) or (forecast.Huurprijs != '') %}
+                <td>€ {{forecast.Huurprijs}}</td>
+                {% else %}
+                <td></td>
+                {% endif %}
+                <td>{{forecast.Garantie}}</td>
+                <td>{{forecast.campagne}}</td>
+                {% if (forecast.0 == 1) %}
+                <td>Configured</td>
+                {% else %}
+                <td>Default</td>
+                {% endif %}
+                <td>{{ forecast.autopilot }}</td>
+                {% if (is_granted('ROLE_SCHOOLADMIN') or is_granted("ROLE_ADMIN")) %}
+                    <td><a href="{{ path("block", {'id' : forecast.id}) }}" class="btn btn-block btn-info btn-sm"><span>Configure</span></a>
+                {% elseif (is_granted('ROLE_USER')) %}
+                    <td><a href="{{ path("block", {'id' : forecast.id}) }}" class="btn btn-block btn-info btn-sm"><span>View</span></a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {# {{ knp_pagination_render(forecasts) }} #}
+    {# <div class="list-group">
+        {% for forecast in forecasts %}
+        <a href="" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{forecast.manufacturer}}&nbsp;{{forecast.model}}&nbsp;{{forecast.motherboard_value}} - {{forecast.MEMORY}} RAM - {{forecast.Harddisk}}</h5>
+                <small>€ {{forecast.Prijs}}</small>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Aantal</strong>
+                    </div>
+                    <div class="col-md-6">{{forecast.Aantal}}</div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div> #}
+    {% else %}
+    <div class="container">
+    <div class="jumbotron">
+        <p>{{'loan.index.nodata'|trans}}</p>
+    </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

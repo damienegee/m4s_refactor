@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+{# {% block somenavigation %}
+{% if institution is defined %}
+    {% include 'utilities/_actionsForInstitution.html.twig'%}
+{% else %}
+    {% include 'utilities/_actions.html.twig'%}
+{% endif %}
+{% endblock %} #}
+{% block body %}
+{% if data %}
+<div class="container-fluid mb-3 mt-3">
+    <div class="row">
+		<div class="col-md-3 col-sm-6 mb-3"></div>
+		<div class="col-md-3 col-sm-6 mb-3"></div>
+		<div class="col-md-3 col-sm-6 mb-3"></div>
+		<div class="col-md-3 col-sm-6 mb-3">
+			<div class="form-group">
+				<select class="form-control" id="academicYearSelect" onchange="getSelect(this)">
+						<option value="" disabled {{ app.request.cookies.get('academic_year') is defined ? "selected" : "" }} hidden>Selecteer academiejaar</option>
+                        <option value="2021-2022" {{ app.request.cookies.get('academic_year') == "2021-2022" ? "selected" : "" }} >2021-2022</option>
+						<option value="2020-2021" {{ app.request.cookies.get('academic_year') == "2020-2021" ? "selected" : "" }} >2020-2021</option>
+						<option value="2019-2020" {{ app.request.cookies.get('academic_year') == "2019-2020" ? "selected" : "" }}>2019-2020</option>
+				</select>
+			</div>
+		</div>
+	</div>
+    {# <div class="jumbotron"> #}
+    <h3 class="text-center">
+        {% if institution is defined %}
+        {{institution.institutionName}}
+        {% else %}
+        Alles
+        {% endif %}
+    </h3>
+    {# <div class="d-flex justify-content-end mb-3 mt-3">
+        <button class="btn btn-success text-white">Persoon toevoegen</button>
+    </div>
+    <table class="table table-stripes table-responsive-lg" id="clientstable">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col" class="text-left">Naam</th>
+                <th scope="col" class="text-left">E-mail</th>
+                <th scope="col" class="text-left">Functie</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for client in data %}
+            <tr>
+                <td>
+                    {{client.firstname}}&nbsp;{{client.lastname}}
+                </td>
+                <td>
+                    {{client.email}}
+                </td>
+                <td>
+                    {{client.type}}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table> #}
+    {# </div> #}
+    <div class="row">
+        {% if forecast is defined and fcdevices is defined %}
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card" style="height:100%;min-height:160px;">
+                <div class="card-body text-white bg-primary" style="font-size:1.2em;padding:10px; !important;">
+				 {{fcdevices|raw}}
+                </div>
+                <h5 class="card-footer mb-0">Totaal Forecast: {{forecast}} </h5>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card" style="height:100%;min-height:160px;">
+                <div class="card-body text-black bg-warning" style="font-size:1.2em;padding:10px; !important;">
+				    {{lmdevices|raw}}
+                </div>
+                <h5 class="card-footer mb-0">Leermiddel : {{counter}}</h5>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card" style="height:100%;min-height:160px;">
+                <div class="card-body text-white bg-success" style="font-size:1.2em;padding:10px; !important;">
+					{{wsdevices|raw}}
+                </div>
+                <h5 class="card-footer mb-0">Webshop {{magento}}</h5>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card" style="height:100%;min-height:160px;">
+                <div class="card-body text-white bg-danger" style="font-size:1.2em;padding:10px; !important;">
+                {% for key,device in devices %}
+                    {% if device|number_format < 0 %}
+                        {{key}}: <b>{{device}}</b>&nbsp;&nbsp;<i class="fas fa-exclamation-triangle"></i><br>
+                    {% else %}
+                        {{key}}: <b>{{device}}</b><br>
+                    {% endif %} 
+                {% endfor %}
+                {% for key,device in wdevices %}
+                    {% if device|number_format < 0 %}
+                        {{key}}: <b>{{device}}</b>&nbsp;&nbsp;<i class="fas fa-exclamation-triangle"></i><br>
+                    {% else %}
+                        {{key}}: <b>{{device}}</b><br>
+                    {% endif %}
+                {% endfor %}
+                </div>
+                <h5 class="card-footer mb-0">Nog toe te wijzen: {{forecast|number_format - counter|number_format - magento|number_format}}</h5>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    {% include('particulier/openorders.html.twig')%}
+</div>
+{% endif %}
+{% endblock %}

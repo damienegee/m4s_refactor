@@ -1,0 +1,135 @@
+{% if item %}
+<div class="modal fade" id="modal{{item.id}}" tabindex="-1" aria-labelledby="modal{{item.id}}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollablemodal-xl">
+    <div class="modal-content">
+      <div class="modal-header">  
+        <h5 class="modal-title text-center" id="exampleModalLabel">{{item.title}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+            <div class="card-deck">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title font-weight-bold">FS{{item.id}}</h5>
+                  <p class="card-text">
+                    {{item.m4s_customerfirstname}}&nbsp;{{item.m4s_customerlastname}}
+                    <span id="serienr" data-id="{{item.serial}}">{{'fieldservice.index.table.serial'|trans}}&nbsp;{{item.serial}}</span><br>
+                    {% if item.sku is not null  %}
+                    <span>SKU: {{item.sku}}</span><br>
+                    {% endif %}
+                    {% if item.city is not same as('') %}
+                    {{'fieldservice.index.table.location'|trans}}&nbsp;{{item.city}}
+                    {% endif %}
+                    {% if item.school_name is not same as('') %}
+                    <br>{{'institutionLocation.form.label.institutionName'|trans}}&nbsp;{{item.school_name}}
+                    {% endif %}
+                    {% if item.status is same as('afgekeurd') %}
+                      {% if item.disapprovedReasonInternal is not same as ('')  and item.disapprovedReasonInternal is not null %}
+                      <br>{{item.disapprovedReasonInternal}}
+                      {% endif %}
+                    {% endif %}
+                    <br>{{'fieldservice.index.table.problem'|trans}}&nbsp;{{item.category}} - {{item.problem}}
+                    {% if item.description is not same as('') %}
+                    <br>{{item.description}}
+                    {% endif %}
+                    {% if item.reasonNowarranty is not same as('') %}
+                    <br>{{ 'reason_no_warranty'|trans }}:&nbsp;{{item.reasonNowarranty}}<br>
+                    {% endif %}
+                  </p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <strong>{{'report.table.contact'|trans}}</strong>
+                    <div class="row">
+                      <div class="col-sm-6 left">
+                        {{item.firstname}}&nbsp;{{item.lastname}}
+                        <br>
+                        <a href="mailto:{{item.email}}">{{item.email}}</a>
+                        <br>
+                        <a href="phone:{{item.phone}}">{{item.phone}}</a>
+                      </div>
+                      <div class="col-sm-6 right">
+                        {{item.street}}&nbsp;{{item.number}}
+                        <br>
+                        {{item.zip}}&nbsp;{{item.city}}
+                        <br>
+                        {{item.country}}
+                      </div>
+                    </div>
+                  </li>
+                  {% if item.billing_firstname is not same as('') %}
+                  <li class="list-group-item">
+                    <strong>{{ 'billing_information'| trans }}</strong>
+                    {% if item.billing_business is not same as('') %}
+                    <br>
+                    {{item.billing_business}} - {{item.billing_vat}}
+                    <br>
+                    {% endif %}
+                    <div class="row">
+                      <div class="col-sm-6 left">
+                        {{item.billing_firstname}}&nbsp;{{item.billing_lastname}}
+                        <br>
+                        <a href="mailto:{{item.billing_email}}">{{item.billing_email}}</a>
+                        <br>
+                        <a href="phone:{{item.billing_phone}}">{{item.billing_phone}}</a>
+                      </div>
+                      <div class="col-sm-6 right">
+                        {{item.billing_street}}&nbsp;{{item.billing_number}}
+                        <br>
+                        {{item.billing_zip}}&nbsp;{{item.billing_city}}
+                        <br>
+                        {{item.billing_country}}
+                      </div>
+                    </div>
+                  </li>
+                  {% endif %}
+                  {% if item.files is not same as('') %}
+                  <li class="list-group-item">
+                    <strong>{{ 'attachment'|trans }}</strong>
+                    <div class="row" style="">
+                      {% set files = explodeSemiCol(item.files) %}
+                      {% for file in files %}
+                      {% if file is not same as('') %}
+                      <div class="col-md-4" style="">
+                        <a href="{{app_sp2_url}}/fieldServices/uploads/{{file}}" target="_blank">
+                          <img src="{{app_sp2_url}}/fieldServices/uploads/{{file}}" class="img-thumbnail" style="" />
+                        </a>
+                      </div>
+                      {% endif %}
+                      {% endfor %}
+                    </div>
+                  </li>
+                  {% endif %}
+                  {% if item.signature is defined and item.signature is not same as('') %}
+                  <li class="list-group-item">
+                    <strong>{{'loan.form.signature'|trans}}</strong>
+                    <img src="{{item.signature}}" class="col" style="max-width:300px">
+                  </li>
+                  {% endif %}
+                  {% if item.ipadres is defined and item.ipadres is not same as('') %}
+                  <li class="list-group-item">
+                    <p>IP adres:&nbsp;{{item.ipadres}}</p>
+                  </li>
+                  {% endif %}
+                </ul>
+                <div class="card-footer">
+                  <small class="text-muted">{{'institution.events.table.created'|trans}}&nbsp;{{item.created|date('d-m-y')}}</small>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-3">
+            <button type="button" class="btn btn-secondary text-left" data-dismiss="modal"><i class="fas fa-window-close"></i></button>
+          </div>
+        </div>  
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}

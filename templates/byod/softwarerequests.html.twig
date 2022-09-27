@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid mb-3 mt-3">
+    <div class="container">
+        <div class="card-deck">
+            {# availableCounter #}
+            <div class="card mb-4">
+                <h4 class="card-header text-center font-weight-nomral my-0">{{'byod.softwarerequests.available'|trans}}</h4>
+                <div class="card-body">
+                    <h5 class="card-title dashboardNumber">
+                        <i class="fas fa-check-circle 9x" style="color: #8dc155;"></i>
+                        {{available.beschikbaar}}
+                    </h5>
+                </div>
+            </div>
+            {# requestedCounter #}
+            <div class="card mb-4">
+                <h4 class="card-header text-center font-weight-nomral my-0">{{'byod.softwarerequests.treatment'|trans}}</h4>
+                <div class="card-body">
+                    <h5 class="card-title dashboardNumber">
+                        <i class="fas fa-cogs 9x" style="color: #00ADBD;"></i>
+                        {{requests.aangevraagd}}
+                    </h5>
+                </div>
+            </div>
+            {# productionCounter #}
+            <div class="card mb-4">
+                <h4 class="card-header text-center font-weight-nomral my-0">{{'byod.softwarerequests.amount'|trans}}</h4>
+                <div class="card-body">
+                    <h5 class="card-title dashboardNumber">
+                        <i class="fas fa-clipboard-list 9x" style="color: #f39c12;"></i>
+                        {{production.productie}}
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <button class="btn btn-info" data-toggle="modal" data-target="#modaladdsoftware"><i class="fas fa-tasks"></i></button>
+        </div>
+        {% if data|length > 0 %}
+        <table id="byodSoftwareTable" class="datatable table" style="width:100%">
+            <thead class="thead">
+                <tr role="row" class="bg-info">
+                    <th scope="col">{{'byod.softwarerequests.name'|trans}}</th>
+                    <th scope="col">{{'byod.softwarerequests.status'|trans}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td><p>{{item.name}}</p></td>
+                    <td>
+                        <p>
+                            {% if item.status == 'in behandeling' %}
+                            <i class="fas fa-hammer text-warning" style="font-size: 1.5em"></i>
+                            {% elseif item.status == 'beschikbaar' %}
+                            <i class="fas fa-check text-success" style="font-size: 1.5em"></i>
+                            {% elseif item.status starts with 'goedgekeurd' %}
+                            <i class="fas fa-thumbs-up text-warning" style="font-size: 1.5em"></i>
+                            {% elseif item.status == 'wachten op meer info' %}
+                            <i class="fas fa-pause text-info" style="font-size: 1.5em"></i>
+                            {% endif %}
+                            &nbsp;
+                            <span style="font-size: 12px;">
+                                {% if item.status starts with 'goedgekeurd' %}
+                                goedgekeurd
+                                {% else %}
+                                {{item.status}}
+                                {% endif %}
+                            </span>
+                        </p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="container">
+    <div class="jumbotron">
+        <p>{{'loan.index.nodata'|trans}}</p>
+    </div>
+</div>
+        {% endif %}
+    </div>
+    {% include 'byod/_requestnewsoftware.modal.html.twig' %}
+</div>
+{% endblock %}

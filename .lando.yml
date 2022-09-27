@@ -1,0 +1,13 @@
+name: m4s
+recipe: symfony
+config:
+  php: '7.4'
+  via: nginx
+  webroot: public
+  database: mariadb
+  xdebug: true
+services:
+  database:
+    config:
+      database: .lando/custom_database.cnf
+    portforward: 3317

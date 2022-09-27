@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid mb-3 mt-3">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1>{{'forecasts.index.title'|trans}}</h1>
+            {% include('utilities/_academicYearSelect.html.twig') %}
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 mb-3">
+                <div class="card">
+                    <div class="card-body text-white bg-primary">
+                        {% for forcast in forecasts.forecasts %}
+                            <p>
+                                {{forcast.aantal}}&nbsp;x&nbsp;
+                                {{forcast.devicebeschrijving}}<br />
+                            </p>
+                        {% endfor %}
+                    </div>
+                    <h5 class="card-footer mb-0">{{'forecasts.index.totalForecast'|trans}} {{app.request.cookies.get('academic_year')}}: {{forecasts.totalForecasts[0].forecast}}</h5>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-3">
+                <div class="card">
+                    <div class="card-body bg-warning">
+                        {% for hire in hires %}
+                            <p>
+                                {{hire.contractcount}}&nbsp;x&nbsp;{{hire.NaamToestel}} <br />
+                                <small>{{hire.OmschrijvingToestel}}</small>
+                            </p>
+                        {% endfor %}
+                    </div>
+                    {% set hiresTotal = 0 %}
+                    {% for leermiddel in hires %}
+                        {% set hiresTotal = leermiddel.contractcount + hiresTotal %}
+                    {% endfor %}
+                    <h5 class="card-footer mb-0">{{'forecasts.index.totalHire'|trans}} {{app.request.cookies.get('academic_year')}}: {{hiresTotal}}</h5>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-3">
+                <div class="card">
+                    <div class="card-body text-white bg-success">
+                        {% for webshop in webshops %}
+                            <p>
+                                {{webshop.ordercount}}&nbsp;x&nbsp;{{webshop.device}}
+                            </p>
+                        {% endfor %}
+                    </div>
+                    {% set shopTotals = 0 %}
+                    {% for shop in webshops %}
+                        {% set shopTotals = shop.ordercount + shopTotals %}
+                    {% endfor %}
+                    <h5 class="card-footer mb-0">{{'forecasts.index.totalShop'|trans}} {{app.request.cookies.get('academic_year')}}: {{shopTotals}}</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-1 mt-1">
+            {% include('forecast/data.html.twig') %}
+        </div>
+
+        {# <ul class="mb-1 mt-1 nav nav-tabs" id="ordersTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="hires-tab" data-toggle="tab" href="#hires" role="tab" aria-controls="hires" aria-selected="true">{{'forecasts.hires.title'|trans}}</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="webshop-tab" data-toggle="tab" href="#webshop" role="tab" aria-controls="webshop" aria-selected="true">{{'forecasts.shop.title'|trans}}</a>
+        </li>
+    </ul>
+    <div class="mt-3 tab-content" id="ordersTabContent">
+        <div class="tab-pane fade show active" id="hires" role="tabpanel" aria-labelledby="hires-tab">
+            {% include('forecast/hires.html.twig') %}
+        </div>
+         <div class="tab-pane fade" id="webshop" role="tabpanel" aria-labelledby="webshop-tab">
+            {% include('forecast/shop.html.twig') %}
+        </div>
+    </div> #}
+    </div>
+{% endblock %}

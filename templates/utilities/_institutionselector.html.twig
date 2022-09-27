@@ -1,0 +1,17 @@
+<li class="nav-item">
+    <select class="nav-link selectpicker select-institution" data-live-search="true" name="selValue" data-dropdown-align-right="true" container="container" onclick="setFocusOnSearchBox()">
+        {% for key,institution in institutions %}
+        <option data-tokens="{{institution.id}}" value="{{path('institutionDetail', { id: institution.id })}}">
+            {{institution.name|removeSynergy}}
+            {# {% for location in institution.locations %}
+            --{{location.institutionName}}--
+            {% endfor %} #}
+        </option>
+        {% for location in institution.locations %}
+         <option data-tokens="{{location.id}}" value="{{path('institutionlocationForId', {lid: location.id})}}">
+            &nbsp;&nbsp;&nbsp;&nbsp;{{location.institutionName}}
+        </option>
+        {% endfor %}
+        {% endfor %}
+    </select>
+</li>

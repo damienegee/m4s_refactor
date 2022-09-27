@@ -1,0 +1,41 @@
+{% if open|length > 0%}
+<table id="openInternalTicketTable" class="fieldservicetable table table-stripes table-responsive-lg" style="width:100%">
+	<thead class="thead">
+		<tr class="bg-info">
+			<th scope="col" class="text-center">#</th>
+			<th scope="col" class="text-center">{{'fieldservice.index.table.student'|trans}}</th>
+			<th scope="col" class="text-center">{{'fieldservice.index.table.serial'|trans}}</th>
+			<th scope="col" class="text-center">{{'fieldservice.index.table.title'|trans}}</th>
+			<th scope="col" class="text-center">{{'fieldservice.index.table.problem'|trans}}</th>
+			<th scope="col" class="text-center">{{'fieldservice.index.table.state'|trans}}</th>
+			<th scope="col" class="text-center">{{'fieldservice.index.table.created'|trans}}</th>
+			<th scope="col" class="text-center">{{'fieldservice.index.table.updated'|trans}}</th>
+			<th scope="col" class="text-center">{{'fieldservice.index.table.location'|trans}}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for item in open %}
+			<tr>
+				<td class="text-left">{{item.id}}</td>
+				<td class="text-left"><strong>{{item.firstname}}</strong>&nbsp;{{item.lastname}}</td>
+				<td class="text-left">
+					<strong>{{item.label}}</strong><br />
+					<a href="{{ path('invetoryDeviceDetailsBySerial', {'serial' : item.serialnumber}) }}">{{item.serialnumber}}</a>
+				</td>
+				<td class="text-left">{{item.problem}}</td>
+				<td class="text-left">{{item.description|raw}}</td>
+				<td class="text-left">{{item.state}}</td>
+				<td class="text-left">{{item.created_at|date('d-m-y')}}</td>
+				<td class="text-left">{{item.modified_at|date('d-m-y')}}</td>
+				<td class="text-left">{{item.city}}</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% else %}
+<div class="container">
+	<div class="jumbotron">
+		<p>{{'loan.index.nodata'|trans}}</p>
+	</div>
+</div>
+{% endif %}

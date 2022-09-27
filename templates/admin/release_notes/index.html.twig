@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid mb-3 mt-3">
+	<div class="row justify-content-end">
+		<div class="col-12 col-md-2">
+			<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addReleaseNoteModal">Toevoegen</button>
+		</div>
+	</div>
+	{% if releasenotes|length > 0 %}
+	<div class="mb-3 mt-3">
+		<table class=" table table-striped datatable" style="width: 100%">
+			<thead>
+				<tr>
+					<th scop="col">#</th>
+					<th scop="col">Version</th>
+					<th scop="col">Title</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for releasenote in releasenotes %}
+				<tr>
+					<td>{{releasenote.id}}</td>
+					<td>{{releasenote.version}}</td>
+					<td>{{releasenote.title}}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	{% endif %}
+	{% include('admin/release_notes/_addreleasenotesmodal.html.twig') %}
+</div>
+{% endblock %}

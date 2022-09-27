@@ -1,0 +1,10 @@
+{{form_start(searchform, { action: path('searchDeviceOrUser')})}}
+<div class="form-row">
+	<div class="col-auto">
+		{{form_widget(searchform.searchcriteria, {'attr': { 'class' : 'form-control'}})}}
+	</div>
+	<div class="col-auto">
+		{{form_widget(searchform.submit)}}
+	</div>
+</div>
+{{form_end(searchform)}}

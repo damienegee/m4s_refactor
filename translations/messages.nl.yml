@@ -1,0 +1,455 @@
+base:
+  navigation:
+    inventory: Inventaris
+    fieldService: Incident
+    users: Gebruikers
+    shops: Huur/koop
+    mySchools: Mijn scholen
+    logout: Uitloggen
+  pagination:
+    previous: Vorige
+    next: Volgende
+  filtration:
+    search: Zoeken
+
+agso:
+  index:
+    title: Bestellingen
+    table:
+      orderid: Order ID
+      device: Toestel
+      numberof: Aantal
+      total: Totaal
+      date: Datum
+      orderNumber: Bestelbonnummer
+
+extradevice:
+  form:
+    title: Toestel toevoegen
+    label:
+      m4sCustomer: Gebruiker
+      productnumber: Productcode
+      serial: Serienummer
+      manufacturer: Fabrikant
+      model: Model
+      supplier: Leverancier
+      reset: Resetten
+      save: Bewaren
+
+fieldservice:
+  label: Incident
+  index:
+    title: Alles
+    button: Incident melden
+    tabs:
+      open: Openstaande
+      wait: Wachten op goedkeuring
+      closed: Gesloten
+      inprogress: In behandeling
+      graph: Grafiek
+    table:
+      student: Leerling
+      serial: Serienummer
+      title: Titel
+      problem: Probleem
+      description: Omschrijving
+      state: Status
+      created: Aangemaakt
+      updated: Gewijzigd
+      location: Vestiging
+      details: Details
+
+forecasts:
+  index:
+    title: Huur/koop
+    yearSelect: Selecteer academiejaar
+    totalForecast: Totaal forecast
+    totalHire: Totaal huur
+    totalShop: Totaal webshop
+  hires:
+    title: Huur
+    table:
+      firstname: Voornaam gebruiker
+      lastname: Naam gebruiker
+      contractNumber: Volgnummer contract
+      contractDrawn: Contract opgemaakt
+      contractReceived: Contract ontvangen
+      advanceReceived: Waarborg ontvangen
+      deviceOrdered: Besteld toestel
+  shop:
+    title: Koop
+    table:
+      firstname: Voornaam gebruiker
+      lastname: Naam gebruiker
+      orderNumber: Volgnummer bestelling
+      shopNumber: Volgnummer webshop
+      orderDate: Datum bestelling
+      deviceOrdered: Besteld toestel
+      paidReceived: Betaling ontvangen
+
+institution:
+  events:
+    table:
+      type: Type
+      title: Titel
+      device: Toestel
+      created: Aangemaakt op
+      closed: Afgesloten op
+      updated: Gewijzigd op
+    nodata: Geen incidenten gevonden
+  counter:
+    inventory: Inventaris
+    openEvents: Openstaande incidenten
+    closedEvents: Gesloten incidenten
+    clientsWithoutDevices: Gebruikers zonder toestellen
+    clients: Gebruikers
+  details:
+    addLocation: Vestiging toevoegen
+
+institutionLocation:
+  index:
+    openEventsTitle: Openstaande incidenten
+    openEventsDescription: Geen openstaande incidenten
+  details:
+    users: Gebruikers
+    devices: Toestellen
+  form:
+    title: Vestiging toevoegen
+    label:
+      institutionNumber: Instellingsnummer
+      institutionName: Instellingsnaam
+      save: Bewaren
+      reset: Resetten
+    address:
+      label:
+        street: Straat
+        number: Huisnummer
+        bus: Bus
+        zipcode: Postcode
+        city: Gemeente
+
+inventory:
+  index:
+    title: Alles
+    nodata: Geen data
+    table:
+      label: Label
+      productnumber: Productnummer
+      serial: Serienummer
+      model: Model
+      firstname: Voornaam
+      lastname: Naam
+  devices:
+    selectmodal:
+      title: Toestel
+      save: Bewaren
+      close: Sluiten
+    assigned: Toegewezen
+    notAssigned: Toestellen zonder gebruiker
+  details:
+    information:
+      title: Informatie
+      device:
+        title: Toestelinfo
+        label: Label
+        hostname: Hostnaam
+        serial: Serienummer
+        productcode: Productcode
+        model: Model
+        processor: Processor
+        memory: Geheugen
+        storage: Opslag
+        display: Scherm
+        location: Vestiging
+        warranty: Garantie
+        deliverytime: Externe levertijd
+      user: Gebruiker
+    log: Log
+    loan:
+      title: Uitgeleend
+      from: Van
+      until: Tot
+      to: Aan
+    moved:
+      title: Verhuizen
+      from: Van
+      to: Naar
+      by: Door
+  extradevice:
+    details:
+      information:
+        title: Informatie
+        device:
+          title: Toestelinfo
+          serial: Serienummer
+          brand: Merk
+          supplier: Leverancier
+          location: Vestiging
+        user: Gebruiker
+      log: Log
+      loan:
+        title: Uitgeleend
+        from: Van
+        until: Tot
+        to: Aan
+      moved:
+        title: Verhuizen
+        from: Van
+        to: Naar
+        by: Door
+  form:
+    title: Toestel toevoegen
+    label:
+      label: Label
+      hostname: Hostnaam
+      serial: Serienummer
+      productcode: Productcode
+      model: Model
+      motherboard: Moederbord
+      memory: Geheugen
+      storage: Opslag
+      display: Scherm
+      macaddress: MAC-adres
+      reset: Resetten
+      save: Bewaren
+  data:
+    adddevice: Toestel toevoegen
+    supplier: Leverancier
+    others: Andere
+    assigned: Toegewezen
+    notassigned: Toestellen zonder gebruiker
+    notsignpost: Niet BYOD toestellen
+    nolocation: Toestellen zonder vestiging
+    table:
+      label: Label
+      productnumber: Productnummer
+      serial: Serienummer
+      model: Model
+      user: Gebruiker
+      type: Functie
+      supplier: Leverancier
+      brand: Merk
+
+loan:
+  form:
+    title: Toestel uitlenen
+    startdate: Van
+    user: Gebruiker
+    device: Toestel
+    enddate: Tot
+    images: Afbeeldingen toevoegen
+    remark: Opmerkingen
+    signature: Handtekening
+    save: Bewaren
+    reset: Resetten
+  index:
+    nodata: Geen data gevonden
+    table:
+      user: Gebruiker
+      device: Toestel
+      serial: Serienummer
+      from: Van
+      to: Tot
+      signature: Handtekening
+      isback: Is terug?
+      yes: Ja
+      no: Neen
+      bringback: Breng terug
+
+movecustomer:
+  modal:
+    title: Gebruiker verplaatsen
+    form:
+      customer: Gebruiker
+      customerName: Gebruikersnaam
+      fromlocation: Huidige vestiging
+      tolocation: Vestiging
+      when: Wanneer
+      save: Bewaren
+      close: Sluiten
+
+movedevice:
+  modal:
+    title: Toestel verhuizen
+    form:
+      device: Toestel
+      serial: Serienummer
+      fromlocation: Huidige vestiging
+      tolocation: Vestiging
+      when: Wanneer
+      save: Bewaren
+      close: Sluiten
+
+customer:
+  data:
+    add: Gebruiker toevoegen
+    table:
+      firstname: Voornaam
+      lastname: Naam
+      email: E-mail
+      type: Functie
+      location: Vestiging
+    nolocation: Gebruikers zonder vestiging
+  details:
+    information:
+      title: Informatie
+      customer:
+        title: Gebruiker
+        firstname: Voornaam
+        lastname: Naam
+        email: E-mail
+        location:
+          title: School - Vestiging
+          school: School
+          location: Vestiging
+        device:
+          title: Toestel
+          label: Label
+          hostname: Hostnaam
+          serial: Serienummer
+          productcode: Productcode
+    log: Log
+    moved:
+      title: Verhuizen
+      from: Van
+      to: Naar
+      by: Door
+  modal:
+    title: Gebruiker
+    save: Bewaren
+    close: Sluiten
+  form:
+    title: Gebruiker toevoegen
+    lastname: Naam
+    firstname: Voornaam
+    email: E-mail
+    type: Functie
+    save: Bewaren
+    reset: Resetten
+
+returnedLoan:
+  form:
+    title: Toestel terugbrengen
+    label:
+      returneddate: Datum
+      images: Afbeeldingen
+      remarks: Opmerkingen
+      save: Bewaren
+      reset: Resetten
+byod:
+  deliveries:
+    follownumber: Volgnummer
+    serialnumber: Serienummer
+    manufacturer: Fabrikant
+    model: Model
+    delivered_on: Geleverd op
+    levering_id: Levering ID
+    aantal: Aantal
+    toestel: Toestel
+    adres: Adres
+    acties: Acties
+  forecasts:
+    manufacturer: Fabrikant
+    model: Model
+    processor: Processor
+    memorydisk: Geheugen - Schijf
+    amount: Aantal
+    label: Label
+    price: Prijs
+    warranty: Garantie
+  intakes:
+    details: Details
+    status: Status
+  softwarerequests:
+    available: Beschikbaar
+    treatment: In behandeling
+    amount: Totaal aantal pakketten
+    name: Softwarenaam
+    status: Status
+  menu:
+    forecast: Forecast
+    intakes: Image Intakes
+    deliveries: Levering
+    hires: Huurcontracten
+    powerbi: Leermiddel Rapport
+    autoappupdater: Auto App Updater
+    freefields: Vrije velden BYOD-shop
+    scripts: Scripts
+  freefields:
+    header: Vrije velden BYOD-shop
+    update: Bewaren
+    add: Toevoegen
+    freefields: Vrije velden
+    title: Titel
+    type: Type
+    active: Actief
+    required: Vereist
+    process: Verwerken
+    edit: Bewerken
+    delete: Verwijderen
+    label: Label
+    inputtype: Inputtype
+    text: Tekst
+    number: Nummer
+    inputmessage: Kies een inputtype...
+
+pagenotfound: Pagina niet gevonden
+pagenotfounddescription: De gevraagde pagina kon niet worden gevonden.
+gohome: Klik hier om naar de Home-pagina te gaan
+accessdenied: Verboden
+accessdenieddescription: U bent niet gemachtigd om dit uit te voeren.
+somethingwrong: Er is iets misgegaan. Probeer het later nog eens.
+somethingwrongdescription: Als het probleem zich meermaals voordoet gelieve contact op te nemen met de helpdesk via de chat onderaan rechts de pagina.
+admin:
+  index:
+    title: Admin Dashboard
+    list: Lijst
+    add: Toevoegen
+    images: Afbeelding voor model
+    importdevices: Importeer toestellen
+    addinstitution: Instelling toevoegen
+    access: Toegangsbeheer
+    importuser: Importeer gebruikers
+    notbyod: Niet BYOD toestellen
+    assigndevice: Toestellen toekennen
+file: Bestand
+freefield:
+  title: Vrije velden
+  user: Gebruiker
+  device: Toestel
+  name: Code
+  defaultvalue: Standaardwaarde
+bulkadduser:
+  extrainfo: De kolom "type" kan enkel een van volgende waarden bevatten
+  savettype: Bewaar je bewerkte CSV als CSV-UTF8
+report:
+  table:
+    relation: Nummer
+    name: Student/Leerling
+    total: Totaal
+    contact: Contact
+bulkform:
+  institution: Instelling
+  location: Vestigingsplaats
+  move: Update
+  notsignpost: Niet BYOD toestellen
+internalticket:
+  title: Interne incidenten
+  problem: Probleem
+  description: Omschrijving
+  state:
+    state: Status
+    open: Open
+    closed: Afgesloten
+    inprogress: In behandeling
+  device: Toestel
+  customer: Gebruiker
+  school: School
+  location: Vestigingsplaats
+reason_no_warranty: Reden geen garantie
+billing_information: Facturatiegegevens
+attachment: Bijlage van de klant
+
+school_settings:
+  settings: Instellingen
+  use_school_facturation_default: Vul school facturatie informatie automatisch in bij het aanmelden van een defect

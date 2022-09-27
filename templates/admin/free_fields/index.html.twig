@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container mb-3 mt-3">
+    <div class="card">
+        <h5 class="card-header text-center">
+            {{'freefield.title'|trans}}
+        </h5>
+        <div class="card-body">
+            <div class="row">
+                {# <div class="col-sm-2 align-self-center">
+                    Free Fields
+                </div> #}
+            </div>
+            {{ form_start(form)}}
+            <div class="form-group row">
+                <div class="col-sm-2 align-self-center">
+                    {{ form_label(form.model) }}
+                </div>
+                <div class="col-sm-10">
+                    {{ form_widget(form.model, { 'attr': { 'class' : 'selectpicker', 'data-live-search' : true, 'title': '' } }) }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-2 align-self-center">
+                    {{ form_label(form.name)}}
+                </div>
+                <div class="col-sm-10">
+                    {{ form_widget(form.name, { 'attr': {'class': 'form-control' } }) }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-2 align-self-center">
+                    {{ form_label(form.defaultvalue)}}
+                </div>
+                <div class="col-sm-10">
+                    {{ form_widget(form.defaultvalue, { 'attr': {'class': 'form-control' } }) }}
+                </div>
+            </div>
+            <div>
+                <button id="addFreeField" type="submit" class="btn btn-primary">Bewaren</button>
+            </div>
+            {{ form_end(form)}}
+        </div>
+    </div>
+    {% if devices|length > 0 %}
+    <h3>{{'freefield.device'|trans}}</h3>
+    <div class="container mb-1 mt-1">
+        {% for tag in devices %}
+        {% if tag != NULL %}
+        <div class="row">
+            <div class="col-md-6">
+                <p>{{tag}}</p>
+            </div>
+            <div class="col-md-6">
+                <a href="{{path('admin_free_fields_devices_remove', {tagname: tag, schoolid: schoolid})}}" class="btn btn-danger">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+        {# {{tag}} #}
+        {% endfor %}
+    </div>
+    <hr />
+    {% endif %}
+    {% if customers|length > 0 %}
+    <h3>{{'freefield.user'|trans}}</h3>
+    <div class="container mb-1 mt-1">
+        {% for tag in customers %}
+        {% if tag != NULL %}
+        <div class="row">
+            <div class="col-md-6">
+                <p>{{tag}}</p>
+            </div>
+            <div class="col-md-6">
+                <a href="{{path('admin_free_fields_customers_remove', {tagname: tag, schoolid: schoolid})}}" class="btn btn-danger">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+        {# {{tag}} #}
+        {% endfor %}
+    </div>
+    <hr />
+    {% endif %}
+</div>
+{% endblock %}

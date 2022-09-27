@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid">
+    {% if 'ROLE_ADMIN' in app.user.roles %}
+    <div class="d-flex justify-content-end mb-3 mt-3">
+        {{ knp_pagination_filter(institutions, {'i.institutionName' : 'Instellingsnaam'})}}
+    </div>
+    {% endif %}
+</div>
+{% if institutions|length > 0 %}
+<div class="container-fluid">
+    <div class="accordion" id="listUserAccordion">
+    {% for key,value in institutions %}
+        <div class="card mb-3">
+            <h5 class="card-header d-flex justify-content-between">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse{{value.id}}" aria-expanded="true" aria-controls="collapse{{value.id}}">
+                    {{value.institutionName|removeSynergy}}
+                </button>
+                <a href="{{ path('addUserForSchool', {iid: value.id}) }}" class="btn btn-info">Add</a>
+            </h5>
+            <div id="collapse{{value.id}}" class="collapse" aria-labelledby="heading{{value.id}}" data-parent="#listUserAccordion">
+                <div class="card-content">
+                    <table class="table" style="width: 100%">
+                        <thead class="thead">
+                            <tr class="bg-info">
+                                <th scope="col">Naam</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Role</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in value.users %}
+                            <tr>
+                                <td>{{user.name}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.roles|join(", ")}}</td>
+                                <td>
+                                    <a href="{{ path('admin_user_edit', {"id": user.id}) }}" class="btn btn-outline-info"><i class="fas fa-edit"></i></a>
+                                </td>
+                                <td><a href="{{path('removeUserForSchool', {sid: value.id, uid: user.id})}}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+<nav aria-label="Page navigation">
+    {{ knp_pagination_render(institutions) }}
+</nav>
+{% endif %}
+{% endblock %}

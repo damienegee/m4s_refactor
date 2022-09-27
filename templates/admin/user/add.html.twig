@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 ml-md-auto">
+      <div class="card bg-light mb-3 mt-5">
+        <div class="card-body">
+          <h5 class="card-header">Gebruiker toevoegen</h5>
+          {{ form_start(add_user) }} 
+          <div class="form_group">
+            <div class="col-md-12 mb-3">
+              {{ form_row(add_user.name, {'attr': {'class': 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="form_group">
+            <div class="col-md-12 mb-3">
+              {{ form_row(add_user.email, {'attr': {'class': 'form-control'}}) }}
+            </div>
+          </div>
+          <div class="form_group ">
+            <div class="col-md-12 mb-3">
+              {{ form_row(add_user.roles, {'attr': {'class': ''}}) }}
+            </div>
+          </div>
+		  <div class="form_group ">
+            <div class="col-md-12 mb-3">
+              {{ form_row(add_user.locale, {'attr': {'class': ''}}) }}
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-8 col-md-offset-4" style="margin-top:0.3125rem;">
+              <button type="submit" class="btn btn-primary">
+                <span><i class="fas fa-edit"></i>Toevoegen<span>
+              </button>
+            </div>
+          </div>
+          {{ form_end(add_user) }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

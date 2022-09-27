@@ -1,0 +1,9 @@
+<div class="form-group">
+    <select class="form-control" id="academicYearSelect" onchange="getSelect(this)">
+        <option value="" disabled {{ app.request.cookies.get('academic_year') is defined ? "selected" : "" }} >{{'forecasts.index.yearSelect'|trans}}</option>
+        <option value="2022-2023" {{ app.request.cookies.get('academic_year') == "2022-2023" ? "selected" : "" }} >2022-2023</option>
+        <option value="2021-2022" {{ app.request.cookies.get('academic_year') == "2021-2022" ? "selected" : "" }} >2021-2022</option>
+        {# <option value="2020-2021" {{ app.request.cookies.get('academic_year') == "2020-2021" ? "selected" : "" }} >2020-2021</option> #}
+        {# <option value="2019-2020" {{ app.request.cookies.get('academic_year') == "2019-2020" ? "selected" : "" }}>2019-2020</option> #}
+    </select>
+</div>

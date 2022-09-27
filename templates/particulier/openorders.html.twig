@@ -1,0 +1,32 @@
+{% if openOrders is defined and openOrders|length > 0 %}
+<div class="mb-3 mt-3">
+    <table id="openOrders" class="datatable table table-stripes table-responsive-lg" style="width:100%">
+        <thead class="thead">
+            <tr class="bg-info">
+                <th scope="col">Leerling</th>
+                <th scope="col">Contract</th>
+                <th scope="col">Waarborg</th>
+                <th scope="col">Type</th>
+                <th scope="col">Toestel</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for order in openOrders %}
+            <tr>
+                <td>{{order.Leerling |raw}}</td>
+                <td>{{order.Contract}}</td>
+                <td>{{order.Voorschot}}</td>
+                <td>{{order.type}}</td>
+                <td>{{order.Toestel}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="container">
+    <div class="jumbotron">
+        <p>{{'loan.index.nodata'|trans}}</p>
+    </div>
+</div>
+{% endif %}

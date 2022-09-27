@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid">
+	{% if reports|length > 0 %}
+	<table id="reportstable" class="datatable table table-hover table-responsive-lg" style="width:100%">
+		<thead class="thead">
+			<tr class="bg-info">
+				<th scope="col" class="text-center">{{'report.table.relation'|trans}}</th>
+				{# <th scope="col" class="text-center">OffsetNumber</th> #}
+				<th scope="col" class="text-center">{{'report.table.name'|trans}}</th>
+				{# <th scope="col" class="text-center">Debit</th> #}
+				{# <th scope="col" class="text-center">Debit</th> #}
+				<th scope="col" class="text-center">0 - 30</th>
+				<th scope="col" class="text-center">30 - 60</th>
+				<th scope="col" class="text-center">61 - 90</th>
+				<th scope="col" class="text-center"> >90 </th>
+				<th scope="col" class="text-center">{{'report.table.total'|trans}}</th>
+				{# <th scope="col" class="text-center">Term</th> #}
+				{# <th scope="col" class="text-center">Address</th> #}
+				<th scope="col" class="text-center">{{'report.table.contact'|trans}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for report in reports %}
+			<tr>
+				<td>{{report.Relation}}</td>
+				{# <td>{{report.OffsetNumber}}</td> #}
+				<td>{{report.StudentName}}</td>
+				{# <td>€ {{report.Debit}}</td> #}
+				{# <td>{% if report.Debit %}€ {{report.Debit}} {% endif %}</td> #}
+				<td>
+					{% if report.T1 is not null and report.T1 > 0 %}
+					<span>€&nbsp;{{report.T1}}</span>
+					{% endif %}
+				</td>
+				<td>
+					{% if report.T2 is not null and report.T2 > 0 %}
+					<span class="text-danger">€&nbsp;{{report.T2}}</span>
+					{% endif %}
+				</td>
+				<td>
+					{% if report.T3 is not null and report.T3 > 0 %}
+					<span class="text-danger">€&nbsp;{{report.T3}}</span>
+					{% endif %}
+				</td>
+				<td>
+					{% if report.T4 is not null and report.T4 > 0%}
+					<span class="text-danger">€&nbsp;{{report.T4}}</span>
+					{% endif %}
+				</td>
+				{# {% if report.AmountDC > 0 %} #}
+				<td>€&nbsp;{{report.AmountDC}}</td>
+				{# {% else %} #}
+				{# <td></td> #}
+				{# {% endif %} #}
+				{# <td>€ {{report.Credit + report.Debit}}</td> #}
+				{# <td>{{report.TERM}}</td> #}
+				{# <td>{{report.Adres}} <br /> <small>{{report.Postcode}}, {{report.City}}</small></td> #}
+				<td>{{report.OffSetName}}<br /><small>{{report.Tel}}</small><br /><small>{{report.Postcode}}, {{report.City}}</small></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+	<div class="container">
+		<div class="jumbotron">
+			<p>{{'loan.index.nodata'|trans}}</p>
+		</div>
+	</div>
+	{% endif %}
+</div>
+{% endblock %}

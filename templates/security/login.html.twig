@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="sidenav">
+    <div class="login-main-text">
+        <img class="img-fluid" src="/assets/logo.svg" title="Signpost" alt="Signpost" />
+        <h2>Management 4 Schools</h2>
+    </div>
+</div>
+<div class="main">
+    <div class="col-md-6 col-sm-12">
+        <div class="login-button">
+            <p><a class="btn btn-lg btn-primary" href={{ path('connect_azure') }}><i class="fab fa-windows"></i> Microsoft365</a></p>
+            <p><a class="btn btn-lg btn-danger" href={{ path('connect_google') }}><i class="fab fa-google"></i> Google</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block footerblock %}
+    {# nothing to show. this block is used to overwrite the current block #}
+{% endblock %}

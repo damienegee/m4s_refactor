@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container-fluid mb-3 mt-3">
+	{% if hires|length > 0 %}
+	<table id="hiresdetailstable" class="table table-hover table-responsive-lg" style="width:100%" >
+		<thead class="thead">
+			<tr class="bg-info">
+				<th scope="col" class="text-center">{{'forecasts.hires.table.lastname'|trans}}</th>
+				<th scope="col" class="text-center">{{'forecasts.hires.table.contractNumber'|trans}}</th>
+				<th scope="col" class="text-center">{{'forecasts.hires.table.contractDrawn'|trans}}</th>
+				<th scope="col" class="text-center">{{'forecasts.hires.table.contractReceived'|trans}}</th>
+				<th scope="col" class="text-center">{{'forecasts.hires.table.advanceReceived'|trans}}</th>
+				<th scope="col" class="text-center">{{'forecasts.hires.table.deviceOrdered'|trans}}</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for hd in hires %}
+			<tr>
+				<td><span class="text-muted">{{hd.VoornaamLeerling}}</span>&nbsp;<strong>{{hd.NaamLeerling}}</strong></td>
+				{# <td>{{hd.NaamLeerling}}</td> #}
+				<td>
+					<strong>{{hd.ContractVolgnummer}}</strong>&nbsp;<a href="https://leermiddel.be/overeenkomst.php?id={{hd.UniqueIdentifier}}" target="_blank"><i class="fas fa-search"></i></a>
+					{% if hd.instruction %}
+					<br />
+					<span class="text-muted">{{hd.instruction}}</span>
+					{% endif %}
+				</td>
+				<td>{{hd.DatumContractopgemaakt | date('d-m-y')}}</td>
+				<td>
+					{% if hd.MethodeContractOntvangen %}
+					<span><i class="fas fa-check text-success"></i></span>{{hd.MethodeContractOntvangen}}
+					<br /><small>{{hd.DatumContractOntvangen|date('d-m-y')}}</small>
+					{% else %}
+					<span><i class="fas fa-times text-danger"></i></span>
+					{% endif %}
+				</td>
+				<td>
+					{% if hd.VoorschotOntvangen == 1 %}
+					<span><i class="fas fa-check text-success"></i></span>({{hd.MethodeVoorschotBetaald}})
+					<br />
+					<small>
+					{% if hd.DatumVoorschotOntvangen %}
+					{{hd.DatumVoorschotOntvangen|date('d-m-y')}}
+					{% endif %}
+					</small>
+					{% elseif hd.VoorschotOntvangen == -1 %}
+					<span><i class='fas fa-check text-secondary'></i></span>
+					<br />
+					<small>
+					{% if hd.DatumVoorschotOntvangen %}
+					{{hd.DatumVoorschotOntvangen|date('d-m-y')}}
+					{% endif %}
+					</small>
+					{% else %}
+					<span><i class="fas fa-times text-danger"></i>&nbsp;€ {{hd.Waarborg}}</span>
+					{% endif %}
+				</td>
+				<td>{{hd.NaamToestel}}<br /><small>{{hd.OmschrijvingToestel}}</small></td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+	<div class="container">
+    <div class="jumbotron">
+        <p>{{'loan.index.nodata'|trans}}</p>
+    </div>
+</div>
+	{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-MD1LE6E1P1"></script>
+        <script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'G-MD1LE6E1P1');
+        </script>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}Management 4 schools{% endblock %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+            {{ encore_entry_link_tags('app') }}
+            {# {{ encore_entry_link_tags('prism') }} #}
+            {# <link rel="stylesheet" type="text/css" href="/assets/css/prism.css"/> #}
+            <link rel="stylesheet" type="text/css" href="/assets/DataTables/datatables.min.css"/>
+            <link rel="stylesheet" type="text/css" href="/assets/DataTables/CheckBox/css/dataTables.checkboxes.css" />
+        {% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            {% if app.user %}
+            <script type="text/javascript">
+                var expires = "";
+                var date = new Date();
+                date.setTime(date.getTime() + (1*24*60*60*1000));
+                expires = "; expires=" + date.toUTCString();
+                {% if app.user.locale %}
+                document.cookie = 'locale' + "=" + ("{{app.user.locale}}")  + expires + "; path=/";
+                {% else %}
+                document.cookie = 'locale' + "=" + ("nl")  + expires + "; path=/";
+                {% endif %}
+            </script>
+            {% endif %}
+            <script type="text/javascript" src="/assets/DataTables/datatables.min.js" defer></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js" defer></script>
+            <script type="text/javascript" src="/assets/DataTables/CheckBox/js/dataTables.checkboxes.min.js" defer></script>
+            {{ encore_entry_script_tags('prism') }}
+        {% endblock %}
+    </head>
+    <body>
+        {% if app.user %}
+        {% include "utilities/_navbar.html.twig" %}
+        {% endif %}
+        <div class="container mt-3 mb-3">
+            {% include "utilities/flash_messages.html.twig" %}
+        </div>
+        {% if app.user and app.user.showRelease %}
+            {# {%  include 'home/showreleasenotes.html.twig' %} #}
+            {{ render(controller("App\\Controller\\HomeController::showReleaseNotesModal")) }}
+        {% endif %}
+        {% block body %}{% endblock %}
+        {% if app.user %}
+        <div class="help">
+            <a href="#" class="float" id="menu-share">
+                <i class="fas fa-question  my-float"></i>
+            </a>
+            <ul class="bg-light rounded help-modal-container">
+                {% if app.user.locale is same as('nl')%}
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#importUser">
+                        <span class="my-float">Gebruikers importeren</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#addLocation">
+                        <span class="my-float">Nieuwe vestiging aanmaken</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#notByod">
+                        <span class="my-float">Niet SP importeren</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#addm4suser">
+                        <span class="my-float">Collega toevoegen</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#hardwarehash">
+                        <span class="my-float">Hardware hashes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#imageintakes">
+                        <span class="my-float">Image toestel</span>
+                    </a>
+                </li>
+                {% endif %}
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#releasenotes">
+                        <span class="my-float">Release notes</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        {% include "utilities/help.modal.html.twig" %}
+        {% endif %}
+        <script type="text/javascript" src="/assets/js/m4s.js" defer></script>
+        {# {% block footerblock %}
+            {% include 'utilities/footer.html.twig'%}
+        {% endblock %} #}
+        {# <!-- Start of Signpost Zendesk Widget script -->
+    <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=17e7fd87-dac8-49c3-85b5-bdfef60323da"> </script>
+
+    <script type="text/javascript">
+    zE('webWidget', 'setLocale', 'nl-be');
+
+    window.zESettings = {
+        webWidget: {
+            "contactOptions": {
+                "enabled": true
+            },
+            color: { theme:"#21ABB9",launcherText:'#FFFFFF' },
+            contactForm: {
+                tags: "m4s"
+            },
+            launcher: {
+                label: {
+                  '*': 'Ik heb een vraag',
+                  fr: 'J\'ai une question'
+                },
+                badge: {
+                    label: {
+                        '*': 'Chat met ons',
+                        fr: 'Discutez avec nous'
+                    },
+                    layout: 'text_only'
+                }
+            }
+        }
+    };
+
+    </script>
+    <!-- End of widget --> #}
+    </body>
+</html>

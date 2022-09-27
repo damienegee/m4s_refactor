@@ -1,0 +1,361 @@
+{% extends 'base.html.twig' %}
+{# {% block somenavigation %}
+{% if institution is defined %}
+    {% include 'utilities/_actionsForInstitution.html.twig'%}
+{% else %}
+    {% include 'utilities/_actions.html.twig'%}
+{% endif %}
+{% endblock %} #}
+{% block body %}
+{% if device is defined %}
+<div class="container-fluid mb-3 mt-3">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h2 class="h2">{{device.label}}</h2>
+    </div>
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card mb-3">
+                <h5 class="card-header">
+                    {{'inventory.details.information.title'|trans}}
+                </h5>
+                <div class="card-body">
+                    <div class="card mb-3">
+                        <h5 class="card-header d-flex align-items-center justify-content-between">
+                            {{'inventory.details.information.device.title'|trans}}
+                            {% if 'ROLE_ADMIN' in app.user.roles %}
+                            {# <button  type="button" class="btn btn-info" data-toggle="modal" data-target="#moveDeviceModal"><i class="fas fa-suitcase-rolling"></i></button> #}
+                            {% endif %}
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editDeviceModal"><i class="fas fa-edit"></i></button>
+                        </h5>
+                        <div class="card-body mx-2">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-6"><strong>{{'inventory.details.information.device.label'|trans}}</strong></div>
+                                    <div class="col-6">{{device.label}}</div>
+                                </div>
+                                 <div class="row">
+                                    <div class="col-6"><strong>{{'inventory.details.information.device.hostname'|trans}}</strong></div>
+                                    <div class="col-6">{{device.hostname}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6"><strong>{{'inventory.details.information.device.serial'|trans}}</strong></div>
+                                    <div class="col-6" id="serialnumber">{{device.serialnumber}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6"><strong>{{'inventory.details.information.device.productcode'|trans}}</strong></div>
+                                    <div class="col-6">{{device.productnumber}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6"><strong>{{'inventory.details.information.device.model'|trans}}</strong></div>
+                                    <div class="col-6">{{device.model}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6"><strong>{{'inventory.details.information.device.processor'|trans}}</strong></div>
+                                    <div class="col-6">{{device.motherboard_value}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6"><strong>{{'inventory.details.information.device.memory'|trans}}</strong></div>
+                                    <div class="col-6">{{device.memory_value}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6"><strong>{{'inventory.details.information.device.storage'|trans}}</strong></div>
+                                    <div class="col-6">{{device.ssd_value}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6"><strong>{{'inventory.details.information.device.display'|trans}}</strong></div>
+                                    <div class="col-6">{{device.panel_value}}</div>
+                                </div>
+                                {% if hardwareHash is not empty %}
+                                <div class="row">
+                                    <div class="col-6"><strong>Hash</strong></div>
+                                    <div class="col-6">
+                                        <span >{{hardwareHash.HardwareHash | u.truncate(25, '...')}}</span>
+                                        <span>
+                                            <button type="button" class="btn btn-link" onclick="copyToClipboard('{{hardwareHash.HardwareHash}}')"><i class="far fa-copy"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if device.mac1 is not null %}
+                                <div class="row">
+                                    <div class="col-6"><strong>MAC-address</strong></div>
+                                    <div class="col-6">{{device.mac1}}</div>
+                                </div>
+                                {% endif %}
+                                {% if device.mac2 is not null %}
+                                <div class="row">
+                                    <div class="col-6"><strong>MAC-address</strong></div>
+                                    <div class="col-6">{{device.mac2}}</div>
+                                </div>
+                                {% endif %}
+                                {% if device.wifi_adapter is not null %}
+                                <div class="row">
+                                    <div class="col-6"><strong>WiFi-adapter</strong></div>
+                                    <div class="col-6">{{device.wifi_adapter}}</div>
+                                </div>
+                                {% endif %}
+                                {% if device.wifi_antenna is not null %}
+                                <div class="row">
+                                    <div class="col-6"><strong>WiFi-antenna</strong></div>
+                                    <div class="col-6">{{device.wifi_antenna}}</div>
+                                </div>
+                                {% endif %}
+                                {% if device.freefieldtag01 != NULL %}
+                                <div class="row">
+                                    <div class="col-5"><strong>{{device.freefieldtag01}}</strong></div>
+                                    <div class="col-7">{{ device.freefieldvalue01 }}</div>
+                                </div>
+                                {% endif %}
+                                {% if device.freefieldtag02 != NULL %}
+                                <div class="row">
+                                    <div class="col-5"><strong>{{device.freefieldtag02}}</strong></div>
+                                    <div class="col-7">{{ device.freefieldvalue02 }}</div>
+                                </div>
+                                {% endif %}
+                                {% if device.freefieldtag03 != NULL %}
+                                <div class="row">
+                                    <div class="col-5"><strong>{{device.freefieldtag03}}</strong></div>
+                                    <div class="col-7">{{ device.freefieldvalue03 }}</div>
+                                </div>
+                                {% endif %}
+                                {% if device.freefieldtag04 != NULL %}
+                                <div class="row">
+                                    <div class="col-5"><strong>{{device.freefieldtag04}}</strong></div>
+                                    <div class="col-7">{{ device.freefieldvalue04 }}</div>
+                                </div>
+                                {% endif %}
+                                {% if device.freefieldtag05 != NULL %}
+                                <div class="row">
+                                    <div class="col-5"><strong>{{device.freefieldtag05}}</strong></div>
+                                    <div class="col-7">{{ device.freefieldvalue05 }}</div>
+                                </div>
+                                {% endif %}
+                                <div class="row">
+                                    <div class="col-6"><strong>{{'inventory.details.information.device.location'|trans}}</strong></div>
+                                    <div class="col-6">{{device.institutionName}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-3">
+                        <h5 class="card-header">
+                            Details
+                        </h5>
+                        <div class="card-body mx-2">
+                            <div class="container">
+                                {% if device.warranty %}
+                                <div class="row">
+                                    <div class="col-6"><strong>{{'inventory.details.information.device.warranty'|trans}}</strong></div>
+                                    <div class="col-6">
+                                        {{device.warranty | date('d-M-y')}}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if device.type is same as('H') %}
+                                <div class="row">
+                                    <div class="col-6"><strong>{{'forecasts.hires.title'|trans}}</strong></div>
+                                    <div class="col-6">
+                                        <a href="https://leermiddel.be/overeenkomst.php?id={{device.identifier}}" target="_blank">&nbsp;<i class="fas fa-search"></i>{{device.ordernumber}}</a>
+                                    </div>
+                                </div>
+                                {% elseif device.type is same as('W') %}
+                                <div class="row">
+                                    <div class="col-12"><strong>{{'forecasts.shop.title'|trans}}</strong></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">{{'forecasts.shop.table.shopNumber'|trans}}</div>
+                                    <div class="col-4">{{'forecasts.shop.table.orderDate'|trans}}</div>
+                                    <div class="col-4">{{'forecasts.shop.table.paidReveived'|trans}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">{{device.ordernumber}}</div>
+                                    <div class="col-4">
+                                        {% if device.orderdate %}
+                                        {{device.orderdate|date('d-m-y')}}
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-4">
+                                        {% if device.paymentdate %}
+                                        {{device.paymentdate|date('d-m-y')}}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="card mb-3">
+                        <h5 class="card-header d-flex justify-content-between align-items-center">
+                            {{'inventory.details.information.user'|trans}}
+                            {% if device.customer_id is null or device.customer_id == 0 %}
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectCustomerModal"><i class="fas fa-plus"></i></button>
+                            {% endif %}
+                        </h5>
+                        <div class="card-body mx-2">
+                            {% if device.customer_id %}
+                            <div class="card">
+                                <h6 class="card-header d-flex justify-content-between align-items-center">
+                                    {{device.studenttype}}
+                                    <a href="{{path('removeCustomerFromDevice', {did: device.id})}}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                                </h6>
+                                <div class="card-body">
+                                    <h6 class="card-title">
+                                        <a href="{{path('customerdetails', {cid: device.customer_id})}}" class="btn btn-link">{{device.firstname}}&nbsp;{{device.lastname}}</a>
+                                    </h6>
+                                    <hr class="divider" />
+                                    <p>{{device.email}}</p>
+                                    <hr class="divider" />
+                                    <p>{{device.institutionName}}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card mb-3">
+                <h5 class="card-header">
+                    {{'inventory.details.log'|trans}}
+                </h5>
+                <div class="card-body">
+                    <div class="card mb-3">
+                        <h5 class="card-header d-flex justify-content-between align-items-center">
+                            {% if device.schoollocation_id is not null %}
+                                <a href="{{path('fieldserviceforlocation', {locationid: device.schoollocation_id})}}">{{'fieldservice.label'|trans}}</a>
+                            {% endif %}
+                            <button class="btn btn-warning mr-1 ml-1" data-toggle="modal" data-target="#modalnewincident"><i class="fas fa-laptop-medical"></i></button>
+                        </h5>
+                        <div class="card-body">
+                            {% if fieldservices|length > 0 %}
+                            <div class="card-group">
+                                {% for fieldservice in fieldservices %}
+
+                                    <div class="list-group-item list-group-item-action mb-1">
+                                        <a data-toggle="modal" data-target="#modal{{fieldservice.id}}">
+                                        <div class="d-flex w-100 justify-content-between align-items-center">
+                                            <p>{{fieldservice.problemtype}}</p>
+                                            <small>{{fieldservice.created}}</small>
+                                        </div>
+                                        <div class="d-flex w-100 justify-content-between align-items-center">
+                                            <p>{{fieldservice.title}}</p>
+                                            <p>{{fieldservice.status}}</p>
+                                        </div>
+                                        </a>
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <h5 class="card-header d-flex justify-content-between align-items-center">
+                            {# {% if device.schoollocation_id is not null %}
+                                <a href="{{path('fieldserviceforlocation', {locationid: device.schoollocation_id})}}">{{'fieldservice.label'|trans}}</a>
+                            {% endif %} #}
+                            <a href="{{path('ticket')}}">{{'internalticket.title'|trans}}</a>
+                            {# <div class="d-flex jsutify-content-end"> #}
+                            <button class="btn btn-warning mr-1 ml-1" data-toggle="modal" data-target="#modalnewinternalincident"><i class="fas fa-laptop-house"></i></button>
+                            {# </div> #}
+                        </h5>
+                        <div class="card-body">
+                            {% if tickets|length > 0 %}
+                            <div class="card-group">
+                                {% for ticket in tickets %}
+                                    <div class="list-group-item list-group-item-action mb-1">
+                                        <a data-toggle="modal" data-target="#modal{{ticket.id}}">
+                                        <div class="d-flex w-100 justify-content-between align-items-center">
+                                            <p>{{ticket.problem}}</p>
+                                            <small>{{ticket.created_at}}</small>
+                                        </div>
+                                        <div class="d-flex w-100 justify-content-between align-items-center">
+                                            <p>{{ticket.state}}</p>
+                                            <p>{{ticket.modified_at}}</p>
+                                        </div>
+                                        </a>
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {# {% if device.customer_id is null %} #}
+                    <div class="card mb-3">
+                        <h5 class="card-header d-flex justify-content-between align-items-center">
+                            <a href="{{path('loan', { location_id: device.schoollocation_id })}}">{{'inventory.details.loan.title'|trans}}</a>
+                            <a href="{{path('loan_new', { locationid: device.schoollocation_id, did: device.id, serialnumber: device.serialnumber})}}" class="btn btn-success"><i class="fab fa-telegram-plane"></i></a>
+                        </h5>
+                        <div class="card-body">
+                            {% if loans|length > 0 %}
+                            <div class="list-group">
+                                {% for loan in loans %}
+                                <div class="list-group-item list-group-item-action mb-1">
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <p>{{'inventory.details.loan.from'|trans}}: <strong>{{loan.startdate|date('d-M-y')}}</strong></p>
+                                        <p>{{'inventory.details.loan.until'|trans}}: <strong>{{loan.enddate|date('d-M-y')}}</strong></p>
+                                    </div>
+                                    <p>{{'inventory.details.loan.to'|trans}}: <strong>{{loan.user|customername}}</strong></p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+{#                    {% if device.schoollocation_id is not null %}#}
+                        <div class="card mb-3">
+                            <h5 class="card-header d-flex justify-content-between align-items-center">
+                                {{'inventory.details.moved.title'|trans}}
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#modalMoveDevice"><i class="fas fa-suitcase-rolling"></i></button>
+                            </h5>
+                            <div class="card-body">
+                                {% if moves|length > 0 %}
+                                <div class="list-group">
+                                {% for move in moves %}
+                                    <div class="list-group-item list-group-item-action mb-1">
+                                        <div class="d-flex w-100 justify-content-between align-items-center">
+                                            <p>{{'inventory.details.moved.from'|trans}}: {{move.fromLocationName}}</p>
+                                            <small>{{move.whenMoved|date('d-M-y')}}</small>
+                                        </div>
+                                        <p>{{'inventory.details.moved.to'|trans}}: {{move.toLocationName}}</p>
+                                        <small>{{'inventory.details.moved.by'|trans}}: <strong>{{move.user}}</strong></small>
+                                    </div>
+                                {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+{#                    {% endif %}#}
+                </div>
+            </div>
+            <a href="{{path('removeDeviceDetails', {id: device.id})}}" class="btn btn-danger btn-block"><i class="fas fa-trash-alt"></i></a>
+        </div>
+    </div>
+</div>
+{# <!-- Customer Select Modal --> #}
+{% include 'particulier/customerselect.modal.html.twig' %}
+{# <!-- Create Fieldservice Modal --> #}
+{% include 'field_service/_field_service_create.modal.html.twig' %}
+{# <!-- Move Device Modal --> #}
+{% include 'move_device/moveDevice.modal.html.twig' %}
+{# <!-- EDIT Customer Modal --> #}
+{% include 'inventory/_editdevice.modal.html.twig' %}
+{% if fieldservices|length > 0 %}
+    {% for item in fieldservices %}
+        {% include 'field_service/field_service_details.modal.html.twig' %}
+    {% endfor %}
+{% endif %}
+{# <!-- Create Fieldservice Modal --> #}
+{% include 'ticket/_internal_field_service_create.modal.html.twig' %}
+{% if tickets|length > 0 %}
+    {% for ticket in tickets %}
+    {% include 'ticket/_internal_field_service_details.modal.html.twig' %}
+    {% endfor %}
+{% endif %}
+{% endif %}
+{% endblock %}

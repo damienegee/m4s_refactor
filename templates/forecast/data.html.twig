@@ -1,0 +1,104 @@
+{% if data|length > 0 %}
+<div class="text-right mb-1 mt-1">
+    <form action="{{path('report.csv')}}" method="POST">
+        <input type="hidden" value="{{data|json_encode()}}" id="csvexport" name="csvexport" />
+        <input type="hidden" value="hireshop" name="type">
+        <button class="btn btn-info btnexcell" type="submit" data-toggle="tooltip" data-placement="top" title="Export to Excel">
+            <i class="fas fa-file-excel"></i>
+        </button>
+    </form>
+</div>
+<table id="hireshoptable" class="table table-hover table-responsive-lg" style="width:100%">
+    <thead class="thead">
+        <tr class="bg-info">
+            <th scope="col" class="text-center">{{'forecasts.hires.table.lastname'|trans}}</th>
+            <th scope="col" class="text-center">{{'forecasts.hires.table.contractNumber'|trans}}</th>
+            <th scope="col" class="text-center">{{'forecasts.hires.table.contractDrawn'|trans}}</th>
+            <th scope="col" class="text-center">{{'forecasts.hires.table.contractReceived'|trans}}</th>
+            <th scope="col" class="text-center">{{'forecasts.hires.table.advanceReceived'|trans}}</th>
+            <th scope="col" class="text-center">{{'forecasts.hires.table.deviceOrdered'|trans}}</th>
+            <th scope="col" class="text-center"></th>
+			<th scope="col" class="text-center">Type</th>
+        </tr>
+    </thead>
+    <tbody>
+	{% for details in data %}
+        <tr>
+            <td><span class="text-muted">{{details.VoornaamLeerling}}</span>&nbsp;<strong>{{details.NaamLeerling}}</strong></td>
+            <td>
+                <strong>{{details.ContractVolgnummer}}</strong>&nbsp;
+				{% if details.UniqueIdentifier %}
+                    {% if app.request.cookies.get('academic_year') is same as('2021-2022') %}
+                        <a href="https://leermiddel.be/overeenkomst.php?id={{details.UniqueIdentifier}}" target="_blank"><i class="fas fa-search"></i></a>
+                    {% else %}
+                        <a href="https://byod-shop.signpost.eu/contracts/{{details.UniqueIdentifier}}.pdf" target="_blank"><i class="fas fa-search"></i></a>
+                    {% endif %}
+{#                    <a href="https://leermiddel.be/overeenkomst.php?id={{details.UniqueIdentifier}}" target="_blank"><i class="fas fa-search"></i></a>#}
+                {% endif %}
+                {% if details.label %}
+                <br />
+                <span class="text-muted"><a href="{{path('invetoryDeviceDetailsByLabel', {label: details.label})}}">{{details.label}} {% if details.splabel and details.label is not same as(details.splabel) %} - {{details.splabel}} {% endif %}<a/></span>
+                {% endif %}
+            </td>
+            <td>
+                {{ details.DatumContract.timestamp is defined ? details.DatumContract| date('d-m-y') : details.DatumContract }}
+            </td>
+            <td>
+                {% if details.MethodeContract %}
+                <span><i class="fas fa-check text-success"></i></span>{{details.MethodeContract}}
+                <br /><small>{{details.DatumOntvangen|date('d-m-y')}}</small>
+                {% elseif details.Waarborg %}
+                <span><i class="fas fa-times text-danger"></i></span>
+                {% endif %}
+            </td>
+            <td>
+                {% if details.VoorschotOntvangen == 1 %}
+                <span><i class="fas fa-check text-success"></i></span>{% if details.MethodeBetaald %}({{details.MethodeBetaald}}){% endif %}
+                <br />
+                <small>
+                {% if details.DatumBetaald %}
+                {{details.DatumBetaald|date('d-m-y')}}
+                {% endif %}
+                </small>
+                {% elseif details.VoorschotOntvangen == -1 %}
+                <span><i class='fas fa-check text-secondary'></i></span>
+                <br />
+                <small>
+                {% if details.DatumBetaald %}
+                {{details.DatumBetaald|date('d-m-y')}}
+                {% endif %}
+                </small>
+                {% else %}
+                <span>
+				{% if details.Waarborg or details.DatumBetaald == NULL %}
+					<i class="fas fa-times text-danger"></i>{% if details.Waarborg %}&nbsp;€ {{details.Waarborg}}{% endif %}
+				{% endif %}
+				</span>
+                {% endif %}
+            </td>
+            <td>{{details.NaamToestel}}<br /><small>{{details.OmschrijvingToestel}}</small></td>
+            <td class="text-center">
+                {% if details.type is same as('W') %}
+                    {{ details.Prijs }}
+                {% elseif details.type is same as('H') %}
+                    {{ details.Termijn }}
+                {% endif %}
+            </td>
+			<td class="text-center">
+            {% if details.type is same as('W') %}
+                {{'forecasts.shop.title' | trans}}
+            {% elseif details.type is same as('H') %}
+                {{'forecasts.hires.title' | trans}}
+            {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+	</tbody>
+</table>
+{% else %}
+<div class="container">
+    <div class="jumbotron">
+        <p>{{'loan.index.nodata'|trans}}</p>
+    </div>
+</div>
+{% endif %}

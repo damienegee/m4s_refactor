@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid mb-3 mt-3">
+	<div class="d-flex justify-content-end flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <a href="/assets/manuals/Handleidingv2{{app.user.locale}}.pdf" target="_blank" class="btn btn-info"><i class="fas fa-book"></i></a>
+    </div>
+    {% if intakes|length > 0%}
+	<div class="accordion" id="accordionImages">
+		{% for intake in intakes %}
+		<div class="card">
+			<div class="card-header" id="heading{{intake.id}}">
+				<h2 class="mb-0">
+					<div class="d-flex justify-content-between align-items-center">
+						<button class="btn btn-link btn-block text-left d-flex justify-content-between align-items-center collapsed" type="button" data-toggle="collapse" data-target="#collapse{{intake.id}}" aria-expanded="true" aria-controls="collapse{{intake.id}}">
+							<span>{{intake.synergyid}}-{{intake.SPSKU}}-V{{intake.version}}-{{intake.name}}</span>
+							{% if intake.computername == "VanOpHetOrder" %}
+								<span></span>
+							{% elseif intake.computername == "?????" %}
+								<span></span>
+							{% else %}
+							<span>{{intake.computername}}</span>
+							{% endif %}
+						</button>
+						{% if intake.url %}
+						<a href="{{intake.url}}" class="btn btn-primary" target="_blank"><i class="fas fa-download"></i></a>
+						{% endif %}
+					</div>
+				</h2>
+			</div>
+			<div id="collapse{{intake.id}}" class="collapse" aria-labelledby="heading{{intake.id}}" data-parent="#accordionImages">
+				<div class="card-body">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-md-6">
+											<h6>Contact</h6>
+										</div>
+										<div class="col-md-6">
+											<p>{{intake.contactname}}</p>
+											<p>{{intake.contacttel}}</p>
+											<p>{{intake.contactemail}}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-8">
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-md-4"><strong>Name</strong></div>
+										<div class="col-md-8">{{intake.name}}</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4"><strong>Type</strong></div>
+										<div class="col-md-8">{{intake.type}}</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4"><strong>Free</strong></div>
+										<div class="col-md-8" style="word-wrap: break-word">{{intake.free_software|replace({';': '<br />'}) | raw}}</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4"><strong>Paid</strong></div>
+										<div class="col-md-8" style="word-wrap: break-word">{{intake.paid_software|replace({';': '<br />'}) | raw}}</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4"><strong>Authentication</strong></div>
+										<div class="col-md-8">{{intake.authentication}}</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4"><strong>{{'byod.intakes.status'|trans}}</strong></div>
+										<div class="col-md-8">{{intake.status}}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	{{ knp_pagination_render(intakes) }}
+	{% else %}
+	<div class="container">
+    <div class="jumbotron">
+        <p>{{'loan.index.nodata'|trans}}</p>
+    </div>
+</div>
+	{% endif %}
+</div>
+{% endblock %}

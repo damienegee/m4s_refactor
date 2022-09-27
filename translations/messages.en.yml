@@ -1,0 +1,456 @@
+base:
+  navigation:
+    inventory: Inventory
+    fieldService: Incident
+    users: Users
+    shops: Rental/purchase
+    mySchools: My schools
+    logout: Logout
+  pagination:
+    previous: Previous
+    next: Next
+  filtration:
+    search: Search
+
+agso:
+  index:
+    title: Orders
+    table:
+      orderid: Order ID
+      device: Device
+      numberof: Number of
+      total: Total
+      date: Date
+      orderNumber: Order number
+
+extradevice:
+  form:
+    title: Add device
+    label:
+      m4sCustomer: User
+      productnumber: Product code
+      serial: Serial number
+      manufacturer: Manufacturer
+      model: Model
+      supplier: Supplier
+      reset: Reset
+      save: Save
+
+fieldservice:
+  label: Incident
+  index:
+    title: Everything
+    button: Report incident
+    tabs:
+      open: Open
+      wait: Awaiting approval
+      closed: Closed
+      inprogress: In progress
+      graph: Graph
+    table:
+      student: Student
+      serial: Serial number
+      title: Title
+      problem: Problem
+      description: Description
+      state: Status
+      created: Created
+      updated: Updated
+      location: Branch
+      details: Details
+
+forecasts:
+  index:
+    title: Rental/purchase
+    yearSelect: Select academic year
+    totalForecast: Total forecast
+    totalHire: Total rental
+    totalShop: Total webshop
+  hires:
+    title: Rental
+    table:
+      firstname: First name user
+      lastname: Name user
+      contractNumber: Tracking number contract
+      contractDrawn: Contract drawn up
+      contractReceived: Contract received
+      advanceReceived: Advance received
+      deviceOrdered: Device ordered
+  shop:
+    title: Purchase
+    table:
+      firstname: First name user
+      lastname: Name user
+      orderNumber: Tracking number order
+      shopNumber: Tracking number shop
+      orderDate: Order date
+      deviceOrdered: Device ordered
+      paidReveived: Payment received
+
+institution:
+  events:
+    table:
+      type: Type
+      title: Title
+      device: Device
+      created: Created on
+      closed: Closed on
+      updated: Modified on
+    nodata: No issues found
+  counter:
+    inventory: Inventory
+    openEvents: Open incidents
+    closedEvents: Closed incidents
+    clientsWithoutDevices: Users without devices
+    clients: Users
+  details:
+    addLocation: Add location
+
+institutionLocation:
+  index:
+    openEventsTitle: Open incidents
+    openEventsDescription: No open incidents
+  details:
+    users: Users
+    devices: Devices
+  form:
+    title: Add school location
+    label:
+      institutionNumber: Institution number
+      institutionName: Institution name
+      save: Save
+      reset: Reset
+    address:
+      label:
+        street: Street
+        number: House number
+        bus: Box
+        zipcode: Zip code
+        city: City
+
+inventory:
+  index:
+    title: Everything
+    nodata: No data
+    table:
+      label: Label
+      productnumber: Product number
+      serial: Serial number
+      model: Model
+      firstname: First name
+      lastname: Last name
+  devices:
+    selectmodal:
+      title: Device
+      save: Save
+      close: Close
+    assigned: Assigned
+    notAssigned: Devices without user
+  details:
+    information:
+      title: Information
+      device:
+        title: Device info
+        label: Label
+        hostname: Hostname
+        serial: Serial number
+        productcode: Product code
+        model: Model
+        processor: Processor
+        memory: Memory
+        storage: Storage
+        display: Display
+        location: Location
+        warranty: Warranty
+        deliverytime: External delivery time
+      user: User
+    log: Log
+    loan:
+      title: Loaned
+      from: From
+      until: Until
+      to: To
+    moved:
+      title: Move
+      from: From
+      to: To
+      by: By
+  extradevice:
+    details:
+      information:
+        title: Information
+        device:
+          title: Device info
+          serial: Serial number
+          brand: Brand
+          supplier: Supplier
+          location: Location
+        user: User
+      log: Log
+      loan:
+        title: Loaned
+        from: From
+        until: Until
+        to: To
+      moved:
+        title: Move
+        from: From
+        to: To
+        by: By
+  form:
+    title: Add device
+    label:
+      label: Label
+      hostname: Hostname
+      serial: Serial number
+      productcode: Product code
+      model: Model
+      motherboard: Motherboard
+      memory: Memory
+      storage: Storage
+      display: Display
+      macaddress: MAC address
+      reset: Reset
+      save: Save
+  data:
+    adddevice: Add device
+    supplier: Supplier
+    others: Others
+    assigned: Assigned
+    notassigned: Devices without user
+    notsignpost: Non BYOD devices
+    nolocation: Devices without location
+    table:
+      label: Label
+      productnumber: Product number
+      serial: Serial number
+      model: Model
+      user: User
+      type: Function
+      supplier: Supplier
+      brand: Brand
+
+loan:
+  form:
+    title: Loan device
+    startdate: From
+    user: User
+    device: Device
+    enddate: Until
+    images: Add images
+    remark: Remarks
+    signature: Signature
+    save: Save
+    reset: Reset
+  index:
+    nodata: No data found
+    table:
+      user: User
+      device: Device
+      serial: Serial number
+      from: From
+      to: Until
+      signature: Signature
+      isback: Has been returned?
+      yes: Yes
+      no: No
+      bringback: Return
+
+movecustomer:
+  modal:
+    title: Move user
+    form:
+      customer: User
+      customerName: Username
+      fromlocation: Current location
+      tolocation: Location
+      when: When
+      save: Save
+      close: Close
+
+movedevice:
+  modal:
+    title: Move device
+    form:
+      device: Device
+      serial: Serial number
+      fromlocation: Current location
+      tolocation: Location
+      when: When
+      save: Save
+      close: Close
+
+customer:
+  data:
+    add: Add user
+    table:
+      firstname: First name
+      lastname: Last name
+      email: Email
+      type: Position
+      location: Location
+    nolocation: Users without location
+  details:
+    information:
+      title: Information
+      customer:
+        title: User
+        firstname: First name
+        lastname: Last name
+        email: Email
+        location:
+          title: School - Location
+          school: School
+          location: Location
+        device:
+          title: Device
+          label: Label
+          hostname: Hostname
+          serial: Serial number
+          productcode: Product code
+    log: Log
+    moved:
+      title: Move
+      from: From
+      to: To
+      by: By
+  modal:
+    title: User
+    save: Save
+    close: Close
+  form:
+    title: Add user
+    lastname: Lastname
+    firstname: Firstname
+    email: E-mail
+    type: Function
+    save: Save
+    reset: Reset
+
+returnedLoan:
+  form:
+    title: Return device
+    label:
+      returneddate: Date
+      images: Images
+      remarks: Remarks
+      save: Save
+      reset: Reset
+
+byod:
+  deliveries:
+    follownumber: Tracking number
+    serialnumber: Serial number
+    manufacturer: Manufacturer
+    model: Model
+    delivered_on: Delivered on
+    levering_id: Delivery ID
+    aantal: Number
+    toestel: Device
+    adres: Address
+    acties: Actions
+  forecasts:
+    manufacturer: Manufacturer
+    model: Model
+    processor: Processor
+    memorydisk: Memory - Disk
+    amount: Number
+    label: Label
+    price: Price
+    warranty: Warranty
+  intakes:
+    details: Details
+    status: Status
+  softwarerequests:
+    available: Available
+    treatment: In process
+    amount: Total number of packages
+    name: Software name
+    status: Status
+  menu:
+    forecast: Forecast
+    intakes: Image Intakes
+    deliveries: Deliveries
+    hires: Lease agreement
+    powerbi: Learning resource report
+    autoappupdater: Auto-App-Updater
+    freefields: Free fields BYOD Shop
+    scripts: Scripts
+  freefields:
+    header: Free fields BYOD Shop
+    update: Save
+    add: Add
+    freefields: Free fields
+    title: Title
+    type: Type
+    active: Active
+    required: Required
+    process: Process
+    edit: Edit
+    delete: Delete
+    label: Label
+    inputtype: Input Type
+    text: Text
+    number: Number
+    inputmessage: Choose an input type..
+
+pagenotfound: Page not found
+pagenotfounddescription: The requested page could not be found.
+gohome: Click here to go to the Home page
+accessdenied: Forbidden
+accessdenieddescription: You are not authorized to perform this.
+somethingwrong: Something went wrong. Please try it later.
+somethingwrongdescription: If the problem occurs several times, please contact the helpdesk via the chat at the bottom right of the page.
+admin:
+  index:
+    title: Admin Dashboard
+    list: List
+    add: Add
+    images: Afbeelding voor model
+    importdevices: Image for Model
+    addinstitution: Add Institution
+    access: Access control
+    importuser: Import user
+    notbyod: Non BYOD devices
+    assigndevice: Assign devices
+file: File
+freefield:
+  title: Free fields
+  user: User
+  device: Device
+  name: Code
+  defaultvalue: Default value
+bulkadduser:
+  extrainfo: The column "type" can only contain one of the following values
+  savettype: Save your edited CSV as CSV UTF-8
+report:
+  table:
+    relation: Number
+    name: Student/Apprentice
+    total: Total
+    contact: Contact
+bulkform:
+  institution: Institution
+  location: Location
+  move: Update
+  notsignpost: Non BYOD devices
+internalticket:
+  title: Internal incidents
+  problem: Problem
+  description: Description
+  state:
+    state: Status
+    open: Open
+    closed: Closed
+    inprogress: In progress
+  device: Device
+  customer: User
+  school: School
+  location: Location
+reason_no_warranty: Reason no warranty
+billing_information: Billing details
+attachment: Attachment from the customer
+
+school_settings:
+  settings: Settings
+  use_school_facturation_default: Use school billing information automatically when registering a defect

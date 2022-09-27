@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% if loans is defined and loans|length > 0 %}
+<div class="container-fluid mb-3 mt-3">
+{# {% for key, val in loans %} #}
+    <table class="datatable table table-striped" style="width: 100%">
+        <thead class="thead">
+            <tr class="bg-info">
+                <th scope="col">Signpost</th>
+                <th scope="col">{{'loan.index.table.user'|trans}}</th>
+                <th scope="col">{{'loan.index.table.device'|trans}}</th>
+                <th scope="col">{{'loan.index.table.serial'|trans}}</th>
+                <th scope="col">{{'loan.index.table.from'|trans}}</th>
+                <th scope="col">{{'loan.index.table.to'|trans}}</th>
+                <th scope="col">{{'loan.index.table.signature'|trans}}</th>
+                <th scope="col">{{'loan.index.table.isback'|trans}}</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for loan in loans %}
+            <tr>
+                <td>{{ loan.isExtra ? 'loan.index.table.no'|trans : 'loan.index.table.yes'|trans }}</td>
+                <td>{{loan.user|customername}}</td>
+                <td>{{loan.deviceId}}</td>
+                <td>{{loan.deviceSerial}}</td>
+                <td>{{loan.startdate|date("d/m/Y")}}</td>
+                <td>{{loan.enddate ? loan.enddate|date("d/m/Y") : "" }}</td>
+                <td>
+                    <img src="{{loan.signature}}" />
+                </td>
+                <td>
+                    {{ loan.returnedLoan ? 'loan.index.table.yes'|trans : 'loan.index.table.no'|trans }}
+                </td>
+                <td>
+                    <a class="btn btn-success" href="{{ path('returned_loan_new', { 'loanId' : loan.id}) }}">{{'loan.index.table.bringback'|trans}}</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{# {% endfor %} #}
+</div>
+{% else %}
+<div class="container">
+    <div class="jumbotron">
+        <p>{{'loan.index.nodata'|trans}}</p>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mb-3 mt-3">
+        <div class="row justify-content-end">
+        </div>
+        <div class="mb-4 mt-2">
+            {% if (is_granted('ROLE_SCHOOLADMIN') or is_granted("ROLE_ADMIN")) %}
+                <h1>Edit</h1>
+            {% elseif (is_granted('ROLE_USER')) %}
+                <h1>View</h1>
+            {% endif %}
+        </div>
+        <div class="bs-stepper">
+            <div class="bs-stepper-header" role="tablist">
+                <!-- your steps here -->
+                <div class="step" data-target="#logo-part">
+                    <button type="button" class="step-trigger" role="tab" aria-controls="logo-part" id="logo-part-trigger">
+                        <span class="bs-stepper-circle">1</span>
+                        <span class="bs-stepper-label">Upload logo</span>
+                    </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#course-part">
+                    <button type="button" class="step-trigger" role="tab" aria-controls="course-part" id="course-part-trigger">
+                        <span class="bs-stepper-circle">2</span>
+                        <span class="bs-stepper-label">Extra info toestel</span>
+                    </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#text-part">
+                    <button type="button" class="step-trigger" role="tab" aria-controls="text-part" id="text-part-trigger">
+                        <span class="bs-stepper-circle">3</span>
+                        <span class="bs-stepper-label">Schoolinfo shop aanpassen</span>
+                    </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#forecast-part">
+                    <button type="button" class="step-trigger" role="tab" aria-controls="forecast-part" id="forecast-part-trigger">
+                        <span class="bs-stepper-circle">4</span>
+                        <span class="bs-stepper-label">Kopieer instellingen</span>
+                    </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#submit-part">
+                    <button type="button" class="step-trigger" role="tab" aria-controls="submit-part" id="submit-part-trigger">
+                        <span class="bs-stepper-circle">5</span>
+                        <span class="bs-stepper-label">Submit</span>
+                    </button>
+                </div>
+            </div>
+            <div class="bs-stepper-content form-group">
+                {{ form_start(form, {'action': path('block', {'id' : id})}) }}
+                <!-- your steps content here -->
+                <div id="logo-part" class="content" role="tabpanel" aria-labelledby="logo-part-trigger">
+                    <br>
+                    <div class="form-group">
+                        <div class="justify-content-end">
+                            {{ form_row(form.school_logo) }}
+                        </div>
+                        <div class="text-center">
+                            {% if (file) %}
+                                <img src="{{ file }}" class="rounded mx-auto d-block" alt="" width="400">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" name="btnNext1">Next</button>
+                </div>
+                <div id="course-part" class="content" role="tabpanel" aria-labelledby="course-part-trigger">
+                    <br>
+                    <div class="form-group">
+                        {{ form_row(form.course_label) }}
+                    </div>
+                    <button type="button" class="btn btn-primary" name="btnNext1">Next</button>
+                </div>
+                <div id="text-part" class="content" role="tabpanel" aria-labelledby="text-part-trigger">
+                    <button type="button" class="btn btn-primary mt-2 mb-3" name="btnNext1">Next</button>
+                    {% set lang = explodeEnv(app_enabledlang) %}
+                    {% for l in lang|reverse %}
+                        <div class="form-group row">
+                            {% set langname = "title_"~l%}
+                            {{form_label(form[langname], 'Titel '~l|upper~'*', {'label_attr' : {'class' : 'col-12 col-md-2 col-form-label'}})}}
+                            {{form_widget(form[langname], {'attr': {'class' : 'form-control col-12 col-md-10'} } )}}
+                        </div>
+                        <div class="form-group">
+                            {% set langname = "description_"~l%}
+                            {{form_label(form[langname], 'Description '~l|upper~'*' , {'label_attr' : {'class' : 'col-12 col-form-label'}})}}
+                            {{form_widget(form[langname], {'attr': {'class' : 'form-control col-12'}})}}
+                        </div>
+                        <br>
+                    {% endfor %}
+                </div>
+                <div id="forecast-part" class="content" role="tabpanel" aria-labelledby="forecast-part-trigger">
+                    <br>
+                    <p>Vink aan als je wilt toestel info kopiëren naar volgende forecasts</p>
+                    {{form_label(form.checkExtraInfo, '')}}
+                    {{form_widget(form.checkExtraInfo)}}
+                    <br>
+                    <p>Vink forecasts aan waarnaar je wilt kopiëren</p>
+                    <div class="row">
+                        <div class="col-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Kies forecast</th>
+                                    <th scope="col">Laptop</th>
+                                    <th scope="col">Aantal</th>
+                                    <th scope="col">Prijs</th>
+                                    <th scope="col">Garantie</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for forecast in forecasts %}
+                                    {% if forecast.id != id %}
+                                    {% set filedname = ""~forecast.id%}
+                                    <tr>
+                                        <td>
+                                            {{form_label(form[filedname], '', {'label_attr' : {'class' : ''}})}}
+                                            {{form_widget(form[filedname], {'attr': {'class' : ''} } )}}
+                                        </td>
+                                        <td>{{forecast.manufacturer}} {{forecast.model}} {{forecast.motherboard_value}} {{forecast.MEMORY}} {{forecast.Harddisk}}</td>
+                                        <td>{{forecast.Aantal}}</td>
+                                        <td>{{forecast.Prijs}}</td>
+                                        <td>{{forecast.Garantie}}</td>
+                                    </tr>
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" name="btnNext1">Next</button>
+                </div>
+                <div id="submit-part" class="content" role="tabpanel" aria-labelledby="submit-part-trigger">
+                    <br>
+                    <div class="col-md-12 text-center">
+                        {{form_row(form.submit)}}
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

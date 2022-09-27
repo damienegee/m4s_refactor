@@ -1,0 +1,69 @@
+doctrine:
+  dbal:
+    default_connection: default
+    connections:
+      default:
+        url: "%env(DATABASE_URL)%"
+        charset: utf8
+        default_table_options:
+          charset: utf8
+          collate: utf8_unicode_ci
+      synergy:
+        driver: pdo_sqlsrv
+        host: "%env(resolve:SYNERGY_HOST)%"
+        port: "%env(resolve:SYNERGY_PORT)%"
+        dbname: "%env(resolve:SYNERGY_DBNAME)%"
+        user: "%env(resolve:SYNERGY_DBUSER)%"
+        password: "%env(resolve:SYNERGY_DBPASS)%"
+        charset: UTF8
+      byod_m4s:
+        url: "%env(BYOD_M4S_DATABASE_URL)%"
+        charset: utf8
+        default_table_options:
+          charset: utf8
+          collate: utf8_unicode_ci
+    types:
+      CustomerType: App\Enum\CustomerType
+      # ws_m4s:
+      #     url: '%env(WS_M4S_DATABASE_URL)%'
+      #     charset: utf8
+      #     default_table_options:
+      #         charset: utf8
+      #         collate: utf8_unicode_ci
+
+    # IMPORTANT: You MUST configure your server version,
+    # either here or in the DATABASE_URL env var (see .env file)
+    #server_version: '13'
+  orm:
+    default_entity_manager: default
+    # auto_generate_proxy_classes: true
+    # naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+    # auto_mapping: true
+    entity_managers:
+      default:
+        connection: default
+        mappings:
+          App:
+            is_bundle: false
+            type: annotation
+            dir: "%kernel.project_dir%/src/Entity"
+            prefix: 'App\Entity'
+            alias: App
+          gedmo_translatable:
+            type: annotation
+            prefix: Gedmo\Translatable\Entity
+            dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Translatable/Entity"
+            alias: GedmoTranslatable # (optional) it will default to the name set for the mapping
+            is_bundle: false
+          gedmo_translator:
+            type: annotation
+            prefix: Gedmo\Translator\Entity
+            dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Translator/Entity"
+            alias: GedmoTranslator # (optional) it will default to the name set for the mapping
+            is_bundle: false
+      synergy:
+        connection: synergy
+      byod_m4s:
+        connection: byod_m4s
+      # ws_m4s:
+      #     connection: ws_m4s

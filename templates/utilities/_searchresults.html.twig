@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid">
+{% if results|length > 0 %}
+	<table class="table table-hover" id="searchResultTable" style="width: 100%">
+		<thead>
+			<tr class="bg-info">
+				<th scope="col" class="col-1"></th>
+				<th scope="col" class="col-2">#</th>
+				<th scope="col"></th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for data in results %}
+			<tr>
+				<td class="text-left col-1">
+					{% if data.colFour is same as('customer') %}
+                    <a href="{{path('customerdetails', {cid: data.colOne})}}"><i class="fas fa-search"></i></a>
+					{% else %}
+					<a href="{{path('invetoryDeviceDetails', {id: data.colOne})}}"><i class="fas fa-search"></i></a>
+					{% endif %}
+				</td>
+				<td class="text-left col-2">
+					{{data.colOne}}
+				</td>
+				<td class="text-left">{{data.colTwo}}</td>
+				<td class="text-left">{{data.colThree}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% else %}
+	<div class="jumbotron mb-3 mt-3">
+		<p>{{'loan.index.nodata'|trans}}</p>
+	</div>
+{% endif %}
+</div>
+{% endblock %}

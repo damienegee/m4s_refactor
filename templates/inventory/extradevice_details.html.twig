@@ -1,0 +1,142 @@
+{% extends 'base.html.twig' %}
+{# {% block somenavigation %}
+{% if institution is defined %}
+    {% include 'utilities/_actionsForInstitution.html.twig'%}
+{% else %}
+    {% include 'utilities/_actions.html.twig'%}
+{% endif %}
+{% endblock %} #}
+{% block body %}
+{% if device is defined %}
+<div class="container-fluid mb-3 mt-3">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h2 class="h2">{{device.model}}</h2>
+    </div>
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card mb-3">
+                <h5 class="card-header d-flex align-items-center justify-content-between">
+                    {{'inventory.extradevice.details.information.title'|trans}}
+                    {% if 'ROLE_ADMIN' in app.user.roles %}
+                    <button  type="button" class="btn btn-info" data-toggle="modal" data-target="#moveExtraDeviceModal"><i class="fas fa-suitcase-rolling"></i></button>
+                    {% endif %}
+                </h5>
+                <div class="card-body">
+                    <div class="card mb-3">
+                        <h5 class="card-header">
+                            {{'inventory.extradevice.details.information.device.title'|trans}}
+                        </h5>
+                        <div class="card-body mx-2">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-6"><strong>{{'inventory.extradevice.details.information.device.serial'|trans}}</strong></div>
+                                    <div class="col-6" id="serialnumber">{{device.productnumber}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6"><strong>{{'inventory.extradevice.details.information.device.brand'|trans}}</strong></div>
+                                    <div class="col-6">{{device.manufacturer}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6"><strong>{{'inventory.extradevice.details.information.device.supplier'|trans}}</strong></div>
+                                    <div class="col-6">{{device.supplier}}</div>
+                                </div>
+                                {% if location is not empty %}
+                                <div class="row">
+                                    <div class="col-6"><strong>{{'inventory.extradevice.details.information.device.location'|trans}}</strong></div>
+                                    <div class="col-6">{{location.institutionName}}</div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <h5 class="card-header d-flex justify-content-between align-items-center">
+                            {{'inventory.extradevice.details.information.user'|trans}}
+                            {% if device.customer_id is null %}
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectCustomerModal"><i class="fas fa-plus"></i></button>
+                            {% endif %}
+                        </h5>
+                        <div class="card-body mx-2">
+                            {% if device.customer_id %}
+                            <div class="card">
+                                <h6 class="card-header d-flex justify-content-between align-items-center">
+                                    {{customer.type}}
+                                    <a href="{{path('removeCustomerFromExtraDevice', {did: device.id})}}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                                </h6>
+                                <div class="card-body">
+                                    <h6 class="card-title">{{customer.firstname}}&nbsp;{{customer.lastname}}</h6>
+                                    <hr class="divider" />
+                                    <p>{{customer.email}}</p>
+                                    <hr class="divider" />
+                                    <p>{{customer.institutionName}}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card mb-3">
+                <h5 class="card-header">
+                    {{'inventory.extradevice.details.log'|trans}}
+                </h5>
+                <div class="card-body">
+                    <div class="card mb-3">
+                        <h5 class="card-header d-flex justify-content-between align-items-center">
+                            <a href="{{path('loan', { location_id: device.m4sSchoollocationId })}}">{{'inventory.extradevice.details.loan.title'|trans}}</a>
+                            <a href="{{path('loan_new', { locationid: device.m4sSchoollocationId, did: device.id, serialnumber: device.productnumber, forextra: true})}}" class="btn btn-success"><i class="fab fa-telegram-plane"></i></a>
+                        </h5>
+                        <div class="card-body">
+                            {% if loans|length > 0 %}
+                            <div class="list-group">
+                                {% for loan in loans %}
+                                <div class="list-group-item list-group-item-action mb-1">
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <p>{{'inventory.extradevice.details.loan.from'|trans}}: <strong>{{loan.startdate|date('d-M-y')}}</strong></p>
+                                        <p>{{'inventory.extradevice.details.loan.until'|trans}}: <strong>{{loan.enddate|date('d-M-y')}}</strong></p>
+                                    </div>
+                                    <p>{{'inventory.extradevice.details.loan.to'|trans}}: <strong>{{loan.user|customername}}</strong></p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <h5 class="card-header d-flex justify-content-between align-items-center">
+                            {{'inventory.extradevice.details.moved.title'|trans}}
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#modalMoveDevice"><i class="fas fa-suitcase-rolling"></i></button>
+                        </h5>
+                        <div class="card-body">
+                            {% if moves|length > 0 %}
+                            <div class="list-group">
+                            {% for move in moves %}
+                                <div class="list-group-item list-group-item-action mb-1">
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <p>{{'inventory.extradevice.details.moved.from'|trans}}: {{move.fromLocationName}}</p>
+                                        <small>{{move.whenMoved|date('d-M-y')}}</small>
+                                    </div>
+                                    <p>{{'inventory.extradevice.details.moved.to'|trans}}: {{move.toLocationName}}</p>
+                                    <small>{{'inventory.extradevice.details.moved.by'|trans}}: <strong>{{move.user}}</strong></small>
+                                </div>
+                            {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {# {% endif %} #}
+                </div>
+            </div>
+            <a href="{{path('removeExtraDeviceDetails', {id: device.id})}}" class="btn btn-danger btn-block"><i class="fas fa-trash-alt"></i></a>
+        </div>
+    </div>
+</div>
+{# <!-- Customer Select Modal --> #}
+{% include 'particulier/customerselect.modal.html.twig' %}
+{# <!-- Move Device Modal --> #}
+{% include 'move_device/moveDevice.modal.html.twig' %}
+{% endif %}
+{% endblock %}

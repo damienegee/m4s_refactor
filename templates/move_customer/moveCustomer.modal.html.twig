@@ -1,0 +1,72 @@
+<div class="modal fade" id="modalMoveCustomer" tabindex="-1" aria-labelledby="modalMoveCustomerLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalMoveCustomerLabel">{{'movecustomer.modal.title'|trans}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ form_start(moveForm) }}
+            <div class="form-group row">
+                <div class="col-sm-4 align-self-center">
+                    {{ form_label(moveForm.customerId)}}
+                </div>
+                <div class="col-sm-8">
+                    {{ form_widget(moveForm.customerId, { 'attr' : {'class': 'form-control'} })}}
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-4 align-self-center">
+                    {{ form_label(moveForm.customerName)}}
+                </div>
+                <div class="col-sm-8">
+                    {{ form_widget(moveForm.customerName, { 'attr' : {'class': 'form-control'} })}}
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-4 align-self-center">
+                    {{ form_label(moveForm.fromLocationName)}}
+                </div>
+                <div class="col-sm-8">
+                    {{ form_widget(moveForm.fromLocationName, { 'attr' : {'class': 'form-control'} })}}
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-4 align-self-center">
+                    {{ form_label(moveForm.toLocationName)}}
+                </div>
+                <div class="col-sm-8">
+                    {{ form_widget(moveForm.toLocationName, { 'attr': { 'class' : 'selectpicker', 'data-live-search' : true, 'title': 'Waar?', 'required': true } }) }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-4 align-self-center">
+                    {{ form_label(moveForm.whenMoved)}}
+                </div>
+                <div class="col-sm-8">
+                    {{ form_widget(moveForm.whenMoved, { 'attr' : {'class': 'form-control'} })}}
+                </div>
+            </div>
+            {% if devices is defined and devices|length > 0 %}
+            <div class="form-group row">
+                <div class="col-sm-4 align-self-center">
+                    {{ form_label(moveForm.moveDevice)}}
+                </div>
+                <div class="col-sm-8">
+                    {{ form_widget(moveForm.moveDevice, { 'attr' : {'class': 'form-control'} })}}
+                </div>
+            </div>
+            {% endif %}
+            <div>
+                <button id="saveMoved" type="submit" class="btn btn-primary">{{'movecustomer.modal.form.save'|trans}}</button>
+            </div>
+        {{ form_end(moveForm) }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{'movecustomer.modal.form.close'|trans}}</button>
+      </div>
+    </div>
+  </div>
+</div>

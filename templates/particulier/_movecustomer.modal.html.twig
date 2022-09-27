@@ -1,0 +1,43 @@
+<div class="modal fade" id="moveCustomerModal" tabindex="-1" aria-labelledby="moveCustomerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="moveCustomerModalLabel">{{'customer.modal.title'|trans}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  	{{ form_start(moveInstitution) }}
+		  	<div class="form-group row">
+				  <div class="col-sm-12">
+					  {{ form_widget(moveInstitution.institutions) }}
+				  </div>
+			  </div>
+        <div class="form-group row">
+          <div class="col-sm-2 align-self-center">
+              {{ form_label(moveInstitution.withBYOD) }}
+          </div>
+          <div class="col-sm-10">
+              {{ form_widget(moveInstitution.withBYOD, { 'attr': {'class': 'form-control' } }) }}
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-2 align-self-center">
+              {{ form_label(moveInstitution.withExtra) }}
+          </div>
+          <div class="col-sm-10">
+              {{ form_widget(moveInstitution.withExtra, { 'attr': {'class': 'form-control' } }) }}
+          </div>
+        </div>
+			  <div>
+          <button id="chooseInstitution" type="submit" class="btn btn-primary">{{'customer.form.save'|trans}}</button>
+        </div>
+		  {{ form_end(moveInstitution) }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{'customer.modal.close'|trans}}</button>
+      </div>
+    </div>
+  </div>
+</div>

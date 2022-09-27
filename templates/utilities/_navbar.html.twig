@@ -1,0 +1,94 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top ">
+	<a class="navbar-brand" href="/">
+		<img src="/assets/logo.svg" title="Signpost" alt="Signpost" width="100%" height="40" />
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto ml-auto">
+			<li class="nav-item">
+				<a href="{{path('dashboard')}}" class="nav-link"><i class="fas fa-tachometer-alt"></i></a>
+			</li>
+			<li class="nav-item">
+				<a href="{{path('inventory')}}" class="nav-link">{{ 'base.navigation.inventory'|trans }}</a>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="fieldserviceDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					{{ 'base.navigation.fieldService'|trans }}
+				</a>
+				<div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="fieldserviceDropdown" style="max-height: 280px; overflow-y: auto;">
+					<a class="dropdown-item" href="{{path('field_service')}}">BYOD</a>
+					<a class="dropdown-item" href="{{path('ticket')}}">{{'internalticket.title'|trans}}</a>
+				</div>
+				{# <a href="{{path('field_service')}}" class="nav-link">{{ 'base.navigation.fieldService'|trans }}</a> #}
+			</li>
+			<li class="nav-item">
+				<a href="{{path('customer')}}" class="nav-link">{{ 'base.navigation.users'|trans }}</a>
+			</li>
+			<li class="nav-item">
+				<a href="{{path('forecast')}}" class="nav-link">{{ 'base.navigation.shops'|trans }}</a>
+			</li>
+			{% if 'ROLE_AGSO' in app.user.roles or 'ROLE_ADMIN' in app.user.roles %}
+			<li class="nav-item">
+				<a href="{{path('agso')}}" class="nav-link">AGSO</a>
+			</li>
+			{% endif %}
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="byodDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					BYOD
+				</a>
+				<div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="byodDropdown" style="max-height: 280px; overflow-y: auto;">
+					<a class="dropdown-item" href="{{path('byod_forecasts')}}">{{'byod.menu.forecast'|trans}}</a>
+					<a class="dropdown-item" href="{{path('byod_imageintakes')}}">{{'byod.menu.intakes'|trans}}</a>
+					<a class="dropdown-item" href="{{path('byod_deliveries')}}">{{'byod.menu.deliveries'|trans}}</a>
+					<a class="dropdown-item" href="{{path('byod_hires')}}">{{'byod.menu.hires'|trans}}</a>
+					<a class="dropdown-item" href="{{path('byod_powerbi')}}">{{'byod.menu.powerbi'|trans}}</a>
+					<a class="dropdown-item" href="{{path('byod_autoappupdater')}}">{{'byod.menu.autoappupdater'|trans}}</a>
+					<a class="dropdown-item" href="{{path('scripting')}}">{{ 'byod.menu.scripts'|trans }}</a>
+					<a class="dropdown-item" href="{{path('byod_shop_free_field')}}">{{ 'byod.menu.freefields'|trans }}</a>
+					<a class="dropdown-item" href="{{path('field_service')}}">{{ 'base.navigation.fieldService'|trans }}</a>
+					<a class="dropdown-item" href="{{path('webshopordersM4S')}}">Bestellingen</a>
+				</div>
+			</li>
+			{% if 'ROLE_ADMIN' in app.user.roles or 'ROLE_SCHOOLADMIN' in app.user.roles %}
+			<li class="nav-item">
+				<a href="{{path('admin')}}" class="nav-link">Admin</a>
+			</li>
+			{% endif %}
+			<li class="nav-item">
+				{{ render(controller("App\\Controller\\HomeController::searchDeviceOrUser", {'uri' : app.request.uri })) }}
+			</li>
+		</ul>
+		<div class="my-2 my-lg-0">
+			<ul class="navbar-nav">
+				{{ render(controller("App\\Controller\\HomeController::listInstitutionAction")) }}
+				<li class="nav-item my-2">
+					<a href="{{path('logout')}}" class="nav-link btn btn-danger"><i class="fas fa-sign-out-alt"></i>&nbsp;{{ 'base.navigation.logout'|trans }}</a>
+				</li>
+				<li class="nav-item dropdown my-2">
+					<a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fas fa-globe"></i>
+					</a>
+					<div class="dropdown-menu dropdown-menu-lg-right " aria-labelledby="langDropdown" style="max-height: 280px; overflow-y: auto;">
+						<a class="dropdown-item" href="{{path('changeLocale', {locale: 'en'})}}">
+							<img src="/assets/lang/united-kingdom.png" width="20" />
+						</a>
+						<a class="dropdown-item" href="{{path('changeLocale', {locale: 'nl'})}}">
+							<img src="/assets/lang/netherlands.png" width="20" />
+						</a>
+						<a class="dropdown-item" href="{{path('changeLocale', {locale: 'fr'})}}">
+							<img src="/assets/lang/france.png" width="20" />
+						</a>
+						<a class="dropdown-item" href="{{path('changeLocale', {locale: 'de'})}}">
+							<img src="/assets/lang/germany.png" width="20" />
+						</a>
+						<a class="dropdown-item" href="{{path('changeLocale', {locale: 'es'})}}">
+							<img src="/assets/lang/spain.png" width="20" />
+						</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

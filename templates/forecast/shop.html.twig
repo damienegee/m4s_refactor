@@ -1,0 +1,61 @@
+ {% if webshopdetails|length > 0%}
+<div class="text-right mb-1 mt-1">
+    <form action="{{path('report.csv')}}" method="POST">
+        <input type="hidden" value="{{webshopdetails|json_encode()}}" id="csvexport" name="csvexport" />
+        <input type="hidden" value="koop" name="type">
+        <button class="btn btn-info btnexcell" type="submit" data-toggle="tooltip" data-placement="top" title="Export to Excel">
+            {# <i class="fas fa-file-export"></i>&nbsp;Excel #}
+            <i class="fas fa-file-excel"></i>
+        </button>
+    </form>
+</div>
+<table id="webshopdetailstable" class="table table-stripes table-responsive-lg" style="width:100%">
+    <thead class="thead">
+        <tr class="bg-info">
+            <th scope="col" class="text-center">{{'forecasts.shop.table.lastname'|trans}}</th>
+            <th scope="col" class="text-center">{{'forecasts.shop.table.shopNumber'|trans}}</th>
+            <th scope="col" class="text-center">{{'forecasts.shop.table.orderDate'|trans}}</th>
+            <th scope="col" class="text-center">{{'forecasts.shop.table.deviceOrdered'|trans}}</th>
+            <th scope="col" class="text-center">{{'forecasts.shop.table.paidReveived'|trans}}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for webshopdetail in webshopdetails %}
+        <tr>
+            <td>
+                <span class="text-muted">{{webshopdetail.voornaam_student}}</span>&nbsp;<strong>{{webshopdetail.naam_student}}</strong>
+            </td>
+            <td>
+                <strong>{{webshopdetail.increment_id }}</strong>
+                {% if webshopdetail.label %}
+                <br />
+                <span class="text-muted">{{ webshopdetail.label}}</span>
+                {% endif %}
+            </td>
+            <td>{{webshopdetail.created_at | date('d-m-y')}}</td>
+            <td>{{webshopdetail.name}}</td>
+            <td class="text-center">
+                {% if webshopdetail.betalingok == 1 %}
+                <span class="text-center">
+                    <i class="fas fa-check text-success"></i>&nbsp;
+                    {% if webshopdetail.payment_date %}
+                        {{webshopdetail.payment_date | date('d-m-y')}}
+                    {% endif %}
+                </span>
+                {% else %}
+                <span class="text-center">
+                    <i class="fas fa-times text-danger"></i>
+                </span>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="container">
+    <div class="jumbotron">
+        <p>{{'loan.index.nodata'|trans}}</p>
+    </div>
+</div>
+{% endif %}

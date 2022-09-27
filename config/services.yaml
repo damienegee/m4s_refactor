@@ -1,0 +1,52 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+  app.env: "%env(APP_ENV)%"
+  app.sp2.url: "%env(SP2_URL)%"
+  app.sp2.username: "%env(SP2_USERNAME)%"
+  app.sp2.passwd: "%env(SP2_PASSWD)%"
+  images_directory: "%kernel.project_dir%/public/uploads"
+  model_directory: "%kernel.project_dir%/public/devicemodel"
+  scripting_directory: "%kernel.project_dir%/public/scripts"
+  csv_directory: "%kernel.project_dir%/public/importtemplates"
+  uploads_directory: "%kernel.project_dir%/public/uploads"
+  container.dumper.inline_factories: true
+  app.enabledlang: "%env(APP_ENABLEDLANG)%"
+  byod_shop: "%env(BYOD_SHOP)%"
+
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  # makes classes in src/ available to be used as services
+  # this creates a service per class whose id is the fully-qualified class name
+  App\:
+    resource: "../src/"
+    exclude:
+      - "../src/DependencyInjection/"
+      - "../src/Entity/"
+      - "../src/Kernel.php"
+      - "../src/Tests/"
+
+  # controllers are imported separately to make sure services can be injected
+  # as action arguments even if you don't extend any base controller class
+  App\Controller\:
+    resource: "../src/Controller/"
+    tags: ["controller.service_arguments"]
+
+  # add more service definitions when explicit configuration is needed
+  # please note that last definitions always *replace* previous ones
+  serializer.encode.json.unescaped:
+    class: Symfony\Component\Serializer\Encoder\JsonEncode
+    arguments:
+      - { "json_encode_options": !php/const JSON_UNESCAPED_UNICODE }
+
+  serializer.encoder.json:
+    class: Symfony\Component\Serializer\Encoder\JsonEncoder
+    arguments:
+      - "@serializer.encode.json.unescaped"

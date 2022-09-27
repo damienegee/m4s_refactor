@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container mb-3 mt-3">
+		<div class="card">
+			<h5 class="card-header text-center">
+				{{ 'byod.freefields.header'|trans }}
+			</h5>
+			<div class="card-body">
+				<div class="row">
+				</div>
+				{{ form_start(form) }}
+				<div class="form-group row">
+					<div class="col-sm-2 align-self-center">
+						{{ form_label(form.fieldType) }}
+					</div>
+					<div class="col-sm-10">
+						{{ form_widget(form.fieldType, { 'attr': { 'class' : 'selectpicker', 'data-live-search' : true, 'title': '' } }) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-2 align-self-center">
+						{{ form_label(form.fieldTitle) }}
+					</div>
+					<div class="col-sm-10">
+						{{ form_widget(form.fieldTitle, { 'attr': {'class': 'form-control' } }) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-2 align-self-center">
+						{{ form_label(form.active) }}
+					</div>
+					<div class="col-sm-10">
+						{{ form_widget(form.active) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-2 align-self-center">
+						{{ form_label(form.required) }}
+					</div>
+					<div class="col-sm-10">
+						{{ form_widget(form.required) }}
+					</div>
+				</div>
+
+				<div class="text-center">
+					<button id="addFreeField" type="submit" class="btn btn-primary">{{ app.request.get('fieldId') ?  'byod.freefields.update'|trans  :  'byod.freefields.add'|trans }}</button>
+				</div>
+				{{ form_end(form) }}
+			</div>
+		</div>
+		{#        {% if freeFields|length > 0 %} #}
+		<h5 class="text-center my-4">{{ 'byod.freefields.freefields'|trans }}</h5>
+
+		<div class="container mb-1 mt-1 card">
+			<table class="table table-striped">
+				<thead>
+				<tr>
+					<th style="width: 20%" scope="col">{{ 'byod.freefields.title'|trans }}</th>
+					<th style="width: 20%" scope="col">{{ 'byod.freefields.type'|trans }}</th>
+					<th style="width: 20%" scope="col">{{ 'byod.freefields.active'|trans }}</th>
+					<th style="width: 20%" scope="col">{{ 'byod.freefields.required'|trans }}</th>
+					<th style="width: 20%" scope="col">{{ 'byod.freefields.process'|trans }}</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for field in freeFields %}
+					<tr class="freeFieldRow">
+						<td>{{ field['field_title'] }}</td>
+						<td>{{ field['field_type'] }}</td>
+						<td>{{ field['active'] }}</td>
+						<td>{{ field['required'] }}</td>
+						<td>
+							<div class="d-none btn-group-sm">
+								<a href="{{ path('byod_free_field_remove', {fieldId: field['id']}) }}"
+								   class="btn btn-danger" title={{ 'byod.freefields.delete'|trans }}>
+									<i class="fas fa-trash-alt"></i>
+								</a>
+								<a href="{{ path('byod_shop_free_field', {fieldId: field['id'], schoolId: school_id}) }}"
+								   class="btn btn-info" title={{ 'byod.freefields.edit'|trans }}>
+									<i class="fas fa-edit"></i>
+								</a>
+							</div>
+						</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<hr/>
+	</div>
+{% endblock %}

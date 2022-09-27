@@ -1,0 +1,17 @@
+{% if releasenotes|length > 0%}
+{% for release in releasenotes %}
+<div class="card mb-3">
+	<div class="card-header">
+		<div class="container-fluid">
+			<div class="row justify-content-between">
+				<div class="col"><span class="card-title"><strong>{{release.version}}</strong> : {{release.title}}</span></div>
+				<div class="col col-md-3"><span class="badge badge-secondary">{{release.created|date('d-m-Y')}}</span></div>
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+		{{release.description|raw}}
+	</div>
+</div>
+{% endfor %}
+{% endif %}

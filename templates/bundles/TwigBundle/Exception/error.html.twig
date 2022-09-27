@@ -1,0 +1,14 @@
+{# templates/bundles/TwigBundle/Exception/error404.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-danger"><strong>{{'somethingwrong'|trans}}</strong></h1>
+
+    {# <p>
+        {{'somethingwrongdescription'|trans}}
+    </p> #}
+
+    <div class="alert alert-danger mb-3 mt-3" role="alert">
+        {{status_code}} : {{ status_text}}
+    </div>
+{% endblock %}

@@ -1,0 +1,188 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% if customer %}
+<div class="container-fluid mb-3 mt-3">
+    <h1 class="text-center">Details</h1>
+    <hr class="divider" />
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card mb-3">
+                <h5 class="card-header d-flex align-items-center justify-content-between">
+                    {{'customer.details.information.title'|trans}}
+                    {% if 'ROLE_ADMIN' in app.user.roles %}
+                    <button  type="button" class="btn btn-info" data-toggle="modal" data-target="#moveCustomerModal"><i class="fas fa-suitcase-rolling"></i></button>
+                    {% endif %}
+                </h5>
+                <div class="card-body">
+                    {# <!-- General info --> #}
+                    <div class="card mb-3">
+                        <h5 class="card-header d-flex align-items-center justify-content-between">
+                            {{'customer.details.information.customer.title'|trans}}
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editCustomerModal"><i class="fas fa-user-edit"></i></button>
+                        </h5>
+                        <div class="card-body mx-2">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-5"><strong>{{'customer.details.information.customer.firstname'|trans}}</strong></div>
+                                    <div class="col-7">{{ customer.firstname }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5"><strong>{{'customer.details.information.customer.lastname'|trans}}</strong></div>
+                                    <div class="col-7">{{ customer.lastname }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5"><strong>{{'customer.details.information.customer.email'|trans}}</strong></div>
+                                    <div class="col-7">{{ customer.email }}</div>
+                                </div>
+                                {% if customer.freefieldtag01 != NULL %}
+                                <div class="row">
+                                    <div class="col-5"><strong>{{customer.freefieldtag01}}</strong></div>
+                                    <div class="col-7">{{ customer.freefieldvalue01 }}</div>
+                                </div>
+                                {% endif %}
+                                {% if customer.freefieldtag02 != NULL %}
+                                <div class="row">
+                                    <div class="col-5"><strong>{{customer.freefieldtag02}}</strong></div>
+                                    <div class="col-7">{{ customer.freefieldvalue02 }}</div>
+                                </div>
+                                {% endif %}
+                                {% if customer.freefieldtag03 != NULL %}
+                                <div class="row">
+                                    <div class="col-5"><strong>{{customer.freefieldtag03}}</strong></div>
+                                    <div class="col-7">{{ customer.freefieldvalue03 }}</div>
+                                </div>
+                                {% endif %}
+                                {% if customer.freefieldtag04 != NULL %}
+                                <div class="row">
+                                    <div class="col-5"><strong>{{customer.freefieldtag04}}</strong></div>
+                                    <div class="col-7">{{ customer.freefieldvalue04 }}</div>
+                                </div>
+                                {% endif %}
+                                {% if customer.freefieldtag05 != NULL %}
+                                <div class="row">
+                                    <div class="col-5"><strong>{{customer.freefieldtag05}}</strong></div>
+                                    <div class="col-7">{{ customer.freefieldvalue05 }}</div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {# <!-- School info --> #}
+                    <div class="card mb-3">
+                        <h5 class="card-header d-flex justify-content-between">
+                            {{'customer.details.information.customer.location.title'|trans}}
+                            {# <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editSchoolInfoModal"><i class="fas fa-user-edit"></i></button> #}
+                        </h5>
+                        <div class="card-body mx-2">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-5"><strong>{{'customer.details.information.customer.location.school'|trans}}</strong></div>
+                                    <div class="col-7">{{ customer.school_name }} ({{customer.synergyid}})</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5"><strong>{{'customer.details.information.customer.location.location'|trans}}</strong></div>
+                                    <div class="col-7">{{ customer.institutionName }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {# <!-- Device info --> #}
+                    <div class="card mb-3">
+                        <h5 class="card-header d-flex justify-content-between align-items-center">
+                            {{'customer.details.information.customer.device.title'|trans}}
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectDeviceModal"><i class="fas fa-plus"></i></button>
+                        </h5>
+                        <div class="card-body mx-2">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col"><strong>{{'customer.details.information.customer.device.label'|trans}}</strong></div>
+                                    <div class="col"><strong>{{'customer.details.information.customer.device.hostname'|trans}}</strong></div>
+                                    <div class="col"><strong>{{'customer.details.information.customer.device.serial'|trans}}</strong></div>
+                                    <div class="col"><strong>{{'customer.details.information.customer.device.productcode'|trans}}</strong></div>
+                                </div>
+                                {% for device in devices %}
+                                <div class="row">
+                                    <div class="col">
+                                        <a class="btn btn-link" href="{{path('invetoryDeviceDetails', {id: device.id})}}">{{device.label}}</a>
+                                    </div>
+                                    <div class="col">{{device.hostname}}</div>
+                                    <div class="col">{{device.serialnumber}}</div>
+                                    <div class="col">{{device.product_code}}</div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {# <!-- Contact info --> #}
+                     <div class="card mb-3">
+                        <h5 class="card-header d-flex justify-content-between align-items-center">
+                            Contactpersoon
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewContactModal"><i class="fas fa-plus"></i></button>
+                        </h5>
+                        <div class="card-body mx-2">
+                            <div class="container">
+                                {% for parent in parents %}
+                                <div class="row mb-1 mt-1">
+                                    <div class="col">{{parent.firstname}}&nbsp;{{parent.lastname}}</div>
+                                    <div class="col">{{parent.email}}</div>
+                                    <div class="col">{{parent.phone}}</div>
+                                    <div class="col-2">
+                                        <a href="{{path('removeparent', {cid: cid, pid: parent.id})}}" class="btn btn-danger btn-block"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card mb-3">
+                <h5 class="card-header">
+                    {{'customer.details.log'|trans}}
+                </h5>
+                <div class="card-body mx-2">
+                    <div class="card mb-3">
+                        <h5 class="card-header d-flex justify-content-between align-items-center">
+                            {{'customer.details.moved.title'|trans}}
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#modalMoveCustomer"><i class="fas fa-suitcase-rolling"></i></button>
+                        </h5>
+                        <div class="card-body">
+                            {% if moves|length > 0 %}
+                            <div class="list-group">
+                            {% for move in moves %}
+                                <div class="list-group-item list-group-item-action mb-1">
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <p>{{'customer.details.moved.from'|trans}}: {{move.fromLocationName}}</p>
+                                        <small>{{move.whenMoved|date('d-M-y')}}</small>
+                                    </div>
+                                    <p>{{'customer.details.moved.to'|trans}}: {{move.toLocationName}}</p>
+                                    <small>{{'customer.details.moved.by'|trans}}: <strong>{{move.user}}</strong></small>
+                                </div>
+                            {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="{{path('removecustomer', {cid: cid})}}" class="btn btn-danger btn-block"><i class="fas fa-trash-alt"></i></a>
+        </div>
+    </div>
+</div>
+{# <!-- Device Select Modal --> #}
+{% include 'inventory/deviceselect.modal.html.twig' %}
+{# <!-- Move Customer Modal --> #}
+{% include 'move_customer/moveCustomer.modal.html.twig' %}
+{# <!-- EDIT Customer Modal --> #}
+{% include 'particulier/_editcustomer.modal.html.twig' %}
+{# <!-- MOVE Customer Modal --> #}
+{% if moveInstitution is not null %}
+{% include 'particulier/_movecustomer.modal.html.twig' %}
+{% endif %}
+{# <!-- Add Parent Modal --> #}
+{% include 'particulier/_addparent.modal.html.twig' %}
+{% endif %}
+{% endblock %}

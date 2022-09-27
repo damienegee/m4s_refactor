@@ -1,0 +1,59 @@
+# config/packages/knpu_oauth2_client.yaml
+knpu_oauth2_client:
+  clients:
+    # will create service: "knpu.oauth2.client.azure"
+    # an instance of: KnpU\OAuth2ClientBundle\Client\Provider\AzureClient
+    # composer require thenetworg/oauth2-azure
+    azure:
+        # must be "azure" - it activates that type!
+        type: azure
+        # add and set these environment variables in your .env files
+        client_id: '%env(OAUTH_AZURE_CLIENT_ID)%'
+        client_secret: '%env(OAUTH_AZURE_CLIENT_SECRET)%'
+        # a route name you'll create
+        redirect_route: connect_azure_check
+        redirect_params: {}
+        # Domain to build login URL
+        # url_login: 'https://login.microsoftonline.com/'
+        # Oauth path to authorize against
+        # path_authorize: '/oauth2/authorize'
+        # Oauth path to retrieve a token
+        # path_token: '/oauth2/token'
+        # Oauth scope send with the request
+        # scope: {}
+        # The tenant to use, default is `common`
+        # tenant: 'common'
+        # Domain to build request URL
+        # url_api: 'https://graph.windows.net/'
+        # Oauth resource field
+        # resource: null
+        # The API version to run against
+        # api_version: '1.6'
+        # Send resource field with auth-request
+        # auth_with_resource: true
+        # The endpoint version to run against
+        # default_end_point_version: '1.0'
+        # whether to check OAuth2 "state": defaults to true
+        # use_state: true
+    # will create service: "knpu.oauth2.client.google"
+    # an instance of: KnpU\OAuth2ClientBundle\Client\Provider\GoogleClient
+    # composer require league/oauth2-google
+    google:
+        # must be "google" - it activates that type!
+        type: google
+        # add and set these environment variables in your .env files
+        client_id: '%env(OAUTH_GOOGLE_CLIENT_ID)%'
+        client_secret: '%env(OAUTH_GOOGLE_CLIENT_SECRET)%'
+        # a route name you'll create
+        redirect_route: connect_google_check
+        redirect_params: {}
+        # Optional value for sending access_type parameter. More detail: https://developers.google.com/identity/protocols/OpenIDConnect#authenticationuriparameters
+        # access_type: null
+        # Optional value for sending hd parameter. More detail: https://developers.google.com/identity/protocols/OpenIDConnect#hd-param
+        # hosted_domain: null
+        # Optional value for additional fields to be requested from the user profile. If set, these values will be included with the defaults. More details: https://developers.google.com/+/web/api/rest/latest/people
+        # user_fields: {}
+        # Optional value if you don't want or need to enable Google+ API access.
+        # use_oidc_mode: false
+        # whether to check OAuth2 "state": defaults to true
+        # use_state: true

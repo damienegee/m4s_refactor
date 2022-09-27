@@ -1,0 +1,84 @@
+<div class="card">
+	<h5 class="card-header text-center">
+		Import
+	</h5>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-sm-2 align-self-center">
+				Excel Template
+			</div>
+			<div class="col-sm-10">
+				{% if importWhat == "devices" %}
+				<a href="{{asset('/importtemplates/devicesTemplates.csv')}}" class="btn btn-link">
+					<i class="fas fa-download"></i>
+				</a>
+				<div class="alert alert-info alert-dismissible" >
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+  					<strong>{{'bulkadduser.savettype'| trans}}</strong>
+				</div>
+				{% elseif importWhat == "customers" %}
+				<div class="alert alert-info alert-dismissible" >
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+  					{{'bulkadduser.extrainfo'| trans}}: <br /> 
+					<strong>EMPLOYEE</strong> - <strong>ADMINISTRATION</strong> - <strong>SALES</strong> - <strong>STUDENT</strong> - <strong>TEACHER</strong> - <strong>ICT COORDINATOR</strong>
+				</div>
+				<a href="{{asset('/importtemplates/customersTemplates.csv')}}" class="btn btn-link">
+					<i class="fas fa-download"></i>
+				</a>
+				<div class="alert alert-info alert-dismissible" >
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+  					<strong>{{'bulkadduser.savettype'| trans}}</strong>
+				</div>
+				{% elseif importWhat == "extradevices" %}
+				<a href="{{asset('/importtemplates/extradevicesTemplates.csv')}}" class="btn btn-link">
+					<i class="fas fa-download"></i>
+				</a>
+				<div class="alert alert-info alert-dismissible" >
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+  					<strong>{{'bulkadduser.savettype'| trans}}</strong>
+				</div>
+				{% elseif importWhat == "assign" %}
+				<a href="{{asset('/importtemplates/assigntodeviceTemplates.csv')}}" class="btn btn-link">
+					<i class="fas fa-download"></i>
+				</a>
+				<div class="alert alert-info alert-dismissible" >
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+  					<strong>{{'bulkadduser.savettype'| trans}}</strong>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+		{{ form_start(form, { attr: { 'accept-charset' : 'UTF-8' }} ) }}
+		<div class="form-group row">
+			<div class="col-sm-2 align-self-center">
+				{{ form_label(form.schoollocation) }}
+			</div>
+			<div class="col-sm-10">
+				{{ form_widget(form.schoollocation, { 'attr': { 'class' : 'selectpicker', 'data-live-search' : true, 'title': 'inventory.details.information.device.location'|trans } }) }}
+			</div>
+		</div>
+		<div class="form-group row">
+			<div class="col-sm-2 align-self-center">
+				{{ form_label(form.file)}}
+			</div>
+			<div class="col-sm-10">
+				{{ form_widget(form.file, { 'attr': {'class': 'form-control' } }) }}
+			</div>
+		</div>
+		{% if form.extradevice is defined %}
+		<div class="form-group row">
+			{# <div class="col-sm-2 align-self-center">
+				{{ form_label(form.extradevice)}}
+			</div> #}
+			<div class="col-10">
+				{{ form_widget(form.extradevice, { 'attr': {'class': 'form-control' } }) }}
+			</div>
+		</div>
+		{% endif %}
+		<div>
+			{# <button id="saveImportDevice" type="submit" class="btn btn-primary">Bewaren</button> #}
+			{{ form_widget(form.send, {'label': "Upload this file", 'attr' : { 'class': 'btn btn-primary' }}) }}
+        </div>
+		{{ form_end(form)}}
+	</div>
+</div>

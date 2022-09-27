@@ -1,0 +1,349 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container-fluid mb-3 mt-3">
+		<h2 class="mt-5 text-left text-primary pl-3 py-4">Bestellingen webshop & leermiddel</h2>
+		<small>last refreshed: {{refreshed|date}}</small>
+		<div class="row container mb-4">
+			<div class="col-md-6 col-sm-6 my-3">
+				<div class="card rounded shadow-sm">
+					<div class="card-body text-white bg-success">
+						<ul class="ml-3 mt-2">
+							<li>
+								<h5>Aantal in behandeling: {{ awaitShop}} </h5>
+{#								<h5>Aantal in behandeling: </h5>#}
+							</li>
+							<li>
+								<h5> Aantal betaald: {{ totalPaidShop}} </h5>
+{#								<h5> Aantal betaald: </h5>#}
+							</li>
+						</ul>
+					</div>
+					<h5 class="card-footer mb-0 bg-transparent ml-4 py-3">Totaal webshop: {{ totalShop}} </h5>
+{#					<h5 class="card-footer mb-0 bg-transparent ml-4 py-3">Totaal webshop: </h5>#}
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-6 my-3">
+				<div class="card rounded shadow-sm">
+					<div class="card-body bg-warning">
+						<ul class="ml-3 mt-2">
+							<li>
+								<h5> Aantal in behandeling: {{ awaitLeermiddel}} </h5>
+{#								<h5> Aantal in behandeling: </h5>#}
+							</li>
+							<li>
+								<h5> Aantal betaald: {{ totalPaidLeermiddel}} </h5>
+{#								<h5> Aantal betaald: </h5>#}
+							</li>
+						</ul>
+					</div>
+					<h5 class="card-footer mb-0 bg-transparent ml-4 py-3">Totaal leermiddel: {{ totalLeermiddel}} </h5>
+{#					<h5 class="card-footer mb-0 bg-transparent ml-4 py-3">Totaal leermiddel: </h5>#}
+				</div>
+			</div>
+		</div>
+{#		{% apply inline_css %}#}
+{#			<style>#}
+{#                #buyTab:active { color: #1dafbe; }#}
+{#                #rentTab:active { color: #1dafbe; }#}
+{#                #bothTab:active { color: #1dafbe; }#}
+{#			</style>#}
+		<div class="col-md-12 col-sm-12 mb-3 mt-4">
+			<ul class="nav nav-tabs mb-4" id="buyRentTab" role="tablist">
+				<li class="nav-item mx-2" role="presentation">
+					<a class="nav-link active" id="buyTab" data-toggle="tab" href="#buy" role="tab" aria-controls="buy" aria-selected="true">Webshop</a>
+				</li>
+				<li class="nav-item mx-2" role="presentation">
+					<a class="nav-link" id="rentTab" data-toggle="tab" href="#rent" role="tab" aria-controls="rent" aria-selected="true">Leermiddel</a>
+				</li>
+{#				<li class="nav-item mx-2" role="presentation">#}
+{#					<a class="nav-link" id="bothTab" data-toggle="tab" href="#both" role="tab" aria-controls="both" aria-selected="true">Webshop/Leermiddel</a>#}
+{#				</li>#}
+{#				<li class="nav-item mx-2" role="presentation">#}
+{#					<a class="nav-link" id="skuTab" data-toggle="tab" href="#sku" role="tab" aria-controls="both" aria-selected="true">Aantal toestellen</a>#}
+{#				</li>#}
+			</ul>
+{#			<div class="d-flex justify-content-end">#}
+{#				<button class="btn btn-primary mx-1" type="submit">Open</button>#}
+{#				<button class="btn btn-primary mx-1" type="submit">Paid</button>#}
+{#				<button class="btn btn-primary mx-1" type="submit">Canceled</button>#}
+{#				<button class="btn btn-primary mx-1" type="submit">Expired</button>#}
+{#			</div>#}
+		</div>
+{#		{% endapply %}#}
+		<div class="tab-content col-md-12 col-sm-12" id="buyRentTabContent">
+			<div class="tab-pane fade show active" id="buy" role="tabpanel" aria-labelledby="buyTab">
+				{% if webshopOrdersM4S|length > 0 %}
+					<table class="table" id="buyTable" style="width: 100%">
+						<thead class="thead">
+						<tr class="bg-info">
+							<th scope="col">Status</th>
+							<th scope="col">Student ID</th>
+							<th scope="col">VN</th>
+							<th scope="col">AN</th>
+							<th scope="col">E-mail</th>
+							<th scope="col">Tel</th>
+							<th scope="col">Toestel</th>
+							<th scope="col">Koopprijs</th>
+							<th scope="col" hidden>Titel, vrije veld</th>
+							<th scope="col" hidden>Waarde, vrije veld</th>
+						</tr>
+						</thead>
+						<tbody>
+						{% for webshopOrderM4S in webshopOrdersM4S %}
+							{% if webshopOrderM4S.status is same as('paid') or webshopOrderM4S.status is same as('open') %}
+							<tr>
+								<td>{{webshopOrderM4S.status}}</td>
+								<td>
+									{% if webshopOrderM4S.student_idBuy is empty %}
+									{{ webshopOrderM4S.value }}
+									{% else %}
+									{{webshopOrderM4S.student_idBuy}}
+									{% endif %}
+								</td>
+								<td>{{webshopOrderM4S.student_firstnameBuy}}</td>
+								<td>{{webshopOrderM4S.student_lastnameBuy}}</td>
+								<td>{{webshopOrderM4S.emailBuy}}</td>
+								<td>{{webshopOrderM4S.phoneBuy}}</td>
+
+								{% if webshopOrderM4S.devices_id is empty %}
+									<td>{{webshopOrderM4S.heddevices_manufacturer}}&nbsp;{{webshopOrderM4S.heddevices_model}}</td>
+								{% else %}
+									<td>{{webshopOrderM4S.devices_manufacturer}}&nbsp;{{webshopOrderM4S.devices_model}}</td>
+								{% endif %}
+
+								<td>{{webshopOrderM4S.totalBuy}}</td>
+								<td hidden>{{webshopOrderM4S.field_title}}</td>
+								<td hidden>{{webshopOrderM4S.value}}</td>
+							</tr>
+						{% endif %}
+						{% endfor %}
+						</tbody>
+					</table>
+				{% else %}
+					<div class="container">
+						<div class="jumbotron">
+							<p>{{'loan.index.nodata'|trans}}</p>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+			<div class="tab-pane fade" id="rent" role="tabpanel" aria-labelledby="rentTab">
+				{% if webshopRentOrders|length > 0 %}
+					<table class="table" id="rentTable" style="width: 100%">
+						<thead class="thead">
+						<tr class="bg-info">
+							<th scope="col">Datum Voorschot</th>
+							<th scope="col">Voorschot Ontvangen</th>
+							<th scope="col">Voorschot Betaald</th>
+							<th scope="col">Getekend</th>
+							<th scope="col">PDF</th>
+							<th scope="col">VN</th>
+							<th scope="col">AN</th>
+							<th scope="col">E-mail</th>
+							<th scope="col">Tel</th>
+							<th scope="col">Toestel</th>
+							<th scope="col">Borg</th>
+							<th scope="col">Huurprijs</th>
+							<th scope="col" hidden>Order guid</th>
+						</tr>
+						</thead>
+						<tbody>
+						{% for webshopRentOrder in webshopRentOrders %}
+{#							{% if webshopRentOrder.status is same as('paid') or webshopRentOrder.status is same as('open') %}#}
+							<tr>
+{#								<td>{{webshopRentOrder.status}}</td>#}
+								<td>{{webshopRentOrder.DatumVoorschotOntvangen}}</td>
+								{% if webshopRentOrder.VoorschotOntvangen is same as(1) %}
+									<td>paid</td>
+								{% else %}
+									<td>open</td>
+								{% endif %}
+								<td>{{webshopRentOrder.MethodeVoorschotBetaald}}</td>
+								{% if (webshopRentOrder.contract_signed == "ADOBE_SIGN") or (webshopRentOrder.contract_signed == "Manueel")%}
+									<td><i class="fas fa-check-circle text-success fa-lg"></i> getekend </td>
+								{% else %}
+									<td><i class="fas fa-times-circle text-danger fa-lg"></i> Niet getekend<br />
+										<a class="btn-link" href="{{byod_shop}}/reminder/{{webshopRentOrder.UniqueIdentifier}}" target="_blank">
+											<small style="color: #00adbd"><i class="fas fa-envelope"></i></small><small style="color: #00adbd"> Send reminder</small>
+										</a>
+									</td>
+								{% endif %}
+								<td>
+									<a class="btn btn-link" href="{{byod_shop}}/contracts/{{webshopRentOrder.contractPDF}}.pdf" target="_blank">
+										<i class="fas fa-file-pdf" style="color: #00adbd"></i>
+									</a>
+									{{ webshopRentOrder.contractPDF }}
+								</td>
+{#								<td>#}
+{#									{% if webshopRentOrder.student_id is empty%}#}
+{#										{{webshopRentOrder.value}}#}
+{#									{% else %}#}
+{#										{{webshopRentOrder.student_id}}#}
+{#									{% endif %}#}
+{#								</td>#}
+								<td>{{webshopRentOrder.student_firstname}}</td>
+								<td>{{webshopRentOrder.student_lastname}}</td>
+								<td>{{webshopRentOrder.email}}</td>
+								<td>{{webshopRentOrder.phone}}</td>
+
+								<td>{{webshopRentOrder.device}}</td>
+{#								{% if webshopRentOrder.devices_id is empty %}#}
+{#									<td>{{webshopRentOrder.heddevices_manufacturer}}&nbsp;{{webshopRentOrder.heddevices_model}}</td>#}
+{#								{% else %}#}
+{#									<td>{{webshopRentOrder.devices_manufacturer}}&nbsp;{{webshopRentOrder.devices_model}}</td>#}
+{#								{% endif %}#}
+
+								<td>{{webshopRentOrder.waarborg}}</td>
+								<td>{{webshopRentOrder.totalPrice}}</td>
+								<td hidden>{{webshopRentOrder.UniqueIdentifier}}</td>
+							</tr>
+{#							{% endif %}#}
+						{% endfor %}
+						</tbody>
+					</table>
+				{% else %}
+					<div class="container">
+						<div class="jumbotron">
+							<p>{{'loan.index.nodata'|trans}}</p>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+{#			<div class="tab-pane fade" id="both" role="tabpanel" aria-labelledby="bothTab">#}
+{#				<div class="text-right mb-1 mt-1">#}
+{#					<form action="{{path('report.csv')}}" method="POST">#}
+{#						<input type="hidden" value="{{webshopAndRentOrders|json_encode()}}" id="csvexport" name="csvexport" />#}
+{#						<input type="hidden" value="webshopAndRentOrders" name="type">#}
+{#						<button class="btn btn-info btnexcell" type="submit" data-toggle="tooltip" data-placement="top" title="Export to Excel">#}
+{#							<i class="fas fa-file-excel"></i>#}
+{#						</button>#}
+{#					</form>#}
+{#				</div>#}
+{#				{% if webshopAndRentOrders|length > 0 %}#}
+{#					<table class="table" id="bothTable" style="width: 100%">#}
+{#						<thead class="thead">#}
+{#						<tr class="bg-info">#}
+{#							<th scope="col">Type</th>#}
+{#							<th scope="col">Status</th>#}
+{#							<th scope="col">Contract</th>#}
+{#							<th scope="col">PDF</th>#}
+{#							<th scope="col">Student ID</th>#}
+{#							<th scope="col">VN</th>#}
+{#							<th scope="col">AN</th>#}
+{#							<th scope="col">E-mail</th>#}
+{#							<th scope="col">Tel</th>#}
+{#							<th scope="col">Toestel</th>#}
+{#							<th scope="col">Koopprijs</th>#}
+{#							<th scope="col">Borg</th>#}
+{#							<th scope="col">Huurprijs</th>#}
+{#						</tr>#}
+{#						</thead>#}
+{#						<tbody>#}
+{#						{% for webshopAndRentOrder in webshopAndRentOrders %}#}
+{#							{% if webshopAndRentOrder.status is same as('paid') or webshopAndRentOrder.status is same as('open') %}#}
+{#							<tr>#}
+{#								<td>{{webshopAndRentOrder.type}}</td>#}
+{#								<td>{{webshopAndRentOrder.status}}</td>#}
+
+{#								{% if (webshopAndRentOrder.contract_signed == "ADOBE_SIGN") or (webshopAndRentOrder.contract_signed == "Manueel") %}#}
+{#									<td><i class="fas fa-check-circle text-success fa-lg"></i> Getekend</td>#}
+{#								{% elseif webshopAndRentOrder.type == "Webshop" %}#}
+{#									<td>/</td>#}
+{#								{% else %}#}
+{#									<td><i class="fas fa-times-circle text-danger fa-lg"></i> Niet getekend<br />#}
+{#										<a class="btn-link" href="{{byod_shop}}/reminder/{{webshopAndRentOrder.UniqueIdentifier}}" target="_blank">#}
+{#											<small style="color: #00adbd"><i class="fas fa-envelope"></i></small><small style="color: #00adbd"> Send reminder</small>#}
+{#										</a>#}
+{#									</td>#}
+
+{#								{% endif %}#}
+
+{#								{% if (webshopAndRentOrder.type == "Webshop")%}#}
+{#									<td>/</td>#}
+{#								{% else %}#}
+{#									<td>#}
+{#										<a class="btn btn-link" href="{{byod_shop}}{{webshopAndRentOrder.contractPDF}}" target="_blank">#}
+{#											<i class="fas fa-file-pdf"></i>#}
+{#										</a>#}
+{#										{{ webshopAndRentOrder.contractPDF |replace({'/contracts/': " ", '.pdf': " "}) }}#}
+{#									</td>#}
+{#								{% endif %}#}
+
+{#								<td>#}
+{#									{% if webshopAndRentOrder.studentID is empty %}#}
+{#										{{ webshopAndRentOrder.value }}#}
+{#									{% else %}#}
+{#										{{webshopAndRentOrder.studentID}}#}
+{#									{% endif %}#}
+{#								</td>#}
+{#								<td>{{webshopAndRentOrder.studentFirstName}}</td>#}
+{#								<td>{{webshopAndRentOrder.studentLastName}}</td>#}
+{#								<td>{{webshopAndRentOrder.email}}</td>#}
+{#								<td>{{webshopAndRentOrder.phone}}</td>#}
+
+{#									{% if webshopAndRentOrder.deviceIDShop is empty %}#}
+{#										<td>{{webshopAndRentOrder.heddeviceManufacturer}}&nbsp;{{webshopAndRentOrder.heddeviceModel}}</td>#}
+{#									{% else %}#}
+{#										<td>{{webshopAndRentOrder.deviceManufacturer}}&nbsp;{{webshopAndRentOrder.deviceModel}}</td>#}
+{#									{% endif %}#}
+
+{#								<td>{{webshopAndRentOrder.total}}</td>#}
+
+{#								<td>{{webshopAndRentOrder.waarborg}}</td>#}
+{#								<td>{{webshopAndRentOrder.totalPrice}}</td>#}
+{#							</tr>#}
+{#							{% endif %}#}
+{#						{% endfor %}#}
+{#						</tbody>#}
+{#					</table>#}
+{#				{% else %}#}
+{#					<div class="container">#}
+{#						<div class="jumbotron">#}
+{#							<p>{{'loan.index.nodata'|trans}}</p>#}
+{#						</div>#}
+{#					</div>#}
+{#				{% endif %}#}
+{#			</div>#}
+{#			<div class="tab-pane fade" id="sku" role="tabpanel" aria-labelledby="skuTab">#}
+{#				{% if devicesSku|length > 0 %}#}
+{#					<table class="table" id="skuTable" style="width: 100%">#}
+{#						<thead class="thead">#}
+{#						<tr class="bg-info">#}
+{#							<th scope="col">Toestel</th>#}
+{#							<th scope="col">SKU</th>#}
+{#							<th scope="col">Open</th>#}
+{#							<th scope="col">Aantal</th>#}
+{#							<th scope="col">Paid</th>#}
+{#							<th scope="col">Aantal</th>#}
+{#							<th scope="col">Type</th>#}
+{#						</tr>#}
+{#						</thead>#}
+{#						<tbody>#}
+{#						{% for deviceSku in devicesSku %}#}
+{#							{% if deviceSku.status is same as('paid') or deviceSku.status is same as('open') %}#}
+{#								<tr>#}
+{#									<td>{{deviceSku.manufacturer}}&nbsp;{{deviceSku.model}}&nbsp;#}
+{#										<br /><small>{{deviceSku.ssd}}GB SSD - {{deviceSku.ram}}GB RAM</small></td>#}
+{#									<td>{{deviceSku.SPSKU}}</td>#}
+{#									<td>{{deviceSku.open}}</td>#}
+{#									<td>{{deviceSku.amount_open}}</td>#}
+{#									<td>{{deviceSku.paid}}</td>#}
+{#									<td>{{deviceSku.amount_paid}}</td>#}
+{#									<td>{{deviceSku.type}}</td>#}
+{#								</tr>#}
+{#							{% endif %}#}
+{#						{% endfor %}#}
+{#						</tbody>#}
+{#					</table>#}
+{#				{% else %}#}
+{#					<div class="container">#}
+{#						<div class="jumbotron">#}
+{#							<p>{{'loan.index.nodata'|trans}}</p>#}
+{#						</div>#}
+{#					</div>#}
+{#				{% endif %}#}
+{#			</div>#}
+		</div>
+	</div>
+{% endblock %}

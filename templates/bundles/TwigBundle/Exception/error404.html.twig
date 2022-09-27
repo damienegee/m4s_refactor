@@ -1,0 +1,12 @@
+{# templates/bundles/TwigBundle/Exception/error404.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron mb-5 mt-5">
+        <h1 class="text-danger"><strong>{{'pagenotfound'|trans}}</strong></h1>
+        <p>
+            {{'pagenotfounddescription'|trans}} <br />
+            <a href="{{ path('home') }}"> {{'gohome'|trans}}</a>.
+        </p>
+    </div>
+{% endblock %}

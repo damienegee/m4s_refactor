@@ -1,0 +1,273 @@
+// assets/styles/global.scss
+
+// customize some Bootstrap variables
+$primary: #00adbd;
+$secondary: #6c757d;
+$dark: black;
+$warning: #f39c12;
+$danger: #ec6523;
+$success: #8dc155;
+$excel: #1d6f42;
+
+.nopadding {
+	padding: 0 !important;
+	margin: 0 !important;
+}
+.second-nav {
+	top: 74;
+}
+
+// custom styles for the app
+.sidenav {
+	height: 100%;
+	background-color: $dark;
+	overflow-x: hidden;
+	padding-top: 1.25rem;
+	@media screen and (max-height: 28.125rem) {
+		padding-top: 0.9375rem;
+	}
+	@media screen and (min-width: 48rem) {
+		width: 40%;
+		position: fixed;
+		z-index: 1;
+		top: 0;
+		left: 0;
+	}
+}
+
+.main {
+	padding: 0rem 0.625rem;
+	@media screen and (min-width: 48rem) {
+		margin-left: 40%;
+	}
+}
+
+.login-main-text {
+	margin-top: 30%;
+	padding: 3.75rem;
+	color: #fff;
+}
+
+.login-main-text h2 {
+	font-weight: 300;
+}
+
+.login-button {
+	@media screen and (max-width: 28.125rem) {
+		margin-top: 10%;
+	}
+	@media screen and (min-width: 48rem) {
+		margin-top: 80%;
+	}
+}
+.nav-logo {
+	width: 14.375rem;
+}
+
+.signature-pad {
+	border: #ced4da 1px solid;
+	border-radius: 0.25rem;
+	width: 100%;
+	height: auto;
+	@media screen and (min-width: 40rem) {
+		width: 50%;
+	}
+}
+a.card,
+a.card:hover {
+	color: inherit;
+	text-decoration: none;
+}
+.carddashboard {
+	padding-top: 20%;
+	font-size: 2.2em;
+}
+
+.dashboardNumber {
+	font-size: 2.2em;
+	text-align: center;
+	line-height: initial;
+}
+
+.dataTables_length {
+	float: left;
+	margin-right: 1rem;
+}
+.btnexcell {
+	border: none !important;
+	background-color: $excel !important;
+	color: white !important;
+}
+
+.dataTable thead tr th {
+	color: white;
+}
+
+.help {
+	.label-container {
+		position: fixed;
+		bottom: 48px;
+		right: 105px;
+		display: table;
+		visibility: hidden;
+	}
+
+	.help-modal-container {
+		border: 1px $primary solid;
+	}
+
+	.label-text {
+		color: $dark;
+		background: rgba(51, 51, 51, 0.5);
+		display: table-cell;
+		vertical-align: middle;
+		padding: 10px;
+		border-radius: 3px;
+	}
+
+	.label-arrow {
+		display: table-cell;
+		vertical-align: middle;
+		color: #333;
+		opacity: 0.5;
+	}
+
+	.float {
+		position: fixed;
+		width: 30px;
+		height: 30px;
+		bottom: 30px;
+		right: 30px;
+		background-color: $secondary;
+		color: #fff;
+		border-radius: 50px;
+		text-align: center;
+		box-shadow: 2px 2px 3px #999;
+		z-index: 1000;
+		animation: bot-to-top 2s ease-out;
+	}
+
+	ul {
+		position: fixed;
+		// padding-right: 0;
+		// margin-right: 0;
+		// margin-left: 0;
+		padding-left: 0.5rem;
+		right: 20px;
+		padding-bottom: 20px;
+		bottom: 40px;
+		z-index: 100;
+	}
+
+	ul li {
+		list-style: none;
+		margin-bottom: 10px;
+	}
+
+	ul li a {
+		// background-color: $secondary;
+		color: $dark;
+		//border-radius: 50px;
+		text-align: left;
+		font-weight: bold;
+		//box-shadow: 2px 2px 3px #999;
+		width: auto;
+		height: auto;
+		display: block;
+	}
+
+	ul:hover {
+		visibility: visible !important;
+		opacity: 1 !important;
+	}
+
+	.my-float {
+		font-size: 15px;
+		margin-top: 9px;
+	}
+
+	a#menu-share + ul {
+		visibility: hidden;
+	}
+
+	a#menu-share:hover + ul {
+		visibility: visible;
+		animation: scale-in 0.5s;
+	}
+
+	a#menu-share i {
+		animation: rotate-in 0.5s;
+	}
+
+	a#menu-share:hover > i {
+		animation: rotate-out 0.5s;
+	}
+
+	@keyframes bot-to-top {
+		0% {
+			bottom: -40px;
+		}
+		50% {
+			bottom: 40px;
+		}
+	}
+
+	@keyframes scale-in {
+		from {
+			transform: scale(0);
+			opacity: 0;
+		}
+		to {
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+
+	@keyframes rotate-in {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	@keyframes rotate-out {
+		from {
+			transform: rotate(360deg);
+		}
+		to {
+			transform: rotate(0deg);
+		}
+	}
+}
+
+.bs-stepper .step-trigger:focus {
+	color: #00adba;
+	outline: none;
+}
+
+.active .bs-stepper-circle {
+	background-color: #00adba;
+}
+
+.freeFieldRow:hover {
+	td:nth-child(5) {
+		div:nth-child(1) {
+			display: inline-block !important;
+		}
+	}
+}
+
+div.dataTables_wrapper div.dataTables_filter {
+	text-align: left !important;
+	margin-top: 20px;
+}
+
+//.nav-link.active {
+//	color: white;
+//	background-color: $primary;
+//}
+
+// the ~ allows you to reference things in node_modules
+@import "~bootstrap/scss/bootstrap.scss";

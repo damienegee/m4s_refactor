@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container mb-3 mt-3">
+    <div class="jumbotron mb-5 mt-5">
+        <h1 class="text-center text-danger">ACCESS DENIED</h1>
+        <hr class="my-4">
+        <a class="btn btn-danger btn-lg" href="{{path('login')}}" role="button">Login</a>
+    </div>
+</div>
+{% endblock %}

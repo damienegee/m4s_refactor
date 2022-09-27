@@ -1,0 +1,130 @@
+<div class="tab-pane fade" id="nolocationDevices" role="tabpanel" aria-labelledby="nolocationDevicesTab">
+{% if dataWithouLocation|length > 0 %}
+	<div class="mb-3 mt-3">
+		{% set tag01 = (data[0].freefieldtag01 != NULL) %}
+		{% set tag02 = (data[0].freefieldtag02 != NULL) %}
+		{% set tag03 = (data[0].freefieldtag03 != NULL) %}
+		{% set tag04 = (data[0].freefieldtag04 != NULL) %}
+		{% set tag05 = (data[0].freefieldtag05 != NULL) %}
+		<table class="inventorytable table table-hover" id="nolocationDevicesTable" style="width: 100%">
+			<thead class="thead">
+				<tr class="bg-info">
+					<th scope="col"></th>
+					<th scope="col">{{'inventory.data.table.label'|trans}}</th>
+					<th scope="col">{{'inventory.data.table.productnumber'|trans}}</th>
+					<th scope="col">{{'inventory.data.table.serial'|trans}}</th>
+					<th scope="col">{{'inventory.data.table.model'|trans}}</th>
+					<th scope="col">{{'inventory.data.table.user'|trans}}</th>
+					<th scope="col">{{'inventory.data.table.type'|trans}}</th>
+					<th scope="col">Vestiging</th>
+					<th scope="col" class="text-center">
+						<input type="checkbox" id="nolocationDevicesCheckAll" name="nolocationDevicesCheckAll"/>
+					</th>
+					{% if tag01 %}
+					<th scope="col">{{data[0].freefieldtag01}}</th>
+					{% endif %}
+					{% if tag02 %}
+					<th scope="col">{{data[0].freefieldtag02}}</th>
+					{% endif %}
+					{% if tag03 %}
+					<th scope="col">{{data[0].freefieldtag03}}</th>
+					{% endif %}
+					{% if tag04 %}
+					<th scope="col">{{data[0].freefieldtag04}}</th>
+					{% endif %}
+					{% if tag05 %}
+					<th scope="col">{{data[0].freefieldtag05}}</th>
+					{% endif %}
+				</tr>
+			</thead>
+			<tbody>
+			{% for item in dataWithouLocation %}
+				{% set value01 = item.freefieldvalue01 %}
+				{% set value02 = item.freefieldvalue02 %}
+				{% set value03 = item.freefieldvalue03 %}
+				{% set value04 = item.freefieldvalue04 %}
+				{% set value05 = item.freefieldvalue05 %}
+				<tr>
+					<td class="text-center">
+						<a href="{{path('invetoryDeviceDetails', {id: item.id})}}" style="cursor: pointer"><i class="fas fa-search"></i></a>
+					</td>
+					<td>{{ item.label }}</td>
+					<td>{{ item.productnumber }}</td>
+					<td>{{ item.serialnumber }}</td>
+					<td>{{ item.model }}</td>
+					<td>
+						{% if item.firstname is null and item.lastname is null %}
+						<span>--</span>
+						{% else %}
+						<span>{{ item.firstname }}&nbsp;<strong>{{ item.lastname }}</strong></span>
+						{% endif %}
+					</td>
+					<td>
+						{% if item.type is null %}
+						<span>--</span>
+						{% else %}
+						<span>{{ item.type }}</span>
+						{% endif %}
+					</td>
+					<td class="text-center">--</td>
+					<td class="text-center">
+						<input class="form-check-input" type="checkbox" value="{{item.id}}" id="{{item.id}}" name="device[]"/>
+					</td>
+					{% if tag01 %}
+					<td>
+						{% if value01 != NULL %}
+						{{value01}}
+						{% else %}
+						--
+						{% endif %}
+					</td>
+					{% endif %}
+					{% if tag02 %}
+					<td>
+						{% if value02 != NULL %}
+						{{value02}}
+						{% else %}
+						--
+						{% endif %}
+					</td>
+					{% endif %}
+					{% if tag03 %}
+					<td>
+						{% if value03 != NULL %}
+						{{value03}}
+						{% else %}
+						--
+						{% endif %}
+						</td>
+					{% endif %}
+					{% if tag04 %}
+					<td>
+						{% if value04 != NULL %}
+						{{value04}}
+						{% else %}
+						--
+						{% endif %}
+						</td>
+					{% endif %}
+					{% if tag05 %}
+					<td>
+						{% if value05 != NULL %}
+						{{value05}}
+						{% else %}
+						--
+						{% endif %}
+					</td>
+					{% endif %}
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% else %}
+	<div class="container">
+		<div class="jumbotron">
+			<p>{{'loan.index.nodata'|trans}}</p>
+		</div>
+	</div>
+{% endif %}
+</div>

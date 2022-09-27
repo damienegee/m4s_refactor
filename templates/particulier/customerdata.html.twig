@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid mb-3 mt-3">
+{{ form_start(bulkmoveForm) }}
+<div class="d-flex justify-content-end mb-3 mt-3">
+    {{ form_widget(bulkmoveForm.type) }}
+    {{ form_widget(bulkmoveForm.institutions) }}
+    {{ form_widget(bulkmoveForm.locations) }}
+    {{ form_widget(bulkmoveForm.submit)}}
+</div>
+{% if withoutlocation is defined%}
+    <ul class="nav nav-tabs" id="deviceTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="customerlocationTab" data-toggle="tab" href="#customerlocation" role="tab" aria-controls="customerlocation" aria-selected="true">{{'inventory.data.assigned'|trans}}</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="customernolocationTab" data-toggle="tab" href="#customernolocation" role="tab" aria-controls="customernolocation" aria-selected="true">{{'customer.data.nolocation'|trans}}</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="devicesTabContent">
+        <div class="tab-pane fade show active" id="customerlocation" role="tabpanel" aria-labelledby="customerlocationTab">
+            {% include('particulier/_data.html.twig') %}
+        </div>
+        <div class="tab-pane fade" id="customernolocation" role="tabpanel" aria-labelledby="customernolocationTab">
+            {% include('particulier/_nolocation.html.twig') %}
+        </div>
+    </div>
+    
+{% else %}
+    {% include('particulier/_data.html.twig') %}
+{% endif %}
+{{ form_end(bulkmoveForm) }}
+</div>
+{% endblock %}

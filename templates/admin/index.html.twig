@@ -1,0 +1,179 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid mb-3 mt-3">
+    <h1 class="h1 text-center"><i class="fas fa-user-shield"></i> {{'admin.index.title'|trans}}</h1>
+    <div class="container-fluid mb-3 mt-3">
+        <div class="card bg-light">
+            <div class="card-body">
+                <div class="container-fluid">
+                    {% if is_granted("ROLE_ADMIN") %}
+                    <div class="row mb-3 mt-3">
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title text-center"><span class="h3">{{'admin.index.list'|trans}}</span></div>
+                                    <div class="card-text">
+                                        <a href="{{ path("admin_user") }}" class="btn btn-block btn-info">
+                                            <span><i class="fas fa-users"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title text-center"><span class="h3">{{'admin.index.add'|trans}}</span></div>
+                                    <div class="card-text">
+                                        <a href="{{ path("admin_user_add") }}" class="btn btn-block btn-info">
+                                            <span><i class="fas fa-users"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title text-center"><span class="h3">{{'admin.index.images'|trans}}</span></div>
+                                    <div class="card-text">
+                                        <a href="{{ path("admin_device_image") }}" class="btn btn-block btn-info">
+                                            <span><i class="fas fa-images"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title text-center"><span class="h3">{{'admin.index.importdevices'|trans}}</span></div>
+                                    <div class="card-text">
+                                        <a href="{{ path("admin_bulk_devices") }}" class="btn btn-block btn-info">
+                                            <span><i class="fas fa-upload"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title text-center"><span class="h3">{{'admin.index.addinstitution'|trans}}</span></div>
+                                    <div class="card-text">
+                                        <a href="{{ path("admin_add_institution") }}" class="btn btn-block btn-info">
+                                            <span><i class="fas fa-university"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title text-center"><span class="h3">Scripting</span></div>
+                                    <div class="card-text">
+                                        <a href="{{ path("addscripting") }}" class="btn btn-block btn-info">
+                                            <span><i class="fas fa-scroll"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title text-center"><span class="h3">Releasenotes</span></div>
+                                    <div class="card-text">
+                                        <a href="{{ path("admin_release_notes") }}" class="btn btn-block btn-info">
+                                            <span><i class="far fa-clipboard"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if is_granted('ROLE_SCHOOLADMIN') or is_granted("ROLE_ADMIN") %}
+                    <div class="row mb-3 mt-3">
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title text-center"><span class="h3">{{'admin.index.access'|trans}}</span></div>
+                                    <div class="card-text">
+                                        <a href="{{ path("listUserForSchool") }}" class="btn btn-block btn-info">
+                                            <span><i class="fas fa-users"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title text-center"><span class="h3">{{'admin.index.importuser'|trans}}</span></div>
+                                    <div class="card-text">
+                                        <a href="{{ path("admin_bulk_customers") }}" class="btn btn-block btn-info">
+                                            <span><i class="fas fa-file-upload"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title text-center"><span class="h3">{{'admin.index.notbyod'|trans}}</span></div>
+                                    <div class="card-text">
+                                        <a href="{{ path("admin_bulk_extradevices") }}" class="btn btn-block btn-info">
+                                            <span><i class="fas fa-upload"></i></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title text-center"><span class="h3">{{'admin.index.assigndevice'|trans}}</span></div>
+                                    <div class="card-text">
+                                        <a href="{{ path("admin_bulk_assign") }}" class="btn btn-block btn-info">
+                                            <span><i class="fas fa-upload"></i></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title text-center"><span class="h3">{{'freefield.title'|trans}}</span></div>
+                                    <div class="card-text">
+                                        <a href="{{ path("admin_free_fields") }}" class="btn btn-block btn-info">
+                                            <span><i class="fas fa-upload"></i></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title text-center"><span class="h3">{{'school_settings.settings'|trans}}</span></div>
+                                    <div class="card-text">
+                                        <a href="{{ path("admin_school_settings") }}" class="btn btn-block btn-info">
+                                            <span><i class="fas fa-cog"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

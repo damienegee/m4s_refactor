@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container-fluid mb-3 mt-3">
+    <div class="container">
+        {% include('admin/device_image/form.html.twig') %}
+        {% if files|length > 0 %}
+        {% for file in files %}
+        <div class="row mb-1 mt-1">
+            <div class="col-md-8">{{file.fileName}}</div>
+            <div class="col-md-4">
+                <a href="{{path('admin_device_image_delete', {path: file.pathName})}}" class="btn btn-danger">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

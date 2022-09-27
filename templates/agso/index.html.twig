@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% if data|length > 0 %}
+<div class="container-fluid">
+    <h1 class="mb-3 mt-3 text-left">AGSO {{'agso.index.title'|trans}}</h1>
+    <table class="datatable table table-striped table-responsive-lg" id="agsotable" style="width: 100%">
+        <thead class="thead">
+            <tr class="bg-info">
+                <th class="text-center" scope="col">{{'agso.index.table.orderid'|trans}}</th>
+                <th scope="col" class="text-center">{{'agso.index.table.device'|trans}}</th>
+                <th scope="col" class="text-center">{{'agso.index.table.numberof'|trans}}</th>
+                <th class="text-center" scope="col">{{'agso.index.table.total'|trans}}</th>
+                <th class="text-center" scope="col">{{'agso.index.table.date'|trans}}</th>
+                <th scope="col" class="text-center">{{'agso.index.table.orderNumber'|trans}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in data %}
+            <tr>
+                <td class="text-right">{{order.orderId}}</td>
+                <td class="text-left">{{order.deviceName}}</td>
+                <td class="text-right">{{order.amount|number_format(0)}}</td>
+                <td class="text-right">{{order.totalToPay|number_format(2)}}</td>
+                <td class="text-right">{{order.OrderDate|date("d/m/y")}}</td>
+                <td>{{order.invoiceNumber}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="container">
+    <div class="jumbotron">
+        <p>{{'loan.index.nodata'|trans}}</p>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

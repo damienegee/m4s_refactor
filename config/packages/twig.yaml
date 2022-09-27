@@ -1,0 +1,8 @@
+twig:
+  form_themes: ["bootstrap_4_layout.html.twig"]
+  default_path: "%kernel.project_dir%/templates"
+  globals:
+    app_sp2_url: "%env(SP2_URL)%"
+    scripting_directory: "%kernel.project_dir%/public/scripts"
+    app_enabledlang: "%env(APP_ENABLEDLANG)%"
+    byod_shop: "%env(BYOD_SHOP)%"

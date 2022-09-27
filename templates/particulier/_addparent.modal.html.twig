@@ -1,0 +1,61 @@
+<div class="modal fade" id="addNewContactModal" tabindex="-1" aria-labelledby="eaddNewContactModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addNewContactModalLabel">Contactpersoon</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  {{ form_start(addParentForm) }}
+	  	<div class="form-group row">
+			<div class="col-sm-2 align-self-center">
+                {{ form_label(addParentForm.firstname) }}
+            </div>
+            <div class="col-sm-10">
+                {{ form_widget(addParentForm.firstname, { 'attr': {'class': 'form-control' } }) }}
+            </div>
+		</div>
+		<div class="form-group row">
+			<div class="col-sm-2 align-self-center">
+                {{ form_label(addParentForm.lastname) }}
+            </div>
+            <div class="col-sm-10">
+                {{ form_widget(addParentForm.lastname, { 'attr': {'class': 'form-control' } }) }}
+            </div>
+		</div>
+		<div class="form-group row">
+			<div class="col-sm-2 align-self-center">
+                {{ form_label(addParentForm.email) }}
+            </div>
+            <div class="col-sm-10">
+                {{ form_widget(addParentForm.email, { 'attr': {'class': 'form-control' } }) }}
+            </div>
+		</div>
+		<div class="form-group row">
+			<div class="col-sm-2 align-self-center">
+                {{ form_label(addParentForm.phone) }}
+            </div>
+            <div class="col-sm-10">
+                {{ form_widget(addParentForm.phone, { 'attr': {'class': 'form-control' } }) }}
+            </div>
+		</div>
+	  	<div class="container-fluid mb-1 mt-1">
+			<div class="d-flex justify-content-around">
+			<div>
+				<button id="addParent" type="submit" class="btn btn-primary">{{'customer.form.save'|trans}}</button>
+			</div>
+			<div>
+				{{ form_row(addParentForm.reset, { 'attr' : { 'class' : 'btn btn-info' }}) }}
+			</div>
+			</div>
+		</div>
+	  {{ form_end(addParentForm) }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{'customer.modal.close'|trans}}</button>
+      </div>
+    </div>
+  </div>
+</div>

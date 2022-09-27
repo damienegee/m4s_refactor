@@ -1,0 +1,456 @@
+base:
+  navigation:
+    inventory: Inventar
+    fieldService: Vorfall
+    users: Benutzer
+    shops: Miete/Kauf
+    mySchools: Meine Schulen
+    logout: Abmelden
+  pagination:
+    previous: Vorherige
+    next: Nächste
+  filtration:
+    search: Suchen
+
+agso:
+  index:
+    title: Bestellungen
+    table:
+      orderid: ID der Bestellung
+      device: Gerät
+      numberof: Anzahl
+      total: Gesamtzahl
+      date: Datum
+      orderNumber: Nummer des Bestellscheins
+
+extradevice:
+  form:
+    title: Gerät hinzufügen
+    label:
+      m4sCustomer: Benutzer
+      productnumber: Produkt-Code
+      serial: Seriennummer
+      manufacturer: Hersteller
+      model: Modell
+      supplier: Lieferant
+      reset: Zurücksetzen
+      save: Speichern
+
+fieldservice:
+  label: Vorfall
+  index:
+    title: Alles
+    button: Vorfall melden
+    tabs:
+      open: Offen
+      wait: Warten auf Genehmigung
+      closed: Abgeschlossen
+      inprogress: In Bearbeitung
+      graph: Graph
+    table:
+      student: Schüler
+      serial: Seriennummer
+      title: Titel
+      problem: Problem
+      description: Beschreibung
+      state: Status
+      created: Erstellt
+      updated: Geändert
+      location: Zweig
+      details: Details
+
+forecasts:
+  index:
+    title: Miete/Kauf
+    yearSelect: Akademisches Jahr auswählen
+    totalForecast: Gesamtzahl Vorhersage
+    totalHire: Gesamtzahl Miete
+    totalShop: Gesamtzahl Webshop
+  hires:
+    title: Miete
+    table:
+      firstname: Vorname des Benutzers
+      lastname: Name des Benutzers
+      contractNumber: Laufende Nummer des Vertrags
+      contractDrawn: Vertrag aufgesetzt
+      contractReceived: Vertrag erhalten
+      advanceReceived: Vorschuss erhalten
+      deviceOrdered: Bestelltes Gerät
+  shop:
+    title: Kauf
+    table:
+      firstname: Vorname des Benutzers
+      lastname: Name des Benutzers
+      orderNumber: Laufende Nummer der Bestellung
+      shopNumber: Laufende Nummer des Webshops
+      orderDate: Datum der Bestellung
+      deviceOrdered: Bestelltes Gerät
+      paidReveived: Zahlung erhalten
+
+institution:
+  events:
+    table:
+      type: Typ
+      title: Titel
+      device: Gerät
+      created: Erstellt am
+      closed: Abgeschlossen am
+      updated: Geändert am
+    nodata: Keine Vorfälle gefunden
+  counter:
+    inventory: Inventar
+    openEvents: Offene Vorfälle
+    closedEvents: Geschlossene Vorfälle
+    clientsWithoutDevices: Benutzer ohne Geräte
+    clients: Benutzer
+  details:
+    addLocation: Standort hinzufügen
+
+institutionLocation:
+  index:
+    openEventsTitle: Offene Vorfälle
+    openEventsDescription: Keine offenen Vorfälle
+  details:
+    users: Benutzer
+    devices: Geräte
+  form:
+    title: Standort hinzufügen
+    label:
+      institutionNumber: Nummer der Institution
+      institutionName: Name der Institution
+      save: Speichern
+      reset: Zurücksetzen
+    address:
+      label:
+        street: Straße
+        number: Hausnummer
+        bus: Bus
+        zipcode: Postleitzahl
+        city: Stadt
+
+inventory:
+  index:
+    title: Alles
+    nodata: Keine Daten
+    table:
+      label: Label
+      productnumber: Produktnummer
+      serial: Seriennummer
+      model: Modell
+      firstname: Vorname
+      lastname: Name
+  devices:
+    selectmodal:
+      title: Gerät
+      save: Speichern
+      close: Abschließen
+    assigned: Zugewiesen
+    notAssigned: Geräte ohne Benutzer
+  details:
+    information:
+      title: Information
+      device:
+        title: Geräteinformation
+        label: Label
+        hostname: Host-Name
+        serial: Seriennummer
+        productcode: Produkt-Code
+        model: Modell
+        processor: Prozessor
+        memory: Speicher
+        storage: Speicherung
+        display: Bildschirm
+        location: Standort
+        warranty: Garantie
+        deliverytime: Externe Lieferzeit
+      user: Benutzer
+    log: Log
+    loan:
+      title: Ausgeliehen
+      from: Von
+      until: Bis
+      to: An
+    moved:
+      title: Umziehen
+      from: Von
+      to: Nach
+      by: Durch
+  extradevice:
+    details:
+      information:
+        title: Information
+        device:
+          title: Geräteinformation
+          serial: Seriennummer
+          brand: Marke
+          supplier: Lieferant
+          location: Standort
+        user: Benutzer
+      log: Log
+      loan:
+        title: Ausgeliehen
+        from: Von
+        until: Bis
+        to: An
+      moved:
+        title: Umziehen
+        from: Von
+        to: Nach
+        by: Durch
+  form:
+    title: Gerät hinzufügen
+    label:
+      label: Label
+      hostname: Host-Name
+      serial: Seriennummer
+      productcode: Produkt-Code
+      model: Modell
+      motherboard: Hauptplatine
+      memory: Speicher
+      storage: Speicherung
+      display: Bildschirm
+      macaddress: MAC-Adresse
+      reset: Zurücksetzen
+      save: Speichern
+  data:
+    adddevice: Gerät hinzufügen
+    supplier: Lieferant
+    others: Andere
+    assigned: Zugewiesen
+    notassigned: Geräte ohne Benutzer
+    notsignpost: Geräte nicht von BYOD
+    nolocation: Geräte ohne Standort
+    table:
+      label: Label
+      productnumber: Produktnummer
+      serial: Seriennummer
+      model: Modell
+      user: Benutzer
+      type: Funktion
+      supplier: Lieferant
+      brand: Marke
+
+loan:
+  form:
+    title: Geräte ausleihen
+    startdate: Von
+    user: Benutzer
+    device: Gerät
+    enddate: Bis
+    images: Bilder hinzufügen
+    remark: Bemerkungen
+    signature: Unterschrift
+    save: Speichern
+    reset: Zurücksetzen
+  index:
+    nodata: Keine Daten gefunden
+    table:
+      user: Benutzer
+      device: Gerät
+      serial: Seriennummer
+      from: Von
+      to: Bis
+      signature: Unterschrift
+      isback: Ist zurück?
+      yes: Ja
+      no: Nein
+      bringback: Zurückbringen
+
+movecustomer:
+  modal:
+    title: Benutzer verschieben
+    form:
+      customer: Benutzer
+      customerName: Name des Benutzers
+      fromlocation: Aktueller Standort
+      tolocation: Standort
+      when: Wenn
+      save: Speichern
+      close: Abschließen
+
+movedevice:
+  modal:
+    title: Gerät umziehen
+    form:
+      device: Gerät
+      serial: Seriennummer
+      fromlocation: Aktueller Standort
+      tolocation: Standort
+      when: Wenn
+      save: Speichern
+      close: Abschließen
+
+customer:
+  data:
+    add: Benutzer hinzufügen
+    table:
+      firstname: Vorname
+      lastname: Name
+      email: E-Mail
+      type: Funktion
+      location: Standort
+    nolocation: Benutzer ohne Standort
+  details:
+    information:
+      title: Information
+      customer:
+        title: Benutzer
+        firstname: Vorname
+        lastname: Name
+        email: E-Mail
+        location:
+          title: Schule - Standort
+          school: Schule
+          location: Standort
+        device:
+          title: Gerät
+          label: Label
+          hostname: Host-Name
+          serial: Seriennummer
+          productcode: Produkt-Code
+    log: Log
+    moved:
+      title: Umziehen
+      from: Von
+      to: Nach
+      by: Durch
+  modal:
+    title: Benutzer
+    save: Speichern
+    close: Abschließen
+  form:
+    title: Benutzer hinzufügen
+    lastname: Name
+    firstname: Vorname
+    email: E-mail
+    type: Funktion
+    save: Speichern
+    reset: Zurücksetzen
+
+returnedLoan:
+  form:
+    title: Gerät zurückbringen
+    label:
+      returneddate: Datum
+      images: Bilder
+      remarks: Bemerkungen
+      save: Speichern
+      reset: Zurücksetzen
+
+byod:
+  deliveries:
+    follownumber: Laufende Nummer
+    serialnumber: Seriennummer
+    manufacturer: Hersteller
+    model: Modell
+    delivered_on: Geliefert am
+    levering_id: Lieferung ID
+    aantal: Anzahl
+    toestel: Gerät
+    adres: Anschrift
+    acties: Aktionen
+  forecasts:
+    manufacturer: Hersteller
+    model: Modell
+    processor: Prozessor
+    memorydisk: Speicher - Disk
+    amount: Anzahl
+    label: Label
+    price: Preis
+    warranty: Garantie
+  intakes:
+    details: Details
+    status: Status
+  softwarerequests:
+    available: Vorhanden
+    treatment: In Bearbeitung
+    amount: Gesamtzahl der Pakete
+    name: Name der Software
+    status: Status
+  menu:
+    forecast: Vorhersage
+    intakes: Bildaufnahmen
+    deliveries: Lieferungen
+    hires: Mietverträge
+    powerbi: Lernressourcenbericht
+    autoappupdater: Auto-App-Updater
+    freefields: Freie Felder BYOD-Shop
+    scripts: Skripte
+  freefields:
+    header: Freie Felder BYOD-Shop
+    update: Speichern
+    add: Hinzufügen
+    freefields: Freie Felder
+    title: Titel
+    type: Typ
+    active: Aktiv
+    required: Erforderlich
+    process: Verarbeiten
+    edit: Bearbeiten
+    delete: Löschen
+    label: Etikett
+    inputtype: Eingabetyp
+    text: Text
+    number: Nummer
+    inputmessage: Wählen Sie einen Eingabetyp...
+
+pagenotfound: Seite nicht gefunden
+pagenotfounddescription: Die angeforderte Seite konnte nicht gefunden werden.
+gohome: Klicken Sie hier, um zur Startseite zu gelangen
+accessdenied: Verboten
+accessdenieddescription: Sie sind dazu nicht berechtigt.
+somethingwrong: Etwas ist schief gelaufen. Bitte versuchen Sie es später.
+somethingwrongdescription: Tritt das Problem mehrmals auf, wenden Sie sich bitte über den Chat unten rechts auf der Seite an den Helpdesk.
+admin:
+  index:
+    title: Admin Armaturenbrett
+    list: Aufführen
+    add: Hinzufügen
+    images: Bild für Modell
+    importdevices: Geräte importieren
+    addinstitution: Einstellung hinzufügen
+    access: Zugangskontrolle
+    importuser: Benutzer importieren
+    notbyod: Nicht-BYOD-Geräte
+    assigndevice: Geräte zuweisen
+file: Datei
+freefield:
+  title: Freie Felder
+  user: Benutzer
+  device: Gerät
+  name: Code
+  defaultvalue: Standardwert
+bulkadduser:
+  extrainfo: die Spalte "Typ" darf nur einen der folgenden Werte enthalten
+  savettype: Speichern Sie Ihre bearbeitete CSV als CSV UTF-8
+report:
+  table:
+    relation: Nummer
+    name: Student/Lehrling
+    total: Gesamt
+    contact: Kontakt
+bulkform:
+  institution: Institution
+  location: Standort
+  move: Aktualisieren
+  notsignpost: Geräte nicht von BYOD
+internalticket:
+  title: Interne Vorfälle
+  problem: Problem
+  description: Beschreibung
+  state:
+    state: Status
+    open: Offen
+    closed: Gesperrt
+    inprogress: in Behandlung
+  device: Gerät
+  customer: Nutzer
+  school: Schule
+  location: Ort
+reason_no_warranty: Grund keine Garantie
+billing_information: Rechnungsdaten
+attachment: Anhang des Kunden
+
+school_settings:
+  settings: Einstellungen
+  use_school_facturation_default: Bei der Registrierung eines Defekts automatisch die Rechnungsdaten der Schule verwenden

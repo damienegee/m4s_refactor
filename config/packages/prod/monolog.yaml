@@ -1,0 +1,20 @@
+monolog:
+    handlers:
+        main:
+            type: rotating_file
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            include_stacktraces: true
+            # handler: streamed
+            level: info
+            max_files: 20
+            bubble: false
+        # default:
+        #     type: buffer
+        #     handler: streamed
+        #     channels: ["!app"]
+        #     level: info
+        #     bubble: false
+        # streamed:
+        #     type: stream
+        #     path: "%kernel.logs_dir%/%kernel.environment%.log"
+        #     include_stacktraces: true

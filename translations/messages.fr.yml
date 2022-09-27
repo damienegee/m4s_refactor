@@ -1,0 +1,456 @@
+base:
+  navigation:
+    inventory: Inventaire
+    fieldService: Incident
+    users: Utilisateurs
+    shops: Location/achat
+    mySchools: Mes écoles
+    logout: Se déconnecter
+  pagination:
+    previous: Précédent
+    next: Suivant
+  filtration:
+    search: Chercher
+
+agso:
+  index:
+    title: Commandes
+    table:
+      orderid: ID de la commande
+      device: Appareil
+      numberof: Nombre
+      total: Total
+      date: Date
+      orderNumber: Numéro de commande
+
+extradevice:
+  form:
+    title: Ajouter un appareil
+    label:
+      m4sCustomer: Utilisateur
+      productnumber: Code produit
+      serial: Numéro de série
+      manufacturer: Fabricant
+      model: Modèle
+      supplier: Fournisseur
+      reset: Réinitialiser
+      save: Sauvegarder
+
+fieldservice:
+  label: Incident
+  index:
+    title: Tout
+    button: Signaler un incident
+    tabs:
+      open: Ouverts
+      wait: En attente d'approbation
+      closed: Clôturés
+      inprogress: En cours
+      graph: Graphique
+    table:
+      student: Eléve
+      serial: Numéro de série
+      title: Titre
+      problem: Incident
+      description: Description
+      state: Statut
+      created: Crée
+      updated: Mis à jour
+      location: Lieu
+      details: Détails
+
+forecasts:
+  index:
+    title: Location/achat
+    yearSelect: Sélectionner l'année académique
+    totalForecast: Totale prévision
+    totalHire: Totale location
+    totalShop: Totale boutique en ligne
+  hires:
+    title: Location
+    table:
+      firstname: Prénom de l'utilisateur
+      lastname: Nom de l'utilisateur
+      contractNumber: Numéro de suivi du contrat
+      contractDrawn: Contrat établi
+      contractReceived: Contrat reçu
+      advanceReceived: Avance reçue
+      deviceOrdered: Appareil commandé
+  shop:
+    title: Achat
+    table:
+      firstname: Prénom de l'utilisateur
+      lastname: Nom de l'utilisateur
+      orderNumber: Numéro de suivi de la commande
+      shopNumber: Numéro de suivi de la boutique en ligne
+      orderDate: Date de la commande
+      deviceOrdered: Appareil commandé
+      paidReveived: Paiement reçu
+
+institution:
+  events:
+    table:
+      type: Type
+      title: Titre
+      device: Appareil
+      created: Créé le
+      closed: Fermé le
+      updated: Modifié le
+    nodata: Aucun incident trouvé
+  counter:
+    inventory: Inventaire
+    openEvents: Incidents ouverts
+    closedEvents: Incidents clos
+    clientsWithoutDevices: Utilisateurs sans appareil
+    clients: Utilisateurs
+  details:
+    addLocation: Ajouter un lieu
+
+institutionLocation:
+  index:
+    openEventsTitle: Incidents ouverts
+    openEventsDescription: Aucun incident ouvert
+  details:
+    users: Utilisateurs
+    devices: Appareils
+  form:
+    title: Ajouter un lieu
+    label:
+      institutionNumber: Numéro de l'établissement
+      institutionName: Nom de l'établissement
+      save: Sauvegarder
+      reset: Réinitialiser
+    address:
+      label:
+        street: Rue
+        number: Numéro
+        bus: Boîte
+        zipcode: Code postal
+        city: Ville
+
+inventory:
+  index:
+    title: Tout
+    nodata: Aucune donnée
+    table:
+      label: Étiquette
+      productnumber: Numéro de produit
+      serial: Numéro de série
+      model: Modèle
+      firstname: Prénom
+      lastname: Nom
+  devices:
+    selectmodal:
+      title: Appareil
+      save: Sauvegarder
+      close: Fermer
+    assigned: Assigné
+    notAssigned: Appareils sans utilisateur
+  details:
+    information:
+      title: Informations
+      device:
+        title: Informations sur l'appareil
+        label: Étiquette
+        hostname: Nom d'hôte
+        serial: Numéro de série
+        productcode: Code produit
+        model: Modèle
+        processor: Processeur
+        memory: Mémoire
+        storage: Stockage
+        display: Écran
+        location: Lieu
+        warranty: Garantie
+        deliverytime: Délai de livraison externe
+      user: Utilisateur
+    log: Journal
+    loan:
+      title: Prêté
+      from: Du
+      until: Au
+      to: À
+    moved:
+      title: Déménager
+      from: De
+      to: À
+      by: Par
+  extradevice:
+    details:
+      information:
+        title: Informations
+        device:
+          title: Informations sur l'appareil
+          serial: Numéro de série
+          brand: Marque
+          supplier: Fournisseur
+          location: Lieu
+        user: Utilisateur
+      log: Journal
+      loan:
+        title: Prêté
+        from: Du
+        until: Au
+        to: À
+      moved:
+        title: Déménager
+        from: De
+        to: À
+        by: Par
+  form:
+    title: Ajouter un appareil
+    label:
+      label: Étiquette
+      hostname: Nom d'hôte
+      serial: Numéro de série
+      productcode: Code produit
+      model: Modèle
+      motherboard: Carte-mère
+      memory: Mémoire
+      storage: Stockage
+      display: Écran
+      macaddress: Adresse MAC
+      reset: Réinitialiser
+      save: Sauvegarder
+  data:
+    adddevice: Ajouter un appareil
+    supplier: Fournisseur
+    others: Autres
+    assigned: Assigné
+    notassigned: Appareils sans utilisateur
+    notsignpost: Appareils non BYOD
+    nolocation: Appareils sans lieu
+    table:
+      label: Étiquette
+      productnumber: Numéro de produit
+      serial: Numéro de série
+      model: Modèle
+      user: Utilisateur
+      type: Fonction
+      supplier: Fournisseur
+      brand: Marque
+
+loan:
+  form:
+    title: Prêter un appareil
+    startdate: Du
+    user: Utilisateur
+    device: Appareil
+    enddate: Au
+    images: Ajouter une image
+    remark: Remarques
+    signature: Signature
+    save: Sauvegarder
+    reset: Réinitialiser
+  index:
+    nodata: Aucune donnée trouvée
+    table:
+      user: Utilisateur
+      device: Appareil
+      serial: Numéro de produit
+      from: Du
+      to: Au
+      signature: Signature
+      isback: Retourné ?
+      yes: Oui
+      no: Non
+      bringback: Retourner
+
+movecustomer:
+  modal:
+    title: Déplacer un utilisateur
+    form:
+      customer: Utilisateur
+      customerName: Nom de l'utilisateur
+      fromlocation: Lieu actuel
+      tolocation: Lieu
+      when: Quand
+      save: Sauvegarder
+      close: Fermer
+
+movedevice:
+  modal:
+    title: Déménager un appareil
+    form:
+      device: Appareil
+      serial: Numéro de série
+      fromlocation: Lieu actuel
+      tolocation: Lieu
+      when: Quand
+      save: Sauvegarder
+      close: Fermer
+
+customer:
+  data:
+    add: Ajouter un utilisateur
+    table:
+      firstname: Prénom
+      lastname: Nom
+      email: E-mail
+      type: Poste
+      location: Lieu
+    nolocation: Utilisateurs sans lieu
+  details:
+    information:
+      title: Informations
+      customer:
+        title: Utilisateur
+        firstname: Prénom
+        lastname: Nom
+        email: E-mail
+        location:
+          title: École - Lieu
+          school: École
+          location: Lieu
+        device:
+          title: Appareil
+          label: Étiquette
+          hostname: Nom d'hôte
+          serial: Numéro de série
+          productcode: Code produit
+    log: Journal
+    moved:
+      title: Déménagement
+      from: De
+      to: Vers
+      by: Par
+  modal:
+    title: Utilisateur
+    save: Sauvegarder
+    close: Fermer
+  form:
+    title: Ajouter un utilisateur
+    lastname: Nom
+    firstname: Prénom
+    email: E-mail
+    type: Poste
+    save: Sauvegarder
+    reset: Réinitialiser
+
+returnedLoan:
+  form:
+    title: Retourner l'appareil
+    label:
+      returneddate: Date
+      images: Images
+      remarks: Remarques
+      save: Sauvegarder
+      reset: Réinitialiser
+
+byod:
+  deliveries:
+    follownumber: Numéro de suivi
+    serialnumber: Numéro de série
+    manufacturer: Fabricant
+    model: Modèle
+    delivered_on: Livré le
+    levering_id: ID de livraison
+    aantal: Nombre
+    toestel: Appareil
+    adres: Adresse
+    acties: Actions
+  forecasts:
+    manufacturer: Fabricant
+    model: Modèle
+    processor: Processeur
+    memorydisk: Mémoire - Disque
+    amount: Nombre
+    label: Étiquette
+    price: Prix
+    warranty: Garantie
+  intakes:
+    details: Details
+    status: Statut
+  softwarerequests:
+    available: Accessible
+    treatment: En cours
+    amount: Nombre total de paquets
+    name: Nom du logiciel
+    status: Statut
+  menu:
+    forecast: Prévision
+    intakes: Prises d'images
+    deliveries: Livraisons
+    hires: Contrats de location
+    powerbi: Rapport ressources d'apprentissage
+    autoappupdater: Mise à jour d'application
+    freefields: Champs libres boutique BYOD
+    scripts: Scénarios
+  freefields:
+    header: Champs libres boutique BYOD
+    update: Sauvegarder
+    add: Ajouter
+    freefields: Champs libres
+    title: Titre
+    type: Type
+    active: Actif
+    required: Requis
+    process: Traiter
+    edit: Modifier
+    delete: Supprimer
+    label: Étiquette
+    inputtype: Type d'entrée
+    text: Texte
+    number: Numéro
+    inputmessage: Choisissez un type d'entrée...
+
+pagenotfound: Page non trouvée
+pagenotfounddescription: La page demandée n'a pu être trouvée.
+gohome: Cliquez ici pour aller à la page d'accueil
+accessdenied: Interdit
+accessdenieddescription: Vous n'êtes pas autorisé à effectuer cela.
+somethingwrong: Quelque chose s'est mal passé. Veuillez l'essayer plus tard.
+somethingwrongdescription: Si le problème se reproduit plusieurs fois, merci de contacter le helpdesk via le chat en bas à droite de la page.
+admin:
+  index:
+    title: Tableau de bord administrateur
+    list: Liste
+    add: Ajouter
+    images: Image pour modèle
+    importdevices: Importer un appareil
+    addinstitution: Ajouter une institution
+    access: Contrôle d'accès
+    importuser: Importer des utilisateurs
+    notbyod: Appareils non BYOD
+    assigndevice: Attribuer des appareils
+file: Fichier
+freefield:
+  title: Champs libres
+  user: Utilisateurs
+  device: Dispositif
+  name: Code
+  defaultvalue: Valeur par défaut
+bulkadduser:
+  extrainfo: La colonne "type" ne peut contenir qu'une des valeurs suivantes
+  savettype: Enregistrez votre CSV modifié au format CSV UTF-8
+report:
+  table:
+    relation: Numéro
+    name: Étudiant/Apprenti
+    total: Total
+    contact: Contact
+bulkform:
+  institution: Institution
+  location: Emplacement
+  move: Mettre à jour
+  notsignpost: Appareils non BYOD
+internalticket:
+  title: Incidents internes
+  problem: Problème
+  description: Description
+  state:
+    state: Statut
+    open: Ouvert
+    closed: Cloturé
+    inprogress: En cours
+  device: Appareil
+  customer: Utilisateur
+  school: Ecole
+  location: Emplacement
+reason_no_warranty: Raison aucune garantie
+billing_information: Données de facturation
+attachment: Annexe du client
+
+school_settings:
+  settings: Paramètres
+  use_school_facturation_default: Utiliser automatiquement les informations de facturation de l'école lors de l'enregistrement d'un défaut

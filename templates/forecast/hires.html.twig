@@ -1,0 +1,74 @@
+ {% if hiresdetails|length > 0%}
+ <div class="text-right mb-1 mt-1">
+    <form action="{{path('report.csv')}}" method="POST">
+        <input type="hidden" value="{{hiresdetails|json_encode()}}" id="csvexport" name="csvexport" />
+        <input type="hidden" value="huur" name="type">
+        <button class="btn btn-info btnexcell" type="submit" data-toggle="tooltip" data-placement="top" title="Export to Excel">
+            <i class="fas fa-file-excel"></i>
+        </button>
+    </form>
+</div>
+<table id="hiresdetailstable" class="table table-hover table-responsive-lg" style="width:100%">
+    <thead class="thead">
+        <tr class="bg-info">
+            <th scope="col" class="text-center">{{'forecasts.hires.table.lastname'|trans}}</th>
+            <th scope="col" class="text-center">{{'forecasts.hires.table.contractNumber'|trans}}</th>
+            <th scope="col" class="text-center">{{'forecasts.hires.table.contractDrawn'|trans}}</th>
+            <th scope="col" class="text-center">{{'forecasts.hires.table.contractReceived'|trans}}</th>
+            <th scope="col" class="text-center">{{'forecasts.hires.table.advanceReceived'|trans}}</th>
+            <th scope="col" class="text-center">{{'forecasts.hires.table.deviceOrdered'|trans}}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for hiredetails in hiresdetails %}
+        <tr>
+            <td><span class="text-muted">{{hiredetails.VoornaamLeerling}}</span>&nbsp;<strong>{{hiredetails.NaamLeerling}}</strong></td>
+            <td>
+                <strong>{{hiredetails.ContractVolgnummer}}</strong>&nbsp;<a href="https://leermiddel.be/overeenkomst.php?id={{hiredetails.UniqueIdentifier}}" target="_blank"><i class="fas fa-search"></i></a>
+                {% if hiredetails.label %}
+                <br />
+                <span class="text-muted">{{hiredetails.label}} {% if hiredetails.splabel and hiredetails.label is not same as(hiredetails.splabel) %} - {{hiredetails.splabel}} {% endif %}</span>
+                {% endif %}
+            </td>
+            <td>{{hiredetails.DatumContractopgemaakt | date('d-m-y')}}</td>
+            <td>
+                {% if hiredetails.MethodeContractOntvangen %}
+                <span><i class="fas fa-check text-success"></i></span>{{hiredetails.MethodeContractOntvangen}}
+                <br /><small>{{hiredetails.DatumContractOntvangen|date('d-m-y')}}</small>
+                {% else %}
+                <span><i class="fas fa-times text-danger"></i></span>
+                {% endif %}
+            </td>
+            <td>
+                {% if hiredetails.VoorschotOntvangen == 1 %}
+                <span><i class="fas fa-check text-success"></i></span>({{hiredetails.MethodeVoorschotBetaald}})
+                <br />
+                <small>
+                {% if hiredetails.DatumVoorschotOntvangen %}
+                {{hiredetails.DatumVoorschotOntvangen|date('d-m-y')}}
+                {% endif %}
+                </small>
+                {% elseif hiredetails.VoorschotOntvangen == -1 %}
+                <span><i class='fas fa-check text-secondary'></i></span>
+                <br />
+                <small>
+                {% if hiredetails.DatumVoorschotOntvangen %}
+                {{hiredetails.DatumVoorschotOntvangen|date('d-m-y')}}
+                {% endif %}
+                </small>
+                {% else %}
+                <span><i class="fas fa-times text-danger"></i>&nbsp;€ {{hiredetails.Waarborg}}</span>
+                {% endif %}
+            </td>
+            <td>{{hiredetails.NaamToestel}}<br /><small>{{hiredetails.OmschrijvingToestel}}</small></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="container">
+    <div class="jumbotron">
+        <p>{{'loan.index.nodata'|trans}}</p>
+    </div>
+</div>
+{% endif %}

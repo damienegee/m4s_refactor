@@ -1,0 +1,17 @@
+{% if myInstitutions|length > 0 %}
+<div class="row">
+    {% for institution in myInstitutions %}
+    <div class="col-md-6">
+        <div class="card mb-2 mt-2">
+            <div class="card-body">
+                <h4 class="text-center">
+                    <a href="{{path('institutionDetail', {'id': institution.id})}}">
+                        {{institution.institutionName|removeSynergy}}
+                    </a>
+                </h4>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

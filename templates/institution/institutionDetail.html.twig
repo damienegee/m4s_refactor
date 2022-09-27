@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{% if institution %}
+<div class="container-fluid mb-3 mt-3>">
+  <h4 class="text-center">{{institution.institutionName|removeSynergy}}</h4>
+  {% if is_granted('ROLE_SCHOOLADMIN') or is_granted("ROLE_ADMIN") %}
+  <div class="d-flex justify-content-end mb-3">
+      <a href="{{path('addinstitutionlocation', { synergy : institution.synergyId, sid : institution.id})}}" class="btn btn-info"><i class="fas fa-map-marker-alt"></i>&nbsp;{{'institution.details.addLocation'|trans}}</a>
+    </div>
+  {% endif %}
+  {% if schoollocations is defined and schoollocations|length > 0 %}
+  <div class="mb-3 mt-3">
+    <div class="row">
+      {% for location in schoollocations %}
+      <div class="col-md-3 col-sm-3 mb-3 align-self-center">
+        <div class="d-flex justify-content-between align-items-start">
+          <div>
+            <h3 class="text-left">
+              <a href="{{path('institutionlocationForId', {lid: location.id})}}">
+                {{location.institutionName}}
+              </a>
+            </h3>
+            <p>
+              {{location.street}}&nbsp;{{location.number}}
+              {% if location.bus %}
+              &nbsp;{{location.bus}}
+              {% endif %}
+              <br />
+              {{location.zipcode}},&nbsp;{{location.city}}
+            </p>
+          </div>
+          {# <button class="btn btn-outline-info" data-toggle="modal" data-target="#editLocation{{location.id}}Modal"><i class="far fa-edit"></i></button> #}
+          <a class="btn btn-outline-info" href="{{ path('editlocation', { 
+                  iid: iid,
+                  lid: location.id,
+                  lname: location.institutionName,
+                  lnumber: location.institutionNumber,
+                  aid: location.aid,
+                  street: location.street,
+                  number: location.number,
+                  bus: location.bus,
+                  zipcode: location.zipcode,
+                  city: location.city}) 
+          }}">
+            <i class="far fa-edit"></i>
+          </a>
+        </div>
+      </div>
+      {{ render(controller("App\\Controller\\InstitutionlocationController::instutionlocationCounterAction", {locId: location.id, locsize: schoollocations|length})) }}
+      {% endfor %}
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        {% include('institution/_institutionOpenEvents.html.twig')%}
+      </div>
+      <div class="col-md-6 col-sm-6">
+        {% include('institution/_institutionClosedEvents.html.twig')%}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endif %}
+{# {% if schoollocations is defined and schoollocations|length > 0 %}
+{% for location in schoollocations %}
+{% include('institutionlocation/_editlocation.modal.html.twig') %}
+{% endfor %} #}
+{# {% endif %} #}
+{% endblock %}
+
+

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-end mb-3 mt-3">
+        {{form_start(searchform, { action: path('scripting')})}}
+        <div class="form-row">
+            <div class="col-auto">
+                {{form_widget(searchform.searchcriteria, {'attr': { 'class' : 'form-control'}})}}
+            </div>
+            <div class="col-auto">
+                {{form_widget(searchform.submit)}}
+            </div>
+        </div>
+        
+        {{form_end(searchform)}}
+    </div>
+    <h2 class="text-center">Scripts</h2>
+    {% if scripts|length > 0 %}
+    {% for script in scripts %}
+        <div class="card mb-1 mt-1">
+            <div class="card-header d-flex justify-content-between align-items-cener">
+                {{ script.name }}
+                <a class="btn btn-info" target="_blank" href="{{ asset('scripts/'~ script.path) }}" download>
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+            <div class="card-body">
+                <blockquote class="mb-1 mt-1">{{script.description}}</blockquote>
+                {% if script.code %}
+                <pre class="language-html">
+                    <code class="language-powershell">{{script.code|raw}}</code>
+                </pre>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+    {% else %}
+    <div class="container">
+        <div class="jumbotron">
+            <p>{{'loan.index.nodata'|trans}}</p>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

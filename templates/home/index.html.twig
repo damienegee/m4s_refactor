@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container-fluid mb-3 mt-3">
+{% if institutions|length > 0 %}
+  <div class="d-flex justify-content-end mb-3 mt-3">
+    {{ knp_pagination_filter(institutions, {'i.institutionName' : 'Instellingsnaam'})}}
+  </div>
+  <div class="row">
+  {% for institution in institutions %}
+    <div class="col-md-6 col-sm-6 mb-3">
+      <h3 class="text-center">
+        <a href="{{path('institutionDetail', { id: institution.id })}}" onclick="setInstitutionCookie({{institution.id}})" class="institutionName">
+          {{institution.institutionName|removeSynergy}}
+        </a>
+      </h3>
+      {{ render(controller("App\\Controller\\InstitutionController::instutionDetailAction", {id: institution.id})) }}
+    </div>
+  {% endfor %}
+  </div>
+{% else %}
+  <div class="container">
+    <div class="jumbotron">
+      <p class="lead text-center">Geen data</p>
+    </div>
+  </div>
+{% endif %}
+  <nav aria-label="Page navigation">
+    {{ knp_pagination_render(institutions) }}
+  </nav>
+</div>
+{% endblock %}

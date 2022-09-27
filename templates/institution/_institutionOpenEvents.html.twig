@@ -1,0 +1,37 @@
+<h3 class="mb-3">{{'institution.counter.openEvents'|trans}}</h3>
+{% if openFieldServices|length > 0 %}
+<div class="container-fluid mb-3 mt-3">
+    <table id="" class="datatable table table-stripes table-responsive-lg" style="width:100%">
+        <thead class="thead">
+            <tr class="bg-info">
+                <th scope="col">#</th>
+                <th scope="col">{{'institution.events.table.type'|trans}}</th>
+                <th scope="col">{{'institution.events.table.title'|trans}}</th>
+                <th scope="col">{{'institution.events.table.device'|trans}}</th>
+                <th scope="col">{{'institution.events.table.created'|trans}}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in openFieldServices %}
+            <tr>
+                <td>FS{{ item.id }}</td>
+                <td>{{item.category}} - {{item.problem}}</td>
+                <td>{{item.title}}</td>
+                {% if item.deviceId is not null %}
+                    <td><a href="{{ path('invetoryDeviceDetails', {'id' : item.deviceId}) }}"> {{item.serial}}</a></td>
+                {% else %}
+                    <td>{{item.serial}}</td>
+                {% endif %}
+                <td>{{item.created}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="container">
+    <div class="jumbotron">
+        <p>{{'institution.events.nodata'|trans}}</p>
+    </div>
+</div>
+{% endif %}

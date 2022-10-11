@@ -41,26 +41,34 @@ class HomeController extends AbstractController
         $this->rnr = $rnr;
     }
 
-    /**
-     * @Route("/", name="root")
-     */
-    public function index(Request $request): Response
-    {
-        if ($this->getUser()) {
-            /** @var User $user */
-            $user = $this->getUser();
-            if (count($user->getInstitutions()) === 1) {
-                $cookie = new Cookie('institution_id', $user->getInstitutions()[0]->getId(), time() + 60);
-                $response = new RedirectResponse($this->generateUrl('home'));
-                $response->headers->setCookie($cookie);
-                return $response;
-            } else {
-                return $this->redirectToRoute('home');
-            }
-        } else {
-            return $this->render('login');
-        }
-    }
+	/**
+	 * @Route("/{reactRouting}", name="app_default", defaults={"reactRouting": null})
+	 */
+	public function index(): Response
+	{
+		return $this->render('default/index.html.twig');
+	}
+
+//    /**
+//     * @Route("/", name="root")
+//     */
+//    public function index(Request $request): Response
+//    {
+//        if ($this->getUser()) {
+//            /** @var User $user */
+//            $user = $this->getUser();
+//            if (count($user->getInstitutions()) === 1) {
+//                $cookie = new Cookie('institution_id', $user->getInstitutions()[0]->getId(), time() + 60);
+//                $response = new RedirectResponse($this->generateUrl('home'));
+//                $response->headers->setCookie($cookie);
+//                return $response;
+//            } else {
+//                return $this->redirectToRoute('home');
+//            }
+//        } else {
+//            return $this->render('login');
+//        }
+//    }
 
     /**
      * @Route("/releasenotes", name="releasenotes")

@@ -41,7 +41,7 @@ security:
     - { path: ^/connect/google, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/connect/azure, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/admin, roles: [ROLE_ADMIN, ROLE_SCHOOLADMIN] }
-    - { path: ^/, roles: ROLE_USER }
+    - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/accessdenied, roles: IS_AUTHENTICATED_ANNONYMOUSLY }
     # - { path: ^/admin, roles: ROLE_ADMIN }
     # - { path: ^/profile, roles: ROLE_USER }

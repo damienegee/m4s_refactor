@@ -1,0 +1,44 @@
+.header{
+    position: relative;
+}
+.header::after{
+    position: absolute;
+    content: "";
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: 2px;
+    width: 80%;
+    background: lightgray;
+
+
+}
+.wrapper {
+    display: flex;
+    align-items: center;
+    width: 89%;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.item:hover {
+    cursor: pointer;
+}
+
+.language {
+    margin-right: 1rem;
+}
+
+.title {
+    margin: 0 auto;
+}
+
+.editBtn {
+    display: flex;
+    align-items: center;
+    border: 2px black solid;
+    border-radius: 1rem;
+    background-color: white;
+    font-size: .8rem;
+    padding: .5rem;
+}

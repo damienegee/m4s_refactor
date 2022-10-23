@@ -1,0 +1,54 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    background-color: #212121;
+    min-height: 100vh;
+}
+
+.logo {
+    width: 100%;
+    padding: 20%;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    flex: 1;
+    margin: 2rem .2rem 0 .2rem;
+}
+
+.listItem {
+    display: flex;
+    align-content: center;
+    color: white;
+    margin-bottom: 1rem;
+    padding: .3rem;
+    gap: 1rem;
+}
+
+.listItem:hover {
+    cursor: pointer;
+}
+
+.logout {
+    margin-top: auto;
+}
+
+.subList {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 300ms, opacity 300ms;
+}
+
+
+.show {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 300ms;
+}
+.none{
+    display: none;
+}

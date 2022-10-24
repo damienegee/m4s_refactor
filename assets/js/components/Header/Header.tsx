@@ -3,7 +3,11 @@ import LanguageRoundedIcon from '@mui/icons-material/LanguageRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import CreateRoundedIcon from '@mui/icons-material/CreateRounded';
 
-const Header = () => {
+interface Header {
+    title:string
+}
+
+const Header = ({title}:Header) => {
     return (
         <div className="header">
             <div className="wrapper">

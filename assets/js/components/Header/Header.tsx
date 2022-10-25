@@ -13,7 +13,7 @@ const Header = ({title}:Header) => {
             <div className="wrapper">
                 <LanguageRoundedIcon className="language item" />
                 <SearchRoundedIcon className="item" />
-                <h2 className ="title item">My Dashboard</h2>
+                <h2 className ="title item">{title}</h2>
                 <button    className="editBtn item">Edit widgets <CreateRoundedIcon/></button>
 
             </div>

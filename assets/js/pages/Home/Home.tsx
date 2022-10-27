@@ -6,7 +6,7 @@ const Home = () => {
     <div className="container">
         <Sidebar/>
         <div className="homeContainer">
-            <Header/>
+            <Header title="My Dashboard"/>
             Content
         </div>
     </div>

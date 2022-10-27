@@ -15,6 +15,7 @@
 }
 .wrapper {
     display: flex;
+    position: relative;
     align-items: center;
     width: 89%;
     margin: 0 auto;
@@ -30,7 +31,9 @@
 }
 
 .title {
-    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0);
 }
 
 .editBtn {

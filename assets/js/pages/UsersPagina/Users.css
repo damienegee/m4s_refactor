@@ -1,0 +1,6 @@
+.container{
+    display: flex;
+}
+.usersContainer{
+    flex:5;
+}

@@ -1,0 +1,6 @@
+.container{
+    display: flex;
+}
+.inventarisContainer{
+    flex:5;
+}

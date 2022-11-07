@@ -12,7 +12,6 @@ import { MouseEventHandler } from "react";
 import "./sidebar.css";
 const logo = require("./logo.png");
 
-
 const Sidebar = () => {
   const handleShow: MouseEventHandler<HTMLLIElement> = (event) => {
     const subList = document.getElementById("subList");
@@ -44,8 +43,8 @@ const Sidebar = () => {
           <LocalLibraryRoundedIcon />
           <span >Leermiddel</span>
         </li>
-        <li id="close" className="listItem none close" onClick={handleHide}>
-          <CloseRoundedIcon fontSize="medium" />
+        <li id="close" className="listItem none" onClick={handleHide}>
+          <CloseRoundedIcon />
           Close
         </li>
         <li id="more" className="listItem" onClick={handleShow}>

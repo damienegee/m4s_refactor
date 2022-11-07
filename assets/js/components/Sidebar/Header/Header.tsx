@@ -3,17 +3,18 @@ import LanguageRoundedIcon from '@mui/icons-material/LanguageRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import CreateRoundedIcon from '@mui/icons-material/CreateRounded';
 
-interface HeaderProps {
+interface Header {
     title:string
 }
-const Header = ({title}:HeaderProps) => {
+
+const Header = ({title}:Header) => {
     return (
         <div className="header">
             <div className="wrapper">
                 <LanguageRoundedIcon className="language item" />
                 <SearchRoundedIcon className="item" />
                 <h2 className ="title item">{title}</h2>
-                {title.toLowerCase().includes("dashboard") && <button    className="editBtn item">Edit widgets <CreateRoundedIcon/></button>}
+                <button    className="editBtn item">Edit widgets <CreateRoundedIcon/></button>
 
             </div>
 

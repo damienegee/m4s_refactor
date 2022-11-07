@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { Box,Tab } from '@mui/material';
 import {TabPanel,TabContext,TabList} from '@mui/lab';
-import Header from "../../components/Header/Header";
-import Sidebar from "../../components/Sidebar/Sidebar";
-import Table from '../../components/Tabel/Userstabel';
 import "./Users.css"
+import { Link } from 'react-router-dom';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import Btn from '../../components/Button/Btn';
+import Table from '../../components/Tabel/Userstabel';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import Header from '../../components/Header/Header';
 
 
 const Users = () => {
@@ -17,7 +20,7 @@ const Users = () => {
         <Sidebar/>
         <div className="usersContainer">
             <Header title="Users"/>
-            <Box sx={{ width: '100%', typography: 'body1' }}>
+            <Box sx={{ width: '100%', typography: 'body1'}}>
               <TabContext value={value}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                   <TabList onChange={handleChange} aria-label="lab API tabs example">
@@ -25,6 +28,7 @@ const Users = () => {
                     <Tab label="Toestellen zonder vestiging" value="2" />
                   </TabList>
                 </Box>
+                <Link to="/adduser"><Btn text="Voeg gebruiker toe" size={15} Icon={<AddRoundedIcon/>} ></Btn></Link>
                 <TabPanel value="1"><Table/></TabPanel>
                 <TabPanel value="2"><Table/></TabPanel>
               </TabContext>

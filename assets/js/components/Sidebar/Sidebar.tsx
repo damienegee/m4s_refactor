@@ -43,8 +43,8 @@ const Sidebar = () => {
           <LocalLibraryRoundedIcon />
           <span >Leermiddel</span>
         </li>
-        <li id="close" className="listItem none" onClick={handleHide}>
-          <CloseRoundedIcon />
+        <li id="close" className="listItem none close" onClick={handleHide}>
+          <CloseRoundedIcon fontSize="medium" />
           Close
         </li>
         <li id="more" className="listItem" onClick={handleShow}>

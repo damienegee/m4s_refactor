@@ -1,7 +1,6 @@
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { useState } from 'react';
-import CustomToolbar from '../AppBar/Appbar';
+import CustomToolbar from '../Appbar/Appbar';
 import '../Tabel/Userstabel.css';
 
 interface Users
@@ -69,7 +68,6 @@ const Table = () =>
         {id:11,FirstName:"DEMO11",LastName:"DEMODEV11",Email:"DEMO11",Position:"Student",Location:"Demo vestiging"}
     ]
     return (
-        <div>
           <div className='tabel'>
         <Box sx={{ height: '700px', width: '100%' }} className="box">
             <DataGrid 
@@ -82,7 +80,6 @@ const Table = () =>
                 checkboxSelection
             />
         </Box>
-        </div>
         </div>
     )
 }

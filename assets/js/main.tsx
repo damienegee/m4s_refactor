@@ -1,6 +1,4 @@
-import React from 'react';
 import {createRoot} from 'react-dom/client';
-import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Users from './pages/UsersPagina/Users';
 
@@ -10,7 +8,7 @@ const root = createRoot(container);
 export const App = () => {
 	return (
 		<div>
-			<Users></Users>
+			<Users/>
 		</div>
 	);
 }

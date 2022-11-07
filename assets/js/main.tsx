@@ -9,7 +9,7 @@ const root = createRoot(container);
 export const App = () => {
 	return (
 		<div>
-			<Home/>
+			<Inventaris/>
 		</div>
 	);
 }

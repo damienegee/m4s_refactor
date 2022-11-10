@@ -1,28 +1,30 @@
-import "./Login.css";
+import styles from "./Login.module.css";
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import WindowRoundedIcon from '@mui/icons-material/WindowRounded';
 import GoogleIcon from '@mui/icons-material/Google';
 const logo = require("./logo.png");
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate();
     return (
-        <div className="container">
-            <img src={logo} alt="" className="logo" />
-            <div className="loginBox">
-                <div className="profile">
+        <div className={styles.container}>
+            <img src={logo} alt="" className={styles.logo} />
+            <div className={styles.loginBox}>
+                <div className={styles.profile}>
                     <PersonRoundedIcon fontSize="inherit" />
                 </div>
-                <div className="buttons">
-                    <button className="btn">
-                        <span className="btnFlex">
-                            <WindowRoundedIcon fontSize="large" className="serviceIcon" />
-                            <span className="serviceName">Microsoft</span>
+                <div className={styles.buttons}>
+                    <button className={styles.btn} onClick={() => navigate("/home")}>
+                        <span className={styles.btnFlex}>
+                            <WindowRoundedIcon fontSize="large" className={styles.serviceIcon} />
+                            <span className={styles.serviceName}>Microsoft</span>
                         </span>
                     </button>
-                    <button className="btn">
-                        <span className="btnFlex">
-                            <GoogleIcon fontSize="large" className="serviceIcon" />
-                            <span className="serviceName">Google</span>
+                    <button className={styles.btn} onClick={() => navigate("/home")}>
+                        <span className={styles.btnFlex}>
+                            <GoogleIcon fontSize="large" className={styles.serviceIcon} />
+                            <span className={styles.serviceName}>Google</span>
                         </span>
                     </button>
                 </div>

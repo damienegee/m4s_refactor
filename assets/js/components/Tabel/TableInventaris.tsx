@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { useState } from 'react';
 import CustomToolbar from '../AppBar/appbar';
-import '../Tabel/datagrid.css';
+import styles from './datagrid.module.css';
 
 interface Product
 {
@@ -78,8 +78,8 @@ const Table = ({products,info}:Table) =>
     const [pageSize,setPageSize] = useState(5);
     return (
       <div>
-        <div className='tabel'>
-          <Box sx={{ height: 400, width: '100%' }} className="box">
+        <div className={styles.tabel}>
+          <Box sx={{ height: 400, width: '100%' }} className={styles.box}>
               <DataGrid 
                   components={{ Toolbar: CustomToolbar }}
                   rows={showedProducts}

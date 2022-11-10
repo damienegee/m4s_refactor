@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import CustomToolbar from '../AppBar/appbar';
-import '../Tabel/Userstabel.css';
+import styles from  './datagrid.module.css';
 
 interface Users
 {
@@ -69,7 +69,7 @@ const Table = () =>
     ]
     return (
           <div className='tabel'>
-        <Box sx={{ height: '700px', width: '100%' }} className="box">
+        <Box sx={{ height: '700px', width: '100%' }} className={styles.box}>
             <DataGrid 
                 components={{ Toolbar: CustomToolbar }}
                 rows={user}

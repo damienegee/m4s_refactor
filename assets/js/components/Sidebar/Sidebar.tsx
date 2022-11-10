@@ -9,69 +9,71 @@ import LaptopChromebookRoundedIcon from '@mui/icons-material/LaptopChromebookRou
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 import Inventory2RoundedIcon from '@mui/icons-material/Inventory2Rounded';
 import { MouseEventHandler } from "react";
-import "./sidebar.css";
+import styles from  "./Sidebar.module.css";
 const logo = require("./logo.png");
+import {useNavigate} from "react-router-dom";
 
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const handleShow: MouseEventHandler<HTMLLIElement> = (event) => {
     const subList = document.getElementById("subList");
     const close = document.getElementById("close");
-    event.currentTarget.classList.add("none");
-    subList?.classList.add("show")
-    close?.classList.remove("none");
+    event.currentTarget.classList.add(styles.none);
+    subList?.classList.add(styles.show)
+    close?.classList.remove(styles.none);
   }
   const handleHide: MouseEventHandler<HTMLLIElement> = (event) => {
     const subList = document.getElementById("subList");
     const more = document.getElementById("more");
-    subList?.classList.remove("show")
-    more?.classList.remove("none");
-    event.currentTarget.classList.add("none");
+    subList?.classList.remove(styles.show)
+    more?.classList.remove(styles.none);
+    event.currentTarget.classList.add(styles.none);
   }
   return (
-    <div className="sidebar">
-      <img className="logo" src={logo} alt="" />
-      <ul className="list">
-        <li className="listItem">
+    <div className={styles.sidebar}>
+      <img className={styles.logo} src={logo} alt="" />
+      <ul className={styles.list}>
+        <li className={styles.listItem} onClick={() => navigate("/home")}>
           <DashboardRoundedIcon />
           <span >Dashboard</span>
         </li>
-        <li className="listItem">
+        <li className={styles.listItem}>
           <StoreRoundedIcon />
           <span >Webshop</span>
         </li>
-        <li className="listItem">
+        <li className={styles.listItem}>
           <LocalLibraryRoundedIcon />
           <span >Leermiddel</span>
         </li>
-        <li id="close" className="listItem none close" onClick={handleHide}>
+        <li id="close" className={`${styles.listItem} ${styles.none} ${styles.close}`} onClick={handleHide}>
           <CloseRoundedIcon fontSize="medium" />
           Close
         </li>
-        <li id="more" className="listItem" onClick={handleShow}>
+        <li id="more" className={styles.listItem} onClick={handleShow}>
           <MoreHorizRoundedIcon />
           <span >Overige</span>
         </li>
-        <div id="subList" className="subList">
-          <li className="listItem">
+        <div id="subList" className={styles.subList}>
+          <li className={styles.listItem} onClick={() => navigate("/inventaris")}>
             <Inventory2RoundedIcon />
             <span >Inventaris</span>
           </li>
-          <li className="listItem">
+          <li className={styles.listItem} onClick={() => navigate("/incidents")}>
             <CalendarMonthRoundedIcon />
             <span >Incident</span>
           </li>
-          <li className="listItem">
+          <li className={styles.listItem}>
             <LaptopChromebookRoundedIcon />
             <span >Toestellen</span>
           </li>
-          <li className="listItem">
+          <li className={styles.listItem} onClick={() => navigate("/users")}>
             <PeopleAltRoundedIcon />
             <span >Gebruikers</span>
           </li>
         </div>
 
-        <li className="listItem logout">
+        <li className={`${styles.listItem} ${styles.logout}`} onClick={() => navigate("/")}>
           <LogoutRoundedIcon />
           <span >Log out</span>
         </li>

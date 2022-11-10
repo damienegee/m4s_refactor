@@ -1,11 +1,3 @@
-.container {
-    display: flex;
-}
-.userContainer {
-    display: flex;
-    flex-direction: column;
-    flex:5;
-}
 .box {
     display: flex;
     margin-top: auto;

@@ -19,6 +19,7 @@
 	"isolatedModules": true,
 	"noEmit": false,
 	"jsx": "react-jsx",
-	"downlevelIteration": true
+	"downlevelIteration": true,
+	"typeRoots": ["./node_modules/@types","./custom.d.ts"]
   }
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, Tab } from '@mui/material';
 import { TabPanel, TabContext, TabList } from '@mui/lab';
-import "./Users.css"
+import styles from "../page.module.css"
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import Btn from '../../components/Button/Btn';
 import Table from '../../components/Tabel/Userstabel';
@@ -15,9 +15,9 @@ const Users = () => {
     setValue(newValue);
   };
   return (
-    <div className="container">
+    <div className={styles.container}>
       <Sidebar />
-      <div className="usersContainer">
+      <div className={styles.pageContainer}>
         <Header title="Users" />
         <Box sx={{ width: '100%', typography: 'body1' }}>
           <TabContext value={value}>

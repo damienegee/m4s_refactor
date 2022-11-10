@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box,Tab } from '@mui/material';
 import {TabPanel,TabContext,TabList} from '@mui/lab/';
-import "./Inventaris.css"
+import styles from  "../page.module.css"
 import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Table from '../../components/Tabel/TableInventaris';
@@ -36,9 +36,9 @@ const Inventaris = () => {
     setValue(newValue);
   };
   return (
-    <div className="container">
+    <div className={styles.container}>
         <Sidebar/>
-        <div className="inventarisContainer">
+        <div className={styles.pageContainer}>
             <Header title="Inventaris"/>
             <Box sx={{ width: '100%', typography: 'body1' }}>
               <TabContext value={value}>

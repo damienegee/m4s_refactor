@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import { DataGrid} from '@mui/x-data-grid';
-import CustomToolbar from '../AppBar/appbar';
+import CustomToolbar from '../AppBar/Appbar';
 import styles from  './datagrid.module.css';
 
 interface Table

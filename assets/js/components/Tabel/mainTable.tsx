@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import { DataGrid} from '@mui/x-data-grid';
-import CustomToolbar from "../AppBar/Appbar"
+import CustomToolbar from '../AppBar/appbar';
 import styles from  './datagrid.module.css';
 
 interface Table
@@ -17,11 +17,11 @@ const MainTable = ({data,columns}:Table) =>
               <DataGrid 
                   components={{ Toolbar: CustomToolbar }}
                   rows={data}
-                  columns={[...columns, { field: 'info', filterable: false }]}
+                  columns={columns}
                   rowHeight={50} {...data}
                   disableSelectionOnClick
                   autoPageSize={true}
-                  checkboxSelection  
+                  checkboxSelection
               />
           </Box>
         </div>

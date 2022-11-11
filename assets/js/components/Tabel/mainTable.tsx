@@ -17,11 +17,11 @@ const MainTable = ({data,columns}:Table) =>
               <DataGrid 
                   components={{ Toolbar: CustomToolbar }}
                   rows={data}
-                  columns={columns}
+                  columns={[...columns, { field: 'info', filterable: false }]}
                   rowHeight={50} {...data}
                   disableSelectionOnClick
                   autoPageSize={true}
-                  checkboxSelection
+                  checkboxSelection  
               />
           </Box>
         </div>

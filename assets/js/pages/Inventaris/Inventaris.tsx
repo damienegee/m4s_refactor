@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import styles from  '../page.module.css'
 import { Box,Tab } from '@mui/material';
-import {TabPanel,TabContext,TabList} from '@mui/lab/';
-import styles from  "../page.module.css"
+import {TabPanel,TabContext,TabList} from '@mui/lab';
 import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Table from '../../components/Tabel/TableInventaris';
+import { Link } from 'react-router-dom';
 interface Product
 {
     id:number

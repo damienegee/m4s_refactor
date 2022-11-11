@@ -1,8 +1,6 @@
-import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { useState } from 'react';
-import CustomToolbar from '../AppBar/appbar';
+import { GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import styles from './datagrid.module.css';
+import MainTable from './mainTable';
 
 interface Product
 {
@@ -75,24 +73,9 @@ const Table = ({products,info}:Table) =>
           width: 150,
         },
       ];
-    const [pageSize,setPageSize] = useState(5);
     return (
-      <div>
-        <div className={styles.tabel}>
-          <Box sx={{ height: 400, width: '100%' }} className={styles.box}>
-              <DataGrid 
-                  components={{ Toolbar: CustomToolbar }}
-                  rows={showedProducts}
-                  columns={columns}
-                  rowHeight={50} {...showedProducts}
-                  checkboxSelection
-                  disableSelectionOnClick
-                  pageSize={pageSize}
-                  rowsPerPageOptions={[1,5,10,50]}
-                  onPageSizeChange={(pageSize)=>setPageSize(pageSize)}
-              />
-          </Box>
-        </div>
+      <div className={styles.tabel}>
+          <MainTable data={showedProducts} columns={columns}/>
       </div>
   )
 }

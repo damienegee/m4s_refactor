@@ -2,8 +2,9 @@ import styles from "./Login.module.css";
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import WindowRoundedIcon from '@mui/icons-material/WindowRounded';
 import GoogleIcon from '@mui/icons-material/Google';
-const logo = require("./logo.png");
 import {useNavigate} from "react-router-dom";
+const logo = require("./logo.png");
+
 
 const Login = () => {
     const navigate = useNavigate();

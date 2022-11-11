@@ -10,8 +10,9 @@ import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 import Inventory2RoundedIcon from '@mui/icons-material/Inventory2Rounded';
 import { MouseEventHandler } from "react";
 import styles from  "./Sidebar.module.css";
-const logo = require("./logo.png");
 import {useNavigate} from "react-router-dom";
+const logo = require("./logo.png");
+
 
 
 const Sidebar = () => {

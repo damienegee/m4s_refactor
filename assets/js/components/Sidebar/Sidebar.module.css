@@ -4,7 +4,9 @@
     flex: 1;
     align-items: center;
     background-color: #212121;
-    min-height: 100vh;
+    height: 100vh;
+    position: sticky;
+    top:0;
 }
 
 .logo {
@@ -55,4 +57,13 @@
 }
 .none{
     display: none;
+}
+
+@media only screen and (max-width:720px){
+    .sidebar{
+        position: fixed;
+        z-index: 1;
+        width: 0;
+        transition: 0.5s;
+    }
 }

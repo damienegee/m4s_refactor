@@ -21,13 +21,14 @@
     width: 89%;
     margin: 0 auto;
     padding: 1rem;
+    list-style: none;
 }
 
 .item:hover {
     cursor: pointer;
 }
 
-.language {
+.language,.menu {
     margin-right: 1rem;
 }
 
@@ -35,6 +36,13 @@
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
+}
+.close{
+    display: none;
+}
+
+.right{
+    margin-left: auto;
 }
 
 .editBtn {
@@ -45,5 +53,4 @@
     background-color: white;
     font-size: .8rem;
     padding: .5rem;
-    margin-left: auto;
 }

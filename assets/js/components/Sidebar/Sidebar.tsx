@@ -32,9 +32,9 @@ const Sidebar = () => {
     event.currentTarget.classList.add(styles.none);
   }
   return (
-    <div className={styles.sidebar}>
+    <div id='sidebar' className={styles.sidebar}>
       <img className={styles.logo} src={logo} alt="" />
-      <ul className={styles.list}>
+      <ul id='list' className={styles.list}>
         <li className={styles.listItem} onClick={() => navigate("/home")}>
           <DashboardRoundedIcon />
           <span >Dashboard</span>

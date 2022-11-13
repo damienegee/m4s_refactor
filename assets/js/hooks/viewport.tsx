@@ -1,10 +1,10 @@
-import {createContext,useState,useEffect,useContext} from "react";
+import {createContext,useState,useEffect,useContext,ReactNode} from "react";
 type ViewportType = {
     width:number
 }
 const viewportContext = createContext<ViewportType>({width:0});
 
-export const ViewportProvider = ({children} : any) => {
+export const Viewport = ({children} : {children:ReactNode}) => {
   const [width, setWidth] = useState(window.innerWidth);
 
   const handleResize = () => {

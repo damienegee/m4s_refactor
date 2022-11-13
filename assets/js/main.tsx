@@ -6,7 +6,7 @@ import Login from './pages/Login/Login';
 import Users from './pages/UsersPagina/Users';
 import Inventaris from './pages/Inventaris/Inventaris';
 import Incident from './pages/Incident/Incident';
-import { ViewportProvider } from './hooks/viewport';
+import { Viewport } from './hooks/viewport';
 
 const container: HTMLElement | null = document.getElementById('root');
 // @ts-ignore
@@ -14,7 +14,7 @@ const root = createRoot(container);
 export const App = () => {
 	return (
 		<>
-			<ViewportProvider>
+			<Viewport>
 				<BrowserRouter>
 					<Routes>
 						<Route path='/' element={<Login />} />
@@ -24,7 +24,7 @@ export const App = () => {
 						<Route path='/incidents' element={<Incident />} />
 					</Routes>
 				</BrowserRouter>
-			</ViewportProvider>
+			</Viewport>
 		</>
 	);
 }

@@ -49,7 +49,6 @@ const Users = () => {
                 <Tab label="Users zonder vestiging" value="2" />
               </TabList>
             </Box>
-            <Btn text="Voeg gebruiker toe" size={15} Icon={<AddRoundedIcon />} ></Btn>
             <TabPanel value="1"><Table users={users} info="toegewezen"/></TabPanel>
             <TabPanel value="2"><Table users={users} info="noLocation"/></TabPanel>
           </TabContext>

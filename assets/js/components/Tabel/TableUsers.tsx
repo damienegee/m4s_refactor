@@ -1,6 +1,8 @@
 import {GridColDef } from '@mui/x-data-grid';
 import MainTable from './mainTable';
-
+import styles from './datagrid.module.css'
+import './styles.css'
+ 
 interface User
 {
     id:number
@@ -29,40 +31,39 @@ const Table = ({users,info}:Table) =>
   }
 
     const columns: GridColDef[] = [
-        { field: 'info', headerName: '', width: 75 },
+        { field: 'info', headerName: 'Test', width: 25 },
         {
           field: 'id',
-          headerName: 'ID',
-          width: 150,
+          headerName: 'ID'
         },
         {
           field: 'FirstName',
           headerName: 'First Name',
-          width: 260,
+          maxWidth:100,
+          headerClassName: `${styles.positie}`
         },
         {
           field: 'LastName',
           headerName: 'Last Name',
-          width: 260,
+          headerClassName: `${styles.positie}`
         },
         {
           field: 'Email',
           headerName: 'Email',
-          width: 350,
+          headerClassName: `${styles.positie}`,
+          maxWidth:100
         },
         {
           field: "Position",
           editable: true,
           type: "singleSelect",
-          valueOptions: ["None","Student", "Teacher", "Director"],
-          width:250
+          valueOptions: ["None","Student", "Teacher", "Director"]
         },
         {
           field: "Location",
           editable: true,
           type: "singleSelect",
-          valueOptions: ["None","Ap","KDG", "UA", "KSV"],
-          width:250
+          valueOptions: ["None","Ap","KDG", "UA", "KSV"]
         },
       ];
     return (

@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridToolbarContainer, GridToolbarDensitySelector, GridToolbarExport } from '@mui/x-data-grid';
-import { Incidentsobj } from '../../../incidenttypes';
+import { Incidentsobj } from '../../../types';
 
 import styles from './datagrid.module.css';
 

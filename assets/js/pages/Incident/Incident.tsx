@@ -9,7 +9,7 @@ import {useViewport} from '../../hooks/viewport'
 
 import Table from '../../components/Tabel/TableIncidents';
 import CardsIncident from '../../components/Cards/CardsIncident';
-import { Incidentsobj } from '../../../incidenttypes';
+import { Incidentsobj } from '../../../types';
 
 const Incident = () => {
   const [value, setValue] = useState('1');

@@ -1,4 +1,4 @@
-import { Incidentsobj } from '../../../incidenttypes';
+import { Incidentsobj } from '../../../types';
 import styles from './cards.module.css';
 const CardsIncident  = ({data}:{data:Incidentsobj}) => {
     return (<>

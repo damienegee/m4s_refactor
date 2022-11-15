@@ -12,3 +12,11 @@
 .tabel {
     margin-top:  15px;
 }
+.container {
+    display: flex;
+}
+.userContainer {
+    display: flex;
+    flex-direction: column;
+    flex:5;
+}

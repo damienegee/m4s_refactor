@@ -1,9 +1,6 @@
 .container{
     display: flex;
 }
-.pageContainer{
-    flex:5;
-}
 .usersContainer{
     flex:5;
 }

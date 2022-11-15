@@ -5,7 +5,7 @@ import styles from  "./Users.module.css"
 import Table from '../../components/Tabel/TableUsers';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Header from '../../components/Header/Header';
-import {useViewport} from '../../components/hooks/viewport'
+import {useViewport} from '../../hooks/viewport'
 import { Users } from '../../../types';
 import Cards from '../../components/Cards/Cards';
 
@@ -24,11 +24,11 @@ let user:Users[] = [
   {id:11,FirstName:"DEMO11",LastName:"DEMODEV11",Email:"cdhbhudcvsyucv@hotmail.com",Position:"Student",Location:"Demo vestiging"}
 ]
 const UserPagina = () => {
+  const { width } = useViewport();
   const [value, setValue] = useState('1');
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
-  const {width} = useViewport();
   if(width>720){
     return (
       <div className={styles.container}>
@@ -65,8 +65,8 @@ const UserPagina = () => {
                   <Tab label="Toestellen zonder vestiging" value="2" />
                 </TabList>
               </Box>
-              <TabPanel value="1">{user.map((user:Users)=> <div>
-              <Cards data={user}></Cards>
+              <TabPanel value="1">{user.map((user:Users)=> <div key={user.id}>
+              <Cards  data={user}></Cards>
               </div>
                )}</TabPanel>
               <TabPanel value="2"><h1>Error 404 not found</h1></TabPanel>

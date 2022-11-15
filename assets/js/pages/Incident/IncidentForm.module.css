@@ -1,0 +1,20 @@
+.IncidentForm {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.box{
+    display: flex;
+    margin: 10px auto;
+    background-color: antiquewhite;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+}
+.container{
+    display: flex;
+}
+.incidentContainer{
+    flex:5;
+}

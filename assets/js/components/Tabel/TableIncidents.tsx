@@ -1,53 +1,40 @@
-import {GridColDef} from '@mui/x-data-grid';
-import MainTable from './mainTable';
+import Box from '@mui/material/Box';
+import { DataGrid, GridColDef, GridToolbarContainer, GridToolbarDensitySelector, GridToolbarExport } from '@mui/x-data-grid';
+import { Incidentsobj } from '../../../incidenttypes';
+
+import styles from './datagrid.module.css';
 
 
-interface Incident
-{
-    id:number
-    Student:string,
-    SerialNumber:string,
-    Problem:string,
-    Status:string,
-    Created:string,
-    
+
+const CustomToolbar = () => {
+  return (
+    <GridToolbarContainer>
+      <GridToolbarDensitySelector></GridToolbarDensitySelector>
+      
+      <GridToolbarExport printOptions={{ disableToolbarButton: true }} />
+
+
+    </GridToolbarContainer>
+  );
 }
-interface Table
+const Table = () =>
 {
-  incidents:Incident[]
-  info:string
-}
-const Table = ({incidents,info}:Table) =>
-{
-  let showedIncidents:Incident[] = [];
-  if(info == "open")
-  {
-    incidents.map((incident:Incident) => {if((incident.Status != "" && incident.Status != null && incident.Status != "Closed")){showedIncidents.push(incident)}})
-  }
-  else if(info == "closed")
-  {
-    incidents.map((incident:Incident) => {if(incident.Status == "Closed"){showedIncidents.push(incident)}})
-  }
-  else if(info == "waiting")
-  {
-    incidents.map((incident:Incident) => {if(incident.Status == "" || incident.Status == null){showedIncidents.push(incident)}})
-  }
     const columns: GridColDef[] = [
         { field: 'info', headerName: '', width: 75 },
         {
           field: 'id',
           headerName: 'ID',
-          width: 150,
+          width: 100,
         },
         {
           field: 'Student',
           headerName: 'Student',
-          width: 230,
+          width: 175,
         },
         {
           field: 'SerialNumber',
           headerName: 'Serial number',
-          width: 260,
+          width: 225,
         },
         {
           field: 'Problem',
@@ -59,21 +46,50 @@ const Table = ({incidents,info}:Table) =>
          editable:true,
          type:"singleSelect",
          valueOptions:["V1","V2"],
-         width:250
+         width:150
         },
         {
           field:"Created",
           editable:true,
           type:"singleSelect",
           valueOptions:["V1","V2"],
-          width:250
+          width:175
          },
         
       ];
-    
+    let Incidentrows:Incidentsobj[] = [
+        {id:0,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
+        {id:1,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
+        {id:2,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
+        {id:3,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
+        {id:4,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
+        {id:5,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
+        {id:6,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
+        {id:7,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
+        {id:8,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
+        {id:9,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
+        {id:10,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
+        {id:11,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
+
+        
+    ]
     return (
         <div>
-          <MainTable data={showedIncidents} columns={columns}/>
+          <div>
+        <Box sx={{ height:'600px', width: '100%' }} className={styles.box}>
+            <DataGrid 
+                components={{ Toolbar: CustomToolbar }}
+                rows={Incidentrows}
+                columns={columns}
+                rowHeight={50} {...Incidentrows}
+                checkboxSelection
+                disableSelectionOnClick
+                autoPageSize={true}
+
+            
+            />
+        </Box>
+        </div>
         </div>
     )
 }

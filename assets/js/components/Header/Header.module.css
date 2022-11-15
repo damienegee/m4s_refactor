@@ -23,6 +23,9 @@
     padding: 1rem;
     list-style: none;
 }
+.item{
+    font-size: 1.5rem;
+}
 
 .item:hover {
     cursor: pointer;
@@ -53,4 +56,15 @@
     background-color: white;
     font-size: .8rem;
     padding: .5rem;
+}
+@media only screen and (max-width:720px){
+    .title{
+        font-size: 2vw;
+    }
+    .item{
+        font-size: 2.5vw;
+    }
+    .editBtn{
+        font-size: 2vw;
+    }
 }

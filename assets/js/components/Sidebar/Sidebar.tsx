@@ -9,8 +9,8 @@ import LaptopChromebookRoundedIcon from '@mui/icons-material/LaptopChromebookRou
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 import Inventory2RoundedIcon from '@mui/icons-material/Inventory2Rounded';
 import { MouseEventHandler } from "react";
-import styles from  "./Sidebar.module.css";
-import {useNavigate} from "react-router-dom";
+import styles from "./Sidebar.module.css";
+import { useNavigate } from "react-router-dom";
 const logo = require("./logo.png");
 
 
@@ -36,47 +36,67 @@ const Sidebar = () => {
       <img className={styles.logo} src={logo} alt="" />
       <ul id='list' className={styles.list}>
         <li className={styles.listItem} onClick={() => navigate("/home")}>
-          <DashboardRoundedIcon />
-          <span >Dashboard</span>
+          <div className={styles.itemIcon}>
+            <DashboardRoundedIcon fontSize='inherit' />
+          </div>
+          <span className={styles.itemTitel} >Dashboard</span>
         </li>
         <li className={styles.listItem}>
-          <StoreRoundedIcon />
-          <span >Webshop</span>
+          <div className={styles.itemIcon}>
+            <StoreRoundedIcon fontSize='inherit' />
+          </div>
+          <span className={styles.itemTitel} >Webshop</span>
         </li>
         <li className={styles.listItem}>
-          <LocalLibraryRoundedIcon />
-          <span >Leermiddel</span>
+          <div className={styles.itemIcon}>
+            <LocalLibraryRoundedIcon  fontSize='inherit'/>
+          </div>
+          <span className={styles.itemTitel}>Leermiddel</span>
         </li>
         <li id="close" className={`${styles.listItem} ${styles.none} ${styles.close}`} onClick={handleHide}>
-          <CloseRoundedIcon fontSize="medium" />
-          Close
+          <div className={styles.itemIcon}>
+            <CloseRoundedIcon fontSize='inherit' />
+          </div>
+          <span className={styles.itemTitel}>Close</span>
         </li>
         <li id="more" className={styles.listItem} onClick={handleShow}>
-          <MoreHorizRoundedIcon />
-          <span >Overige</span>
+          <div className={styles.itemIcon}>
+            <MoreHorizRoundedIcon fontSize='inherit' />
+          </div>
+          <span className={styles.itemTitel}>Overige</span>
         </li>
         <div id="subList" className={styles.subList}>
           <li className={styles.listItem} onClick={() => navigate("/inventaris")}>
-            <Inventory2RoundedIcon />
-            <span >Inventaris</span>
+            <div className={styles.itemIcon}>
+              <Inventory2RoundedIcon  fontSize='inherit'/>
+            </div>
+            <span className={styles.itemTitel} >Inventaris</span>
           </li>
           <li className={styles.listItem} onClick={() => navigate("/incidents")}>
-            <CalendarMonthRoundedIcon />
-            <span >Incident</span>
+            <div className={styles.itemIcon}>
+              <CalendarMonthRoundedIcon fontSize='inherit' />
+            </div>
+            <span  className={styles.itemTitel}>Incident</span>
           </li>
           <li className={styles.listItem}>
-            <LaptopChromebookRoundedIcon />
-            <span >Toestellen</span>
+            <div className={styles.itemIcon}>
+              <LaptopChromebookRoundedIcon fontSize='inherit' />
+            </div>
+            <span className={styles.itemTitel} >Toestellen</span>
           </li>
           <li className={styles.listItem} onClick={() => navigate("/users")}>
-            <PeopleAltRoundedIcon />
-            <span >Gebruikers</span>
+            <div className={styles.itemIcon}>
+              <PeopleAltRoundedIcon fontSize='inherit'/>
+            </div>
+            <span  className={styles.itemTitel}>Gebruikers</span>
           </li>
         </div>
 
         <li className={`${styles.listItem} ${styles.logout}`} onClick={() => navigate("/")}>
-          <LogoutRoundedIcon />
-          <span >Log out</span>
+          <div className={styles.itemIcon}>
+            <LogoutRoundedIcon  fontSize='inherit'/>
+          </div>
+          <span className={styles.itemTitel} >Log out</span>
         </li>
       </ul>
 

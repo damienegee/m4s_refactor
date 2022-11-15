@@ -20,7 +20,7 @@ const Header = ({ title }: HeaderProps) => {
         const close = document.getElementById("navClose");
         const editBtn = document.getElementById("editBtn");
         if (sidebar && list && close) {
-            sidebar.style.width = "25%";
+            sidebar.style.width = "30%";
             list.style.display = "flex";
             close.style.display = "block"
             if(title.toLowerCase().includes("dashboard") && editBtn){
@@ -65,22 +65,22 @@ const Header = ({ title }: HeaderProps) => {
         <div className={styles.header}>
             <ul className={styles.wrapper}>
                 {width < 720 && <li className={`${styles.menu} ${styles.item}`} onClick={handleOpen}>
-                    <MenuRoundedIcon />
+                    <MenuRoundedIcon fontSize="inherit" />
                 </li>}
                 <li className={`${styles.language} ${styles.item}`}>
-                    <LanguageRoundedIcon />
+                    <LanguageRoundedIcon fontSize="inherit" />
                 </li>
                 <li className={styles.item}>
-                    <SearchRoundedIcon />
+                    <SearchRoundedIcon fontSize="inherit" />
                 </li>
-                <li className={`${styles.item} ${styles.title}`}>
+                <li className={` ${styles.title}`}>
                     <h2 >{title}</h2>
                 </li>
                 <li id="navClose" className={`${styles.item} ${styles.right} ${styles.close}`} onClick={handleClose}>
-                    <CloseRoundedIcon />
+                    <CloseRoundedIcon fontSize="inherit" />
                 </li>
                 {title.toLowerCase().includes("dashboard") && <li id="editBtn" className={`${styles.right}`}>
-                    <button className={`${styles.editBtn} ${styles.item}`}>Edit widgets <CreateRoundedIcon /></button>
+                    <button className={`${styles.editBtn} ${styles.item}`}>Edit widgets <CreateRoundedIcon fontSize="inherit" /></button>
                 </li>}
             </ul>
 

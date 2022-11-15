@@ -34,13 +34,20 @@
 .listItem:hover {
     cursor: pointer;
 }
+.itemTitel,.itemIcon{
+    display: flex;
+    align-items: center;
+}
+.itemIcon{
+    font-size: 1.5rem;
+}
 
 .logout {
     margin-top: auto;
 }
 
 .subList {
-    margin-left: 1rem;
+    padding: 0 1rem 0 1rem;
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s linear 300ms, opacity 300ms;
@@ -66,5 +73,11 @@
         z-index: 1;
         width: 0;
         transition: 0.5s;
+    }
+    .listItem{
+        font-size: 2vw;
+    }
+    .itemIcon{
+        font-size: 2.5vw;
     }
 }

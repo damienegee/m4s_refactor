@@ -1,3 +1,10 @@
+export interface ITable
+{
+  users?:Users[]
+  incidents?:Incidentsobj[]
+  products?:Product[]
+  info:string
+}
 export interface Users
 {
     id:number
@@ -15,5 +22,15 @@ export interface Incidentsobj
     Problem:string,
     Status:string,
     Created:string,
-    
+}
+export interface Product
+{
+    id:number
+    label:string,
+    productNumber:string,
+    serialNumber:string,
+    model?:string,
+    user?:{firstName:string,lastName:string},
+    function?:string,
+    location?:string
 }

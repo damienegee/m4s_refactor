@@ -3,6 +3,7 @@ import { DataGrid, GridColDef, GridToolbarContainer, GridToolbarDensitySelector,
 import { Incidentsobj } from '../../../types';
 
 import styles from './datagrid.module.css';
+import MainTable from './mainTable';
 
 
 
@@ -74,23 +75,9 @@ const Table = () =>
         
     ]
     return (
-        <div>
-          <div>
-        <Box sx={{ height:'600px', width: '100%' }} className={styles.box}>
-            <DataGrid 
-                components={{ Toolbar: CustomToolbar }}
-                rows={Incidentrows}
-                columns={columns}
-                rowHeight={50} {...Incidentrows}
-                checkboxSelection
-                disableSelectionOnClick
-                autoPageSize={true}
-
-            
-            />
-        </Box>
-        </div>
-        </div>
+      <div className={styles.tabel}>
+        <MainTable data={Incidentrows} columns={columns}/>
+    </div>
     )
 }
 export default Table;

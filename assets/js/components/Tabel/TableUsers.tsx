@@ -4,6 +4,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Users } from '../../../types';
 import CustomToolbar from '../AppBar/AppBar';
 import styles from './datagrid.module.css';
+import MainTable from './mainTable';
 
 let user:Users[] = [
   {id:0,FirstName:"DEMO00",LastName:"DEMODEV00",Email:"youssef.j@hotmail.com",Position:"Student",Location:"Demo vestiging"},
@@ -61,18 +62,8 @@ const Table = () =>
       ];
       return (
       
-          <div className={styles.tabel}>
-        <Box sx={{ height: '600px', width: '100%' }} className={styles.box}>
-            <DataGrid 
-                components={{Toolbar:CustomToolbar }}
-                rows={user}
-                columns={columns}
-                rowHeight={50} {...user}
-                disableSelectionOnClick
-                autoPageSize={true}
-                checkboxSelection
-            />
-        </Box>
+        <div className={styles.tabel}>
+          <MainTable data={user} columns={columns}/>
         </div>
     )
 }

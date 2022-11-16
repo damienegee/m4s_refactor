@@ -6,17 +6,10 @@ import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Table from '../../components/Tabel/TableInventaris';
 import { Link } from 'react-router-dom';
-interface Product
-{
-    id:number
-    label:string,
-    productNumber:string,
-    serialNumber:string,
-    model?:string,
-    user?:{firstName:string,lastName:string},
-    function?:string,
-    location?:string
-}
+import { Product } from '../../../types';
+import Cards from '../../components/Cards/CardsInventaris';
+import { useViewport } from '../../hooks/viewport';
+
 let products:Product[] = [
   {id:1,label:"DEMO01",productNumber:"DEMODEV01",serialNumber:"DEMO01",model:"DEMO01",user:{firstName:"Acht",lastName:"Leerling"},function:"STUDENT",location:'DEMOLOCATION'},
   {id:2,label:"DEMO02",productNumber:"DEMODEV02",serialNumber:"DEMO02",model:"DEMO02",user:{firstName:"Twintig",lastName:"Prof"},function:"TEACHER",location:'DEMOLOCATION'},
@@ -32,6 +25,7 @@ let products:Product[] = [
   {id:12,label:"DEMO012",productNumber:"DEMODEV012",serialNumber:"DEMO03",model:"DEMO03",user:{firstName:"Twee",lastName:"Leerling"},function:"STUDENT",location:''},
 ]
 const Inventaris = () => {
+  const { width } = useViewport();
   const [value, setValue] = useState('1');
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -51,7 +45,10 @@ const Inventaris = () => {
                     <Tab label="Niet BYOD toestellen" value="4" />
                   </TabList>
                 </Box>
-                <TabPanel value="1"><Table products={products} info='toegewezen'/></TabPanel>
+                {width>720 ? <TabPanel value="1"><Table products={products} info='toegewezen'/></TabPanel>: products.map((product:Product)=> 
+                <div key={product.id}>
+                  <Cards  data={product}></Cards>
+                </div>)}
                 <TabPanel value="2"><Table products={products} info='noUser'/></TabPanel>
                 <TabPanel value="3"><Table products={products} info='noLocation'/></TabPanel>
                 <TabPanel value="4">Item Four</TabPanel>

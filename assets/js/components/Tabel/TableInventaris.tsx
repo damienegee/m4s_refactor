@@ -1,35 +1,20 @@
 import { GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import styles from './datagrid.module.css';
 import MainTable from './mainTable';
+import { Product,ITable } from '../../../types';
 
-interface Product
-{
-    id:number
-    label:string,
-    productNumber:string,
-    serialNumber:string,
-    model?:string,
-    user?:{firstName:string,lastName:string},
-    function?:string,
-    location?:string
-}
-interface Table
-{
-  products:Product[]
-  info:string
-}
-const Table = ({products,info}:Table) =>
+const Table = ({products,info}:ITable) =>
 {
   let showedProducts:Product[] = [];
-  if(info == "toegewezen")
+  if(info == "toegewezen" && products !== undefined)
   {
     products.map((product:Product) => {if((product.location != "" && product.location != null) && (product.user?.firstName != null && product.user.firstName != "")){showedProducts.push(product)}})
   }
-  else if(info == "noLocation")
+  else if(info == "noLocation" && products !== undefined)
   {
     products.map((product:Product) => {if(product.location == "" || product.location == null){showedProducts.push(product)}})
   }
-  else if(info == "noUser")
+  else if(info == "noUser" && products !== undefined)
   {
     products.map((product:Product) => {if(product.user?.firstName == "" || product.user?.firstName == null){showedProducts.push(product)}})
   }

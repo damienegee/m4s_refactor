@@ -1,7 +1,7 @@
 import styles from './cards.module.css';
-import { Users } from '../../../types';
+import { User } from '../../../types';
 
-const Cards  = ({data}:{data:Users}) => {
+const Cards  = ({data}:{data:User}) => {
     return (<>
 
         <div className={styles.card}>

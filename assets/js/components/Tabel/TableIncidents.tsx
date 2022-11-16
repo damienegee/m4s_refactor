@@ -1,25 +1,25 @@
-import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridToolbarContainer, GridToolbarDensitySelector, GridToolbarExport } from '@mui/x-data-grid';
-import { Incidentsobj } from '../../../types';
-
+import { GridColDef} from '@mui/x-data-grid';
 import styles from './datagrid.module.css';
 import MainTable from './mainTable';
+import { Incidentsobj,ITable } from '../../../types';
 
 
 
-const CustomToolbar = () => {
-  return (
-    <GridToolbarContainer>
-      <GridToolbarDensitySelector></GridToolbarDensitySelector>
-      
-      <GridToolbarExport printOptions={{ disableToolbarButton: true }} />
-
-
-    </GridToolbarContainer>
-  );
-}
-const Table = () =>
+const Table = ({incidents,info}:ITable) =>
 {
+  let showedIncidents:Incidentsobj[] = [];
+  if(info == "open" && incidents !== undefined)
+  {
+    incidents.map((incident:Incidentsobj) => {if((incident.Status != "" && incident.Status != null && incident.Status != "Closed")){showedIncidents.push(incident)}})
+  }
+  else if(info == "closed" && incidents !== undefined)
+  {
+    incidents.map((incident:Incidentsobj) => {if(incident.Status == "Closed"){showedIncidents.push(incident)}})
+  }
+  else if(info == "waiting" && incidents !== undefined)
+  {
+    incidents.map((incident:Incidentsobj) => {if(incident.Status == "" || incident.Status == null){showedIncidents.push(incident)}})
+  }
     const columns: GridColDef[] = [
         { field: 'info', headerName: '', width: 75 },
         {
@@ -58,25 +58,9 @@ const Table = () =>
          },
         
       ];
-    let Incidentrows:Incidentsobj[] = [
-        {id:0,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
-        {id:1,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
-        {id:2,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
-        {id:3,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
-        {id:4,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
-        {id:5,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
-        {id:6,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
-        {id:7,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
-        {id:8,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
-        {id:9,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
-        {id:10,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
-        {id:11,Student:"DEMO00",SerialNumber:"DEMODEV00",Problem:"DEMO00",Status:"Rejected",Created:"Demo vestiging"},
-
-        
-    ]
     return (
       <div className={styles.tabel}>
-        <MainTable data={Incidentrows} columns={columns}/>
+        <MainTable data={showedIncidents} columns={columns}/>
     </div>
     )
 }

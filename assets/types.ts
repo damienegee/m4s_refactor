@@ -1,11 +1,11 @@
 export interface ITable
 {
-  users?:Users[]
+  users?:User[]
   incidents?:Incidentsobj[]
   products?:Product[]
   info:string
 }
-export interface Users
+export interface User
 {
     id:number
     FirstName:string,

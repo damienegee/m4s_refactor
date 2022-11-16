@@ -47,7 +47,7 @@ const Inventaris = () => {
                 </Box>
                 {width>720 ? <TabPanel value="1"><Table products={products} info='toegewezen'/></TabPanel>: products.map((product:Product)=> 
                 <div key={product.id}>
-                  <Cards  data={product}></Cards>
+                  <TabPanel value="1"><Cards  data={product}></Cards></TabPanel>
                 </div>)}
                 <TabPanel value="2"><Table products={products} info='noUser'/></TabPanel>
                 <TabPanel value="3"><Table products={products} info='noLocation'/></TabPanel>

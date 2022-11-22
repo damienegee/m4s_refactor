@@ -1,7 +1,7 @@
 export interface ITable
 {
   users?:User[]
-  incidents?:Incidentsobj[]
+  incidents?:Incidents[]
   products?:Product[]
   info:string
 }
@@ -14,7 +14,7 @@ export interface User
     Position:string,
     Location:string
 }
-export interface Incidentsobj
+export interface Incidents
 {
     id:number
     Student:string,

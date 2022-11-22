@@ -1,24 +1,24 @@
 import { GridColDef} from '@mui/x-data-grid';
 import styles from './datagrid.module.css';
 import MainTable from './mainTable';
-import { Incidentsobj,ITable } from '../../../types';
+import { Incidents,ITable } from '../../../types';
 
 
 
 const Table = ({incidents,info}:ITable) =>
 {
-  let showedIncidents:Incidentsobj[] = [];
+  let showedIncidents:Incidents[] = [];
   if(info == "open" && incidents !== undefined)
   {
-    incidents.map((incident:Incidentsobj) => {if((incident.Status != "" && incident.Status != null && incident.Status != "Closed")){showedIncidents.push(incident)}})
+    incidents.map((incident:Incidents) => {if((incident.Status != "" && incident.Status != null && incident.Status != "Closed")){showedIncidents.push(incident)}})
   }
   else if(info == "closed" && incidents !== undefined)
   {
-    incidents.map((incident:Incidentsobj) => {if(incident.Status == "Closed"){showedIncidents.push(incident)}})
+    incidents.map((incident:Incidents) => {if(incident.Status == "Closed"){showedIncidents.push(incident)}})
   }
   else if(info == "waiting" && incidents !== undefined)
   {
-    incidents.map((incident:Incidentsobj) => {if(incident.Status == "" || incident.Status == null){showedIncidents.push(incident)}})
+    incidents.map((incident:Incidents) => {if(incident.Status == "" || incident.Status == null){showedIncidents.push(incident)}})
   }
     const columns: GridColDef[] = [
         { field: 'info', headerName: '', width: 75 },

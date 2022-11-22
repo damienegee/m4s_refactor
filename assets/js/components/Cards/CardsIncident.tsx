@@ -1,6 +1,6 @@
-import { Incidentsobj } from '../../../types';
+import { Incidents } from '../../../types';
 import styles from './cards.module.css';
-const CardsIncident  = ({data}:{data:Incidentsobj}) => {
+const CardsIncident  = ({data}:{data:Incidents}) => {
     return (<>
 
         <div className={styles.card}>

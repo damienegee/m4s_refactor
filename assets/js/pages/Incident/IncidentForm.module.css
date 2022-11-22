@@ -7,10 +7,11 @@
 .box{
     display: flex;
     margin: 10px auto;
-    background-color: antiquewhite;
+    background-color: #dcdcdc;
     padding: 20px;
-    align-items: center;
     justify-content: center;
+    border-radius: 20px;
+    border: 1px solid black;
 }
 .container{
     display: flex;

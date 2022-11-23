@@ -9,9 +9,11 @@ import { useEffect, MouseEventHandler } from "react";
 
 
 interface HeaderProps {
-    title: string
+    title: string,
+    editState?:boolean,
+    setEditState?:(editState:boolean) => void
 }
-const Header = ({ title }: HeaderProps) => {
+const Header = ({ title,editState,setEditState }: HeaderProps) => {
 
     const { width } = useViewport();
     const handleOpen: MouseEventHandler<HTMLLIElement> = () => {
@@ -40,6 +42,9 @@ const Header = ({ title }: HeaderProps) => {
                 editBtn.style.display = "block";
             }
         }
+    }
+    const editHandle : MouseEventHandler<HTMLLIElement> = () => {
+        if (setEditState) setEditState(!editState);
     }
     useEffect(() => {
         const sidebar = document.getElementById("sidebar");
@@ -79,7 +84,7 @@ const Header = ({ title }: HeaderProps) => {
                 <li id="navClose" className={`${styles.item} ${styles.right} ${styles.close}`} onClick={handleClose}>
                     <CloseRoundedIcon fontSize="inherit" />
                 </li>
-                {title.toLowerCase().includes("dashboard") && <li id="editBtn" className={`${styles.right}`}>
+                {title.toLowerCase().includes("dashboard") && <li id="editBtn" className={`${styles.right}`} onClick={editHandle}>
                     <button className={`${styles.editBtn} ${styles.item}`}>Edit widgets <CreateRoundedIcon fontSize="inherit" /></button>
                 </li>}
             </ul>

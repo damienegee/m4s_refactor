@@ -13,9 +13,3 @@
     border-radius: 20px;
     border: 1px solid black;
 }
-.container{
-    display: flex;
-}
-.incidentContainer{
-    flex:5;
-}

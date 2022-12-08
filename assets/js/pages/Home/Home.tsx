@@ -37,7 +37,7 @@ const Home = () => {
           else if (widget == "images-list") return <List key={widget} type="images" editState={editState} name={widget} handleRemove={handleRemove} />
           else if (widget == "mails-list") return <List key={widget} type="mails" editState={editState} name={widget} handleRemove={handleRemove} />
           else if (widget == "incidents-list") return <List key={widget} type="incidents" editState={editState} name={widget} handleRemove={handleRemove} />
-          else if (widget == "doughnut-chart") return <DoughnutChart editState={editState} name={widget} handleRemove={handleRemove} />
+          else if (widget == "doughnut-chart") return <DoughnutChart key={widget} editState={editState} name={widget} handleRemove={handleRemove} />
         })}
         {editState && <AddWidget />}
       </div>

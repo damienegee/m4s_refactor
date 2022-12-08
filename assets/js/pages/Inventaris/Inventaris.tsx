@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Box, Tab } from '@mui/material';
+import { Box } from '@mui/material';
 import { TabPanel, TabContext, TabList } from '@mui/lab';
 import Table from '../../components/Tabel/TableInventaris';
 import { Product } from '../../../types';
 import Cards from '../../components/Cards/CardsInventaris';
 import { useViewport } from '../../hooks/viewport';
 import Layout from '../../components/Layout/Layout';
+import StyledTab from '../../components/StyledTab/StyledTab';
 
 let products: Product[] = [
   { id: 1, label: "DEMO01", productNumber: "DEMODEV01", serialNumber: "DEMO01", model: "DEMO01", user: { firstName: "Acht", lastName: "Leerling" }, function: "STUDENT", location: 'DEMOLOCATION' },
@@ -33,10 +34,10 @@ const Inventaris = () => {
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <TabList onChange={handleChange} aria-label="TableInfo">
-              <Tab label="Toegewezen" value="1" />
-              <Tab label="Toestel zonder gebruiker" value="2" />
-              <Tab label="Toestellen zonder vestiging" value="3" />
-              <Tab label="Niet BYOD toestellen" value="4" />
+              <StyledTab label="Toegewezen" value="1" />
+              <StyledTab label="Toestel zonder gebruiker" value="2" />
+              <StyledTab label="Toestellen zonder vestiging" value="3" />
+              <StyledTab label="Niet BYOD toestellen" value="4" />
             </TabList>
           </Box>
           {width > 720 ? <TabPanel value="1"><Table products={products} info='toegewezen' /></TabPanel> : products.map((product: Product) =>

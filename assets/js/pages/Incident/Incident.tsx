@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Autocomplete, Box, Button, FormControl, FormControlLabel, Modal, Radio, RadioGroup, Tab, TextField } from '@mui/material';
+import { Autocomplete, Box, Button, FormControl, FormControlLabel, Modal, Radio, RadioGroup, TextField } from '@mui/material';
 import { TabPanel, TabContext, TabList } from '@mui/lab';
 import styles from "./IncidentForm.module.css"
 import { style } from '@mui/system';
@@ -8,6 +8,7 @@ import Table from '../../components/Tabel/TableIncidents';
 import { Incidents } from '../../../types';
 import CardsIncident from '../../components/Cards/CardsIncident';
 import Layout from '../../components/Layout/Layout';
+import StyledTab from '../../components/StyledTab/StyledTab';
 
 const Incident = () => {
   const [value, setValue] = useState('1');
@@ -87,10 +88,10 @@ const Incident = () => {
             <Box sx={{ borderColor: 'divider' }}>
 
               <TabList onChange={handleChange} aria-label="lab API tabs example">
-                <Tab label="Open" value="1" />
-                <Tab label="Awaiting approval" value="2" />
-                <Tab label="Closed" value="3" />
-                <Tab label="Graph" value="4" />
+                <StyledTab label="Open" value="1" />
+                <StyledTab label="Awaiting approval" value="2" />
+                <StyledTab label="Closed" value="3" />
+                <StyledTab label="Graph" value="4" />
               </TabList>
             </Box>
 
@@ -186,10 +187,10 @@ const Incident = () => {
           <TabContext value={value}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <TabList onChange={handleChange} aria-label="lab API tabs example">
-                <Tab label="Open" value="1" />
-                <Tab label="Awaiting approval" value="2" />
-                <Tab label="Closed" value="3" />
-                <Tab label="Graph" value="4" />
+                <StyledTab label="Open" value="1" />
+                <StyledTab label="Awaiting approval" value="2" />
+                <StyledTab label="Closed" value="3" />
+                <StyledTab label="Graph" value="4" />
               </TabList>
             </Box>
             <Button onClick={handleOpen}>Report incident</Button>

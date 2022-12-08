@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Box, Tab } from '@mui/material';
+import { Box } from '@mui/material';
 import { TabPanel, TabContext, TabList } from '@mui/lab';
 import Table from '../../components/Tabel/TableUsers';
 import { useViewport } from '../../hooks/viewport'
 import { User } from '../../../types';
 import Cards from '../../components/Cards/Cards';
 import Layout from '../../components/Layout/Layout';
+import StyledTab from '../../components/StyledTab/StyledTab';
 
 let users: User[] = [
   { id: 0, FirstName: "DEMO00", LastName: "DEMODEV00", Email: "youssef.j@hotmail.com", Position: "Student", Location: "Demo vestiging" },
@@ -33,8 +34,8 @@ const UserPagina = () => {
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <TabList onChange={handleChange} aria-label="lab API tabs example">
-              <Tab label="Toegewezen" value="1" />
-              <Tab label="Toestellen zonder vestiging" value="2" />
+              <StyledTab label="Toegewezen" value="1" />
+              <StyledTab label="Toestellen zonder vestiging" value="2" />
             </TabList>
           </Box>
           {width > 720 ? <TabPanel value="1"><Table users={users} info='toegewezen' /></TabPanel> : users.map((product: User) =>

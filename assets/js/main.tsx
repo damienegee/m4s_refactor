@@ -7,6 +7,7 @@ import Users from './pages/UsersPagina/Users';
 import Inventaris from './pages/Inventaris/Inventaris';
 import Incident from './pages/Incident/Incident';
 import { Viewport } from './hooks/viewport';
+import "../styles/app.css";
 
 const container: HTMLElement | null = document.getElementById('root');
 // @ts-ignore

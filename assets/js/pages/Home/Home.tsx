@@ -1,13 +1,15 @@
 import { useState, useEffect, MouseEventHandler } from "react";
 import Layout from "../../components/Layout/Layout";
-import AddWidget from "../../components/Widgets/AddWidget/AddWidget";
+import EditWidget from "../../components/Widgets/EditWidget/EditWidget";
 import Counter from "../../components/Widgets/Counter/Counter";
 import DoughnutChart from "../../components/Widgets/DoughnutChart/DoughnutChart";
 import List from "../../components/Widgets/List/List";
+import WidgetsForm from "../../components/WidgetsForm/WidgetsForm";
 import styles from "./Home.module.css"
 
 const Home = () => {
   const [editState, setEditState] = useState<boolean>(false);
+  const [open,setOpen] = useState<boolean>(false);
   const [widgets, setWidgets] = useState<string[]>(localStorage.getItem("widgets")?.split(",") ??
     [
       "doughnut-chart",
@@ -29,6 +31,7 @@ const Home = () => {
 
   return (
     <Layout title="My Dashboard" editState={editState} setEditState={setEditState}>
+      <WidgetsForm open={open} setOpen={setOpen} activeWidgets={widgets} setActiveWidgets={setWidgets}/>
       <div className={styles.widgetsContainer}>
         {widgets.map(widget => {
           if (widget == "devices-counter") return <Counter key={widget} type="devices" editState={editState} name={widget} handleRemove={handleRemove} />
@@ -39,7 +42,7 @@ const Home = () => {
           else if (widget == "incidents-list") return <List key={widget} type="incidents" editState={editState} name={widget} handleRemove={handleRemove} />
           else if (widget == "doughnut-chart") return <DoughnutChart key={widget} editState={editState} name={widget} handleRemove={handleRemove} />
         })}
-        {editState && <AddWidget />}
+        {editState && <EditWidget setOpen={setOpen} />}
       </div>
     </Layout>
   )

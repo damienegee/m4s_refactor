@@ -78,7 +78,7 @@ const Sidebar = () => {
             </div>
             <span  className={styles.itemTitel}>Incident</span>
           </li>
-          <li className={styles.listItem}>
+          <li className={styles.listItem} onClick={() => navigate("/devices")}>
             <div className={styles.itemIcon}>
               <LaptopChromebookRoundedIcon fontSize='inherit' />
             </div>
